@@ -19,8 +19,9 @@ bash "$HOME/.config/YASD/scripts/rofi-layout.sh" --refresh "$WALLPAPER" "$CURREN
 # 4. Reload desktop components
 swaymsg reload
 killall -SIGUSR2 waybar
-makoctl reload
+swaync-client -R && swaync-client -rs
 kill -SIGUSR1 $(pgrep -u $USER kitty)
+kitty -e spicetify apply
 
 # 5. Notify
 notify-send -i "$WALLPAPER" "System Synced" "Config: $(basename "$WALLUST_CONFIG")"

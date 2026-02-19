@@ -1,0 +1,118 @@
+/* SeraDOTS Universal Spotify Theme */
+@import url("../YASD/color.css");
+
+/* --- Core Interaction --- */
+.main-playButton-PlayButton.main-playButton-primary {
+  color: var(--bg-base);
+  background-color: var(--accent);
+}
+
+.main-entityTitle-subtitle.main-entityTitle-gray,
+.main-entityHeader-metaDataText,
+.main-trackList-rowTitle,
+input,
+.main-type-mesto,
+.x-533-dropDown-dropDown,
+.main-userWidget-box,
+.lyrics-lyricsContent-lyric {
+  color: var(--text) !important;
+}
+
+.main-duration-container,
+.x-sortBox-sortDropdown,
+.encore-internal-color-text-subdued,
+.main-shelf-title,
+.main-buddyFeed-activityMetadata .main-buddyFeed-username a,
+.main-trackCreditsModal-sectionTitle,
+.lyrics-lyricsContent-provider,
+.lyrics-lyricsContent-lyric:not(.lyrics-lyricsContent-highlight) {
+  color: var(--text-dim) !important;
+}
+
+.main-entityTitle-subtitle,
+.main-type-canon,
+.main-card-card a,
+.main-card-card button {
+  color: var(--text-dim) !important; /* Mapped to extratext */
+}
+
+/* --- Highlights & Selection --- */
+.main-trackList-trackListRow.main-trackList-active .main-trackList-rowMarker,
+.main-trackList-trackListRow.main-trackList-active .main-trackList-rowTitle,
+.main-navBar-navBarLinkActive:focus {
+  color: var(--active) !important;
+}
+
+.LegacyChipInner__ChipInnerComponent-sc-1qguixk-0,
+.encore-bright-accent-set {
+  --background-base: var(--active) !important;
+  --background-highlight: var(--active) !important;
+}
+
+/* --- Backgrounds & Containers --- */
+.main-topBar-background,
+.main-topBar-overlay,
+.x-441-actionBarBackground-background,
+.MGZ4oJmGVPrWsx5cT5hN,
+.main-keyboardShortcutsHelpModal-container,
+.main-trackCreditsModal-container,
+.lyrics-lyrics-background {
+  background-color: var(--bg-base) !important;
+}
+
+.x-filterBox-expandedOrHasFilter,
+.DquSH3YjnaIIXMZiOvwA,
+.X5mwWAw7ijxPvQOoabzQ,
+.main-navBar-navBarLinkActive,
+.view-homeShortcutsGrid-main,
+.main-trackList-trackListHeaderStuck.main-trackList-trackListHeader,
+.main-topBar-searchBar,
+.GimJ6fo6WOYPyWNVpSr1,
+.CvxzmyND_aGd2RR8ZoSr,
+.main-nowPlayingView-section {
+  background-color: var(--bg-alt) !important;
+}
+
+.main-nowPlayingBar-container {
+  background-color: var(--bg-alt) !important;
+  border-top: 1px solid var(--accent-alpha) !important;
+}
+
+/* --- Buttons & UI Elements --- */
+.search-searchCategory-carouselButton,
+.search-searchCategory-carouselButton:hover,
+.AIlmv6h8bR5NY5R0VceT,
+.ChipClear__ChipClearComponent-sc-zv5btm-0,
+.main-globalNav-navLink,
+.eEiwEPDfVRD0HKjYM_dq button {
+  background-color: var(--accent-alpha) !important;
+}
+
+.main-shuffleButton-button.main-shuffleButton-on,
+.main-repeatButton-button.main-repeatButton-on {
+  color: var(--accent) !important;
+}
+
+/* --- Images & Borders --- */
+.view-homeShortcutsGrid-shortcut,
+.main-cardImage-imageWrapper,
+.main-cardImage-image,
+.main-entityHeader-image,
+.main-card-card {
+  border-radius: 12px !important;
+}
+
+/* --- Layout Cleanup (Your original logic) --- */
+.connect-title, .connect-header, .upgrade-button, 
+button[data-menu-item="upgrade-account"], .utUDWsORU96S7boXm2Aq,
+.main-leaderboardComponent-container, .main-topBar-UpgradeButton {
+  display: none !important;
+}
+
+#context-menu > div > ul > li:nth-child(3) > a {
+  display: none !important;
+}
+
+.main-home-filterChipsContainer {
+  display: none;
+}

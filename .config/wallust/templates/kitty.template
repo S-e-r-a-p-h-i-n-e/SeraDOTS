@@ -46,6 +46,3 @@ color14 {{color14}}
 # white
 color7  {{color7}}
 color15 {{color15}}
-
-# Background opacity
-background_opacity 0.8

@@ -8,24 +8,15 @@
     "passthrough": false,
     "reload_style_on_change": true,
     "include": [
-        "~/.config/waybar/modules.jsonc"
+        "~/.config/waybar/modules.jsonc" 
     ],
     "modules-left": [
-        "group/pill#left1",
-        "group/pill#left2"
+        "group/pill#left"
     ],
-    "group/pill#left1": {
+    "group/pill#left": {
         "orientation": "inherit",
         "modules": [
-            "cpu",
-            "memory"
-        ]
-    },
-    "group/pill#left2": {
-        "orientation": "inherit",
-        "modules": [
-            "idle_inhibitor",
-            "clock"
+            "sway/workspaces"
         ]
     },
     "modules-center": [
@@ -34,38 +25,22 @@
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
-            "sway/workspaces",
-            "sway/window"
+            "custom/cava",
+            "idle_inhibitor",
+            "clock"
         ]
     },
     "modules-right": [
-        "group/pill#right1",
-        "group/pill#right2",
-        "group/pill#right3"
+        "group/pill#right"
     ],
-    "group/pill#right1": {
+    "group/pill#right": {
         "orientation": "inherit",
         "modules": [
             "backlight",
-            "network",
             "pulseaudio",
             "pulseaudio#microphone",
-            "custom/updates"
-        ]
-    },
-    "group/pill#right2": {
-        "orientation": "inherit",
-        "modules": [
-            "privacy",
             "tray",
-            "battery"
-        ]
-    },
-    "group/pill#right3": {
-        "orientation": "inherit",
-        "modules": [
-            "custom/wallchange",
-            "custom/wbar",
+            "battery",
             "custom/cliphist",
             "custom/power"
         ]

@@ -1,17 +1,18 @@
-# /home/amelie/.config/wallust/wallust.toml
+# ~/.config/wallust/templates/wallust.toml
 
 backend = "wal"
 palette = "light16"
 threshold = 20
 
 [templates]
-css       = { src = "color.template", dst = "~/.config/YASD/color.css" }
-fastfetch = { src = "fastfetch.template", dst = "~/.config/fastfetch/config.jsonc" }
+css        = { src = "color.template", dst = "~/.config/YASD/color.css" }
+fastfetch  = { src = "fastfetch.template", dst = "~/.config/fastfetch/config.jsonc" }
 kdeglobals = { src = "kdeglobals.template", dst = "~/.config/kdeglobals" }
-kitty     = { src = "kitty.template", dst = "~/.config/kitty/theme.conf" }
-kvantum = { src = "wallust.kvconfig.template", dst = "~/.config/Kvantum/wallust/wallust.kvconfig" }
-mako      = { src = "mako.template", dst = "~/.config/mako/config" }
-rofi      = { src = "rofi-theme.template", dst = "~/.config/rofi/theme.rasi" }
-sway      = { src = "sway-theme.template", dst = "~/.config/sway/config.d/theme.conf" }
-swaylock  = { src = "swaylock.template", dst = "~/.config/swaylock/config" }
-vencord   = { src = "vencord.template", dst = "/home/amelie/.config/vesktop/settings/quickCss.css" }
+kitty      = { src = "kitty.template", dst = "~/.config/kitty/theme.conf" }
+kvantum    = { src = "wallust.kvconfig.template", dst = "~/.config/Kvantum/wallust/wallust.kvconfig" }
+mako       = { src = "mako.template", dst = "~/.config/mako/config" }
+rofi       = { src = "rofi-theme.template", dst = "~/.config/rofi/theme.rasi" }
+spotify    = { src = "spotify.template", dst = "~/.config/spicetify/Themes/SeraDOTS/color.ini" }
+sway       = { src = "sway-theme.template", dst = "~/.config/sway/config.d/theme.conf" }
+swaylock   = { src = "swaylock.template", dst = "~/.config/swaylock/config" }
+vencord    = { src = "vencord.template", dst = "/home/amelie/.config/vesktop/settings/quickCss.css" }

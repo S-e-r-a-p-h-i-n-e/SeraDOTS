@@ -47,8 +47,8 @@
         "orientation": "horizontal",
         "modules": [
             "idle_inhibitor",
-            "custom/mako",
-            "custom/menu"
+            "custom/menu",
+            "custom/swaync"
         ]
     }
 }

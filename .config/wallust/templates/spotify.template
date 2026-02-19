@@ -1,0 +1,36 @@
+[Base]
+; Wallust Spotify Theme
+; Generated from: {{wallpaper}}
+
+text               = {{foreground | strip}}
+text-bright-accent = {{color15 | strip}}
+subtext            = {{color7 | strip}}
+extratext          = {{color8 | strip}}
+
+; Main background areas
+main               = {{background | strip}}
+sidebar            = {{background | strip}}
+player             = {{background | strip}}
+sec-player         = {{color0 | strip}}
+
+; UI Cards and elevated surfaces
+card               = {{color0 | strip}}
+sec-card           = {{color8 | strip}}
+shadow             = 000000
+
+; Interaction elements
+selected-row       = {{color7 | strip}}
+sec-input          = {{color0 | strip}}
+
+; Action buttons (Using your primary accent)
+button             = {{color1 | strip}}
+button-active      = {{color9 | strip}}
+button-disabled    = {{color8 | strip}}
+button-background  = {{color0 | strip}}
+
+; Status and Miscellaneous
+sec-checked        = {{color1 | strip}}
+tab-active         = {{background | strip}}
+notification       = {{foreground | strip}}
+notification-error = {{color1 | strip}}
+misc               = {{color2 | strip}}

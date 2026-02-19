@@ -1,0 +1,4 @@
+[Colors:View]
+BackgroundNormal={{background}}
+ForegroundNormal={{foreground}}
+BackgroundAlternate={{color0}}

@@ -1,0 +1,129 @@
+{
+    // --- Sway Native Modules ---
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "on-click": "activate"
+    },
+    "sway/window": {
+        "format": "󰖯 {title}",
+        "max-length": 40
+    },
+
+    // --- System Resource Modules ---
+    "cpu": {
+        "interval": 10,
+        "format": "󰍛 {usage}%",
+        "on-click": "kitty -e btop"
+    },
+    "memory": {
+        "interval": 30,
+        "format": "󰾆 {percentage}%",
+        "on-click": "kitty -e btop"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", "󰛨"]
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "󰖪",
+        "on-click": "nm-connection-editor"
+    },
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    // --- Media & Interaction ---
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "pavucontrol"
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭",
+        "on-click": "pavucontrol -tab 4"
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": { "activated": "", "deactivated": "" },
+        "on-click": "~/.config/YASD/scripts/idle-notify.sh"
+    },
+    "clock": {
+        "format": "  {:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
+    },
+    "mpris": {
+        "format": "{player_icon} {title} - {artist}",
+        "format-paused": "󰏤 {title} - {artist}",
+        "player-icons": {
+            "default": "󰎆",
+            "spotify": "",
+            "mpv": "🎵"
+        },
+        "max-length": 30
+    },
+
+    // --- Custom Modules (HyDE Migrated) ---
+    "custom/gpuinfo": {
+        "exec": "~/.config/YASD/scripts/gpu-temp.sh",
+        "interval": 5,
+        "format": "󰢮 {}"
+    },
+    "custom/updates": {
+        "exec": "checkupdates | wc -l",
+        "on-click": "kitty -e ~/.config/YASD/scripts/updater.sh",
+        "interval": 7200,
+        "format": "󰚰 {}"
+    },
+    "custom/cliphist": {
+        "format": "󱘔",
+        "on-click": "~/.config/YASD/scripts/clipmgr.sh"
+    },
+    "custom/wallchange": {
+        "format": "󰸉",
+        "on-click": "~/.config/YASD/scripts/wallchange.sh"
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout -b 5 -l ~/.config/wlogout/layout -C ~/.config/wlogout/style.css",
+        "tooltip": false
+    },
+    "custom/menu": {
+        "format": "",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/layout.rasi",
+        "tooltip": false
+    },
+    "custom/mako": {
+        "tooltip": false,
+        "format": "{}", 
+        "exec": "makoctl mode | grep -q '^dnd$' && echo '●' || echo '○'",
+        "on-click": "~/.config/YASD/scripts/dnd-toggle.sh",
+        "interval": 1,
+        "signal": 8
+    },
+    "custom/wbar": {
+        "format": "󱂬",
+        "on-click": "~/.config/YASD/scripts/wbar-layout.sh",
+        "tooltip": true,
+        "tooltip-format": "Change Waybar Layout"
+    },
+    "custom/cava": {
+    "exec": "~/.config/YASD/scripts/cava.sh",
+    "format": "{}",
+    "tooltip": false
+}
+}

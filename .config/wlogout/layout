@@ -1,0 +1,30 @@
+{
+    "label" : "lock",
+    "action" : "~/.config/YASD/scripts/sys-power.sh lock",
+    "text" : "Lock",
+    "keybind" : "l"
+}
+{
+    "label" : "logout",
+    "action" : "~/.config/YASD/scripts/sys-power.sh logout",
+    "text" : "Logout",
+    "keybind" : "e"
+}
+{
+    "label" : "suspend",
+    "action" : "~/.config/YASD/scripts/sys-power.sh suspend",
+    "text" : "Suspend",
+    "keybind" : "s"
+}
+{
+    "label" : "reboot",
+    "action" : "~/.config/YASD/scripts/sys-power.sh reboot",
+    "text" : "Reboot",
+    "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "~/.config/YASD/scripts/sys-power.sh shutdown",
+    "text" : "Shutdown",
+    "keybind" : "p"
+}

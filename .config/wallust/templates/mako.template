@@ -1,0 +1,25 @@
+# Global Style
+font=JetBrainsMono Nerd Font 10
+width=300
+height=100
+margin=20
+padding=15
+border-size=2
+border-radius=10
+
+# Colors (Wallust will overwrite these placeholders)
+background-color={{background}}
+text-color={{foreground}}
+border-color={{color2}}
+progress-color=over {{color8}}
+
+# Behavior
+default-timeout=3000
+ignore-timeout=0
+group-by=app-name
+
+# Specific Criteria (The Lego Bricks)
+[urgency=high]
+# Using a bright/urgent color variable for critical alerts
+border-color={{color1}}
+default-timeout=0

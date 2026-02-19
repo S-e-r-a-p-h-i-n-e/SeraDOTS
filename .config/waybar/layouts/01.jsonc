@@ -1,0 +1,48 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 10,
+    "exclusive": true,
+    "passthrough": false,
+    "reload_style_on_change": true,
+    "include": [
+        "~/.config/waybar/modules.jsonc"
+    ],
+
+    "modules-left": [
+        "group/pill#left1",
+        "group/pill#left2"
+    ],
+    "modules-center": [
+        "group/pill#center"
+    ],
+    "modules-right": [
+        "group/pill#right1",
+        "group/pill#right2",
+        "group/pill#right3"
+    ],
+    "group/pill#left1": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "memory"]
+    },
+    "group/pill#left2": {
+        "orientation": "horizontal",
+        "modules": ["idle_inhibitor", "clock"]
+    },
+    "group/pill#center": {
+        "orientation": "horizontal",
+        "modules": ["sway/workspaces", "sway/window"] 
+    },
+    "group/pill#right1": {
+        "orientation": "horizontal",
+        "modules": ["backlight", "network", "pulseaudio"]
+    },
+    "group/pill#right2": {
+        "orientation": "horizontal",
+        "modules": ["tray", "battery"]
+    },
+    "group/pill#right3": {
+        "orientation": "horizontal",
+        "modules": ["custom/wallchange", "custom/power"]
+    }
+}

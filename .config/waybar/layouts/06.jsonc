@@ -1,0 +1,54 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "height": 10,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "reload_style_on_change": true,
+    "include": [
+        "~/.config/waybar/modules.jsonc"
+    ],
+    
+    "modules-left": [],
+    "modules-center": [
+        "group/pill-power",
+        "group/pill-sys",
+        "group/pill-main",
+        "group/pill-tools"
+    ],
+    "modules-right": [],
+
+    "group/pill-power": {
+        "orientation": "horizontal",
+        "modules": ["custom/power"]
+    },
+
+    "group/pill-sys": {
+        "orientation": "horizontal",
+        "modules": [
+            "pulseaudio",
+            "battery",
+            "tray"
+        ]
+    },
+
+    "group/pill-main": {
+        "orientation": "horizontal",
+        "modules": [
+            "sway/workspaces",
+            "clock",
+            "mpris"
+        ]
+    },
+
+    "group/pill-tools": {
+        "orientation": "horizontal",
+        "modules": [
+            "idle_inhibitor",
+            "custom/mako",
+            "custom/menu"
+        ]
+    }
+}

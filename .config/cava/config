@@ -1,0 +1,12 @@
+[general]
+# Match your '10 lines' requirement
+bars = 10
+# Lower sleep time makes it smoother (higher FPS)
+sleep_timer = 1
+
+[output]
+method = raw
+raw_target = /dev/stdout
+data_format = ascii
+# 32 provides much smoother transitions than 7
+ascii_max_range = 32

@@ -1,0 +1,49 @@
+{
+    "layer": "top",
+    "height": 10,
+    "exclusive": true,
+    "passthrough": false,
+    "reload_style_on_change": true,
+    "include": [
+        "~/.config/waybar/modules.jsonc"
+    ],
+    "modules-left": [
+        "group/pill#left"
+    ],
+    "modules-center": [
+        "group/pill#center"
+    ],
+    "modules-right": [
+        "group/pill#right"
+    ],
+    "group/pill#left": {
+        "orientation": "inherit",
+        "modules": [
+            "sway/workspaces",
+            "sway/window"
+        ]
+    },
+    "group/pill#center": {
+        "orientation": "inherit",
+        "modules": [
+            "idle_inhibitor",
+            "clock",
+            "custom/updates"
+        ]
+    },
+    "group/pill#right": {
+        "orientation": "inherit",
+        "modules": [
+            "privacy",
+            "backlight",
+            "tray",
+            "network",
+            "pulseaudio",
+            "pulseaudio#microphone",
+            "battery",
+            "custom/gpuinfo",
+            "cpu",
+            "memory"
+        ]
+    }
+}

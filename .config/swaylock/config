@@ -1,0 +1,58 @@
+# Wallust Swaylock Config
+# Generated from: /home/amelie/.config/YASD/wallpapers/Haste-Broken-Worlds.jpg
+
+# --- Behavior & Quality of Life ---
+daemonize
+show-failed-attempts
+ignore-empty-password
+grace=1
+grace-no-mouse
+grace-no-touch
+fade-in=0.3
+
+# --- Visual Effects & Clock ---
+screenshot
+effect-blur=15x15
+effect-vignette=1:1
+clock
+datestr=%a, %B %e
+timestr=%I:%M %p
+font="Inter"
+text-color=#675029
+
+# --- Ring Geometry ---
+indicator
+indicator-radius=200
+indicator-thickness=20
+
+# --- Colors (Dynamic) ---
+# Base tint over blurred background (approx 50% opacity)
+color=#3C202480
+
+# Base Ring
+ring-color=#3C2024
+inside-color=00000000
+line-color=00000000
+separator-color=00000000
+
+# Typing State
+key-hl-color=#42262F
+
+# Verifying State 
+ring-ver-color=#42262F
+inside-ver-color=00000000
+line-ver-color=00000000
+text-ver-color=#675029
+
+# Deleting / Wrong State (Using color1 for Warning/Red)
+bs-hl-color=#2D0F13
+ring-clear-color=#2D0F13
+inside-clear-color=00000000
+line-clear-color=00000000
+text-clear-color=#675029
+
+ring-wrong-color=#2D0F13
+inside-wrong-color=00000000
+line-wrong-color=00000000
+text-wrong-color=#675029
+text-caps-lock-color=#2D0F13

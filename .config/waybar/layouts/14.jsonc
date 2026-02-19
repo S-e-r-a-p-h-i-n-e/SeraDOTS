@@ -1,0 +1,63 @@
+{
+    "layer": "top",
+    "output": [
+        "*"
+    ],
+    "height": 10,
+    "exclusive": true,
+    "passthrough": false,
+    "reload_style_on_change": true,
+    "include": [
+        "~/.config/waybar/modules.jsonc"
+    ],
+    "modules-left": [
+        "group/pill#left1",
+        "group/pill#left2"
+    ],
+    "group/pill#left1": {
+        "orientation": "inherit",
+        "modules": [
+            "custom/power",
+            "custom/cliphist",
+            "custom/wbar",
+            "custom/wallchange"
+        ]
+    },
+    "group/pill#left2": {
+        "orientation": "inherit",
+        "modules": [
+            "idle_inhibitor",
+            "clock",
+            "mpris"
+        ]
+    },
+    "modules-center": [
+        "group/pill#center"
+    ],
+    "group/pill#center": {
+        "orientation": "inherit",
+        "modules": [
+            "sway/workspaces"
+        ]
+    },
+    "modules-right": [
+        "group/pill#right1",
+        "group/pill#right2"
+    ],
+    "group/pill#right1": {
+        "orientation": "inherit",
+        "modules": [
+            "privacy",
+            "tray"
+        ]
+    },
+    "group/pill#right2": {
+        "orientation": "inherit",
+        "modules": [
+            "backlight",
+            "network",
+            "pulseaudio",
+            "pulseaudio#microphone"
+        ]
+    }
+}

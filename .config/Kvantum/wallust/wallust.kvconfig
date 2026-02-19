@@ -1,0 +1,22 @@
+[General]
+theme=wallust
+# Set these to true to match your main user's "blurred" look
+translucent_windows=true
+blurring=true
+
+[GeneralColors]
+# Swap the Gruvbox hex codes for these Wallust variables
+window.color=#DACFD0
+base.color=#F6EBEC
+alt.base.color=#F6EBEC
+button.color=#3C2024
+text.color=#675029
+window.text.color=#675029
+highlight.color=#42262F
+highlight.text.color=#DACFD0
+
+[Hacks]
+# Matches your main user's Hacks tab
+transparent_dolphin_view=true
+transparent_pcmanfm_view=true
+blur_translucent=true

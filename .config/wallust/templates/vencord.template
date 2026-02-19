@@ -1,0 +1,39 @@
+@import url('https://mwittrien.github.io/BetterDiscordAddons/Themes/DiscordRecolor/DiscordRecolor.css');
+
+:root {
+  /* Wallust Accent Colors */
+  --accentcolor: {{color2 | rgb}};
+  --accentcolor2: {{color0 | rgb}};
+  --linkcolor: {{color4 | rgb}};
+  --mentioncolor: {{color5 | rgb}};
+
+  /* Text Colors */
+  --textbrightest: {{foreground | rgb}};
+  --textbrighter: {{foreground | rgb}};
+  --textbright: {{color7 | rgb}};
+  --textdark: {{color15 | rgb}};
+  --textdarker: {{color8 | rgb}};
+  --textdarkest: {{background | rgb}};
+
+  /* Background Colors */
+  --backgroundaccent: {{color2 | rgb}};
+  --backgroundprimary: {{background | rgb}};
+  --backgroundsecondary: {{background | rgb}};
+  --backgroundsecondaryalt: {{background | rgb}};
+  --backgroundtertiary: {{background | rgb}};
+  --backgroundfloating: {{color0 | rgb}};
+  --settingsicons: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 500px !important;
+  background: rgba(var(--accentcolor), 0.7) !important;
+  background-clip: content-box !important;
+  border: 2px solid transparent !important;
+}
+
+/* Any custom CSS below here */

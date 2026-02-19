@@ -1,0 +1,22 @@
+#  ▀█▀ █░█ █▀▀ █▀▄▀█ █▀▀
+#  ░█░ █▀█ ██▄ █░▀░█ ██▄
+
+# Wallust Sway Theme
+# Generated from: {{wallpaper}}
+
+# --- Color Scheme ---
+default_border pixel 2
+
+# class                 border    backgr.   text      indicator child_border
+client.focused          {{color2}}  {{color2}}  {{color0}}  {{color2}}  {{color2}}
+client.focused_inactive {{color8}}  {{color8}}  {{color0}}  {{color8}}  {{color8}}
+client.unfocused        {{color0}}  {{color0}}  {{color7}}  {{color0}}  {{color0}}
+client.urgent           {{color1}}  {{color1}}  {{color0}}  {{color1}}  {{color1}}
+
+corner_radius 10
+shadows enabled
+shadow_blur_radius 15
+shadow_color #00000077
+
+gaps inner 5
+gaps outer 5

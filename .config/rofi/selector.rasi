@@ -1,0 +1,80 @@
+// Config //
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "JetBrainsMono Nerd Font 10";
+}
+
+@theme "~/.config/rofi/theme.rasi"
+
+// Main //
+window {
+    width:                       60em;     /* Defined width for 3 large items */
+    anchor:                      center;
+    location:                    center;
+    enabled:                     true;
+    fullscreen:                  false;
+    transparency:                "real";
+    cursor:                      "default";
+    spacing:                     0em;
+    padding:                     0em;
+    border:                      2px solid;
+    border-radius:               1em;
+    border-color:                @main-br;
+    background-color:            @main-bg;
+}
+
+mainbox {
+    enabled:                     true;
+    orientation:                 vertical;
+    children:                    [ "listview" ];
+    background-color:            transparent;
+}
+
+// Lists //
+listview {
+    enabled:                     true;
+    spacing:                     3em;      /* Space between previews */
+    padding:                     4em;      /* Outer margin */
+    columns:                     3;        /* 3 per page */
+    lines:                       1;        /* Single row */
+    cycle:                       true;
+    dynamic:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    reverse:                     false;    /* Set to false for standard L-R order */
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @main-fg;
+}
+
+// Elements //
+element {
+    enabled:                     true;
+    orientation:                 vertical;
+    spacing:                     0em;
+    padding:                     1.5em;    /* Padding for the selection box */
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    border-radius:               1em;
+}
+
+element selected.normal {
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
+}
+
+element-icon {
+    cursor:                      inherit;
+    size:                        12em;     /* Matches your high-res assets */
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
+    background-color:            transparent;
+    expand:                      true;
+}
+
+element-text {
+    enabled:                     false;    /* Keep icons only as requested */
+}

@@ -1,0 +1,19 @@
+/* Universal Color Scheme (GTK-Compatible) */
+/* Generated from: {{wallpaper}} */
+
+@define-color bg-base       {{background}};
+@define-color bg-alt        {{color0}};
+@define-color accent        {{color2}};
+@define-color text          {{foreground}};
+@define-color text-dim      {{color7}};
+@define-color active        {{color15}};
+
+/* Functional Colors */
+@define-color urgent        {{color1}};
+@define-color warning       {{color3}};
+@define-color success       {{color2}};
+
+/* Transparency Variants */
+@define-color bg-base-alpha alpha({{background}}, 0.85);
+@define-color bg-alt-alpha  alpha({{color0}}, 0.60);
+@define-color accent-alpha  alpha({{color2}}, 0.40);

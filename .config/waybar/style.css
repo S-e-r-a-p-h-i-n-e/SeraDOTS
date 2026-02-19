@@ -1,0 +1,71 @@
+/* Import your dynamic universal colors */
+@import url("../YASD/color.css");
+
+/* --- Global Bar Reset --- */
+window#waybar {
+    background: transparent; 
+    color: @text;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+}
+
+/* This targets the 'pill' ID regardless of which Side or Index it has */
+#pill {
+    background-color: @bg-alt; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 10px; 
+    margin: 5px 4px;
+    padding: 2px 10px;
+}
+
+.modules-center > widget > box {
+    background-color: @bg-alt;
+    border-radius: 10px;
+    margin: 5px 4px;
+    padding: 2px 10px;
+}
+
+#custom-cava {
+    color: @active; /* Uses your primary accent color from color.css */
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+/* --- Individual Module Spacing --- */
+/* Universal spacing for every module used in your 18 layouts */
+#workspaces, #window, #cpu, #memory, #backlight, #network, 
+#pulseaudio, #battery, #tray, #idle_inhibitor, #clock, 
+#mpris, #custom-power, #custom-wallchange, #custom-wbar, 
+#custom-cliphist, #custom-updates, #custom-gpuinfo, 
+#custom-cpuinfo, #custom-weather, #custom-swaync, #mpris, 
+#custom-mako {
+    padding: 0 6px;
+    margin: 0 2px;
+}
+#idle_inhibitor {
+    padding: 0 6px 0 3px;
+    margin: 0 2px;
+}
+#custom-menu {
+    padding: 0 6px 0 0;
+    margin: 0 2px;
+}
+
+/* --- Special Hover/Active States --- */
+#workspaces button {
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+    background: transparent;
+    color: @text;
+}
+
+#workspaces button.focused {
+    color: @active; 
+    font-weight: bold;
+}
+
+#custom-power:hover {
+    color: @urgent; 
+}

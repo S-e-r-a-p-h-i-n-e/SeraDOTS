@@ -27,6 +27,7 @@
         "modules": [
             "custom/cava",
             "idle_inhibitor",
+            "custom/swaync",
             "clock"
         ]
     },

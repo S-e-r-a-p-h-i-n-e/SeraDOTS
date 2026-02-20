@@ -27,8 +27,8 @@
         "orientation": "inherit",
         "modules": [
             "idle_inhibitor",
-            "clock",
-            "custom/updates"
+            "custom/swaync",
+            "clock"
         ]
     },
     "group/pill#right": {
@@ -41,6 +41,7 @@
             "pulseaudio",
             "pulseaudio#microphone",
             "battery",
+            "custom/updates",
             "custom/gpuinfo",
             "cpu",
             "memory"

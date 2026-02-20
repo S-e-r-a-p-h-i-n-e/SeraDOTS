@@ -15,7 +15,7 @@
   },
   "group/pill#left2": {
     "orientation": "inherit",
-    "modules": ["idle_inhibitor", "clock"]
+    "modules": ["idle_inhibitor", "custom/swaync", "clock"]
   },
   "modules-center": ["group/pill#center"],
   "group/pill#center": {

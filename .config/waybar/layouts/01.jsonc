@@ -10,39 +10,39 @@
     ],
 
     "modules-left": [
-        "group/pill#left1",
-        "group/pill#left2"
+        "group/pill#hwinfo",
+        "group/pill#behavior"
     ],
     "modules-center": [
-        "group/pill#center"
+        "group/pill#main"
     ],
     "modules-right": [
-        "group/pill#right1",
-        "group/pill#right2",
-        "group/pill#right3"
+        "group/pill#sys",
+        "group/pill#tray",
+        "group/pill#tools"
     ],
-    "group/pill#left1": {
+    "group/pill#hwinfo": {
         "orientation": "horizontal",
-        "modules": ["cpu", "memory"]
+        "modules": ["cpu", "custom/gpuinfo", "memory"]
     },
-    "group/pill#left2": {
+    "group/pill#behavior": {
         "orientation": "horizontal",
-        "modules": ["idle_inhibitor", "clock"]
+        "modules": ["idle_inhibitor", "custom/swaync", "clock"]
     },
-    "group/pill#center": {
+    "group/pill#main": {
         "orientation": "horizontal",
         "modules": ["sway/workspaces", "sway/window"] 
     },
-    "group/pill#right1": {
+    "group/pill#sys": {
         "orientation": "horizontal",
         "modules": ["backlight", "network", "pulseaudio"]
     },
-    "group/pill#right2": {
+    "group/pill#tray": {
         "orientation": "horizontal",
         "modules": ["tray", "battery"]
     },
-    "group/pill#right3": {
+    "group/pill#tools": {
         "orientation": "horizontal",
-        "modules": ["custom/wallchange", "custom/power"]
+        "modules": ["custom/wallchange", "custom/cliphist", "custom/power"]
     }
 }

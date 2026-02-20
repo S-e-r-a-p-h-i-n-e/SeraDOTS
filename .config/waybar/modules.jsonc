@@ -63,7 +63,7 @@
         "on-click": "~/.config/YASD/scripts/idle-notify.sh"
     },
     "clock": {
-        "format": "  {:%H:%M}",
+        "format": "{:%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
     },
     "mpris": {

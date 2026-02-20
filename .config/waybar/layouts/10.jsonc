@@ -36,8 +36,9 @@
         "orientation": "inherit",
         "modules": [
             "sway/workspaces",
+            "clock",
             "idle_inhibitor",
-            "clock"
+            "custom/swaync"
         ]
     },
     "group/pill#center4": {

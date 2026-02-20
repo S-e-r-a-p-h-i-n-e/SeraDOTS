@@ -27,6 +27,7 @@
         "orientation": "inherit",
         "modules": [
             "idle_inhibitor",
+            "custom/swaync",
             "clock",
             "mpris"
         ]

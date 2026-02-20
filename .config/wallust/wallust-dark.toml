@@ -5,6 +5,7 @@ palette = "dark16"
 threshold = 20
 
 [templates]
+code       = { src = "code-dark.template", dst = "~/.config/Code/User/settings.json" }
 css        = { src = "color.template", dst = "~/.config/YASD/color.css" }
 fastfetch  = { src = "fastfetch.template", dst = "~/.config/fastfetch/config.jsonc" }
 kdeglobals = { src = "kdeglobals.template", dst = "~/.config/kdeglobals" }

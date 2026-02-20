@@ -24,8 +24,9 @@
     "group/pill#left2": {
         "orientation": "inherit",
         "modules": [
-            "idle_inhibitor",
-            "clock"
+            "cpu",
+            "memory",
+            "custom/gpuinfo"
         ]
     },
     "modules-center": [
@@ -34,10 +35,9 @@
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
-            "cpu",
-            "memory",
-            "custom/cpuinfo",
-            "custom/gpuinfo"
+            "idle_inhibitor",
+            "custom/swaync",
+            "clock"
         ]
     },
     "modules-right": [

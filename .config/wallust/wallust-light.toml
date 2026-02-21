@@ -3,6 +3,7 @@
 backend = "wal"
 palette = "light16"
 threshold = 20
+color_space = "lch"
 
 [templates]
 code       = { src = "code-light.template", dst = "~/.config/Code/User/settings.json" }

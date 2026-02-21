@@ -7,7 +7,7 @@
     {
       "type": "custom",
       /* Using \u001b[38;2;R;G;Bm for truecolor support in the quote */
-      "format": "\u001b[38;2;m  Times are hard for dreamers. Stay sharp or she'll devour your heart.",
+      "format": "\u001b[38;2;m  Times are hard for dreamers. Stay sharp.",
       "keyColor": "#42262F"
     },
     {

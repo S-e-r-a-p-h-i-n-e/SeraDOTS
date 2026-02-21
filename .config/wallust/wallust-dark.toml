@@ -3,6 +3,7 @@
 backend = "wal"
 palette = "dark16"
 threshold = 20
+color_space = "lab"
 
 [templates]
 code       = { src = "code-dark.template", dst = "~/.config/Code/User/settings.json" }

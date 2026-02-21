@@ -77,7 +77,7 @@
         "max-length": 30
     },
 
-    // --- Custom Modules (HyDE Migrated) ---
+    // --- Custom Modules ---
     "custom/gpuinfo": {
         "exec": "~/.config/YASD/scripts/gpu-temp.sh",
         "interval": 5,

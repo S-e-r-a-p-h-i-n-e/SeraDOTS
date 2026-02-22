@@ -4,7 +4,7 @@
 
 SeraDOTS is a reference implementation of a modern Linux desktop built around a strict contract: **design against the least capable environment first, and allow more capable environments to extend it.** 
 
-This project aims to be modular and understandable. It is not a distro, and it is not a one-size-fits-all rice.
+This project aims to be modular and understandable. It is not a distro, and it is not a one-size-fits-all rice. In here, Core defines what must work everywhere while Extensions define what works better somewhere.
 
 ---
 
@@ -58,3 +58,5 @@ Then this project is probably for you.
 ## ⚠️ Disclaimer
 
 This project is a work in progress. Breaking changes may happen while the architecture is refined. However, the **design and layout is stable**, the **baseline is usable**, and regressions are avoided intentionally.
+Proper folders for scripts, core, and extensions will be added and configured later on once everything is stable, documented, and finished.
+Once it's finished the sky is the limit.

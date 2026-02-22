@@ -1,10 +1,8 @@
-#!/bin/bash
-
 # Configuration
 THEME="~/.config/rofi/clipboard.rasi"
 FAV_FILE="$HOME/.config/YASD/clipboard_favorites.txt"
 
-# Ensure the favorites file exists so commands don't throw an error
+# Ensure the favorites file exists
 touch "$FAV_FILE"
 
 # Define the Main Menu Options
@@ -15,25 +13,23 @@ OPT_4="❌ Remove from Favorites"
 OPT_5="🗑️ Clear Clipboard History"
 
 # Build the menu and pipe it into Rofi
-MENU_LIST=$(printf "%s\n%s\n%s\n%s\n%s" "$OPT_1" "$OPT_2" "$OPT_3" "$OPT_4" "$OPT_5")
-CHOICE=$(echo -e "$MENU_LIST" | rofi -dmenu -p "Menu" -theme "$THEME")
+MENU_LIST=$(printf '%s\n%s\n%s\n%s\n%s' "$OPT_1" "$OPT_2" "$OPT_3" "$OPT_4" "$OPT_5")
+CHOICE=$(printf '%s\n' "$MENU_LIST" | rofi -dmenu -p "Menu" -theme "$THEME")
 
 # Route the user's choice
 case "$CHOICE" in
     "$OPT_1")
-        # Standard cliphist behavior
         SELECTED=$(cliphist list | rofi -dmenu -p "History" -theme "$THEME")
         if [ -n "$SELECTED" ]; then
-            echo "$SELECTED" | cliphist decode | wl-copy
+            printf '%s\n' "$SELECTED" | cliphist decode | wl-copy
         fi
         ;;
         
     "$OPT_2")
-        # Read the favorites file
         if [ -s "$FAV_FILE" ]; then
-            SELECTED=$(cat "$FAV_FILE" | rofi -dmenu -p "Favorites" -theme "$THEME")
+            SELECTED=$(rofi -dmenu -p "Favorites" -theme "$THEME" < "$FAV_FILE")
             if [ -n "$SELECTED" ]; then
-                echo -n "$SELECTED" | wl-copy 
+                printf '%s' "$SELECTED" | wl-copy 
                 notify-send -u low -h string:x-canonical-private-synchronous:clip "Clipboard" "Favorite Copied"
             fi
         else
@@ -42,18 +38,16 @@ case "$CHOICE" in
         ;;
         
     "$OPT_3")
-        # Pick an item from cliphist to save
         SELECTED=$(cliphist list | rofi -dmenu -p "Save Fav" -theme "$THEME")
         if [ -n "$SELECTED" ]; then
-            echo "$SELECTED" | cliphist decode >> "$FAV_FILE"
+            printf '%s\n' "$SELECTED" | cliphist decode >> "$FAV_FILE"
             notify-send -u low -h string:x-canonical-private-synchronous:clip "Clipboard" "Added to Favorites 🌟"
         fi
         ;;
 
     "$OPT_4")
-        # Pick a favorite to delete
         if [ -s "$FAV_FILE" ]; then
-            SELECTED=$(cat "$FAV_FILE" | rofi -dmenu -p "Delete Fav" -theme "$THEME")
+            SELECTED=$(rofi -dmenu -p "Delete Fav" -theme "$THEME" < "$FAV_FILE")
             if [ -n "$SELECTED" ]; then
                 grep -v -F -x "$SELECTED" "$FAV_FILE" > "${FAV_FILE}.tmp"
                 mv "${FAV_FILE}.tmp" "$FAV_FILE"

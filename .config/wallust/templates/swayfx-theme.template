@@ -7,7 +7,7 @@
 # --- Color Scheme ---
 default_border pixel 2
 
-# class                 border      backgr.     text        indicator   child_border
+# class                 border    backgr.   text      indicator child_border
 client.focused          {{color2}}  {{color2}}  {{color0}}  {{color2}}  {{color2}}
 client.focused_inactive {{color8}}  {{color8}}  {{color0}}  {{color8}}  {{color8}}
 client.unfocused        {{color0}}  {{color0}}  {{color7}}  {{color0}}  {{color0}}

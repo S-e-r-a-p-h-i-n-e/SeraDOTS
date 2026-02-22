@@ -60,7 +60,7 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": { "activated": "", "deactivated": "" },
-        "on-click": "~/.config/YASD/scripts/idle-notify.sh"
+        "on-click": "idle-notify.sh"
     },
     "clock": {
         "format": "{:%H:%M}",
@@ -79,23 +79,23 @@
 
     // --- Custom Modules ---
     "custom/gpuinfo": {
-        "exec": "~/.config/YASD/scripts/gpu-temp.sh",
+        "exec": "gpu-temp.sh",
         "interval": 5,
         "format": "󰢮 {}"
     },
     "custom/updates": {
         "exec": "checkupdates | wc -l",
-        "on-click": "kitty -e ~/.config/YASD/scripts/updater.sh",
+        "on-click": "kitty -e updater.sh",
         "interval": 7200,
         "format": "󰚰 {}"
     },
     "custom/cliphist": {
         "format": "󱘔",
-        "on-click": "~/.config/YASD/scripts/clipmgr.sh"
+        "on-click": "clipmgr.sh"
     },
     "custom/wallchange": {
         "format": "󰸉",
-        "on-click": "~/.config/YASD/scripts/wallchange.sh"
+        "on-click": "wallchange.sh"
     },
     "custom/power": {
         "format": "⏻",
@@ -111,18 +111,18 @@
         "tooltip": false,
         "format": "{}", 
         "exec": "makoctl mode | grep -q '^dnd$' && echo '●' || echo '○'",
-        "on-click": "~/.config/YASD/scripts/dnd-toggle.sh",
+        "on-click": "dnd-toggle.sh",
         "interval": 1,
         "signal": 8
     },
     "custom/wbar": {
         "format": "󱂬",
-        "on-click": "~/.config/YASD/scripts/wbar-layout.sh",
+        "on-click": "wbar-layout.sh",
         "tooltip": true,
         "tooltip-format": "Change Waybar Layout"
     },
     "custom/cava": {
-    "exec": "~/.config/YASD/scripts/cava.sh",
+    "exec": "cava.sh",
     "format": "{}",
     "tooltip": false
     },

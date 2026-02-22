@@ -1,50 +1,49 @@
 {
     "layer": "top",
+    "output": [
+        "*"
+    ],
     "height": 10,
     "exclusive": true,
     "passthrough": false,
     "reload_style_on_change": true,
     "include": [
-        "~/.config/waybar/modules.jsonc"
+        "~/.config/waybar/modules.jsonc" 
     ],
     "modules-left": [
         "group/pill#left"
     ],
-    "modules-center": [
-        "group/pill#center"
-    ],
-    "modules-right": [
-        "group/pill#right"
-    ],
     "group/pill#left": {
         "orientation": "inherit",
         "modules": [
-            "sway/workspaces",
-            "sway/window"
+            "sway/workspaces"
         ]
     },
+    "modules-center": [
+        "group/pill#center"
+    ],
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
+            "custom/cava",
             "idle_inhibitor",
             "custom/swaync",
             "clock"
         ]
     },
+    "modules-right": [
+        "group/pill#right"
+    ],
     "group/pill#right": {
         "orientation": "inherit",
         "modules": [
-            "privacy",
             "backlight",
-            "tray",
-            "network",
             "pulseaudio",
             "pulseaudio#microphone",
+            "tray",
             "battery",
-            "custom/updates",
-            "custom/gpuinfo",
-            "cpu",
-            "memory"
+            "custom/cliphist",
+            "custom/power"
         ]
     }
 }

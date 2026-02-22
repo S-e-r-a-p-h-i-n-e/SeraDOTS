@@ -1,5 +1,3 @@
-#!/bin/bash
-
 STATE_FILE="/tmp/waybar_idle_state"
 
 if [ ! -f "$STATE_FILE" ]; then
@@ -11,3 +9,4 @@ else
     rm "$STATE_FILE"
     notify-send -u low -h string:x-canonical-private-synchronous:idle "Display" "Idle Inhibitor: OFF "
 fi
+

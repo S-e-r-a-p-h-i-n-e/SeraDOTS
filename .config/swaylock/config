@@ -1,5 +1,5 @@
 # Wallust Swaylock Config
-# Generated from: /home/amelie/.config/YASD/wallpapers/Haste-Broken-Worlds.jpg
+# Generated from: /home/amelie/.config/YASD/wallpapers/frieren2.png
 
 # --- Behavior & Quality of Life ---
 daemonize
@@ -18,7 +18,7 @@ clock
 datestr=%a, %B %e
 timestr=%I:%M %p
 font="Inter"
-text-color=#675029
+text-color=#12252C
 
 # --- Ring Geometry ---
 indicator
@@ -27,32 +27,32 @@ indicator-thickness=20
 
 # --- Colors (Dynamic) ---
 # Base tint over blurred background (approx 50% opacity)
-color=#3C202480
+color=#4C909880
 
 # Base Ring
-ring-color=#3C2024
+ring-color=#4C9098
 inside-color=00000000
 line-color=00000000
 separator-color=00000000
 
 # Typing State
-key-hl-color=#42262F
+key-hl-color=#407B85
 
 # Verifying State 
-ring-ver-color=#42262F
+ring-ver-color=#407B85
 inside-ver-color=00000000
 line-ver-color=00000000
-text-ver-color=#675029
+text-ver-color=#12252C
 
 # Deleting / Wrong State (Using color1 for Warning/Red)
-bs-hl-color=#2D0F13
-ring-clear-color=#2D0F13
+bs-hl-color=#357781
+ring-clear-color=#357781
 inside-clear-color=00000000
 line-clear-color=00000000
-text-clear-color=#675029
+text-clear-color=#12252C
 
-ring-wrong-color=#2D0F13
+ring-wrong-color=#357781
 inside-wrong-color=00000000
 line-wrong-color=00000000
-text-wrong-color=#675029
-text-caps-lock-color=#2D0F13
+text-wrong-color=#12252C
+text-caps-lock-color=#357781

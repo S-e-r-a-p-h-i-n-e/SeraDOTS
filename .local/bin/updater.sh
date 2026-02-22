@@ -1,5 +1,3 @@
-#!/bin/bash
-
 fastfetch
 
 echo -e "\n--- Starting System Update (Pacman) ---"

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # --- Paths ---
 STYLE_DIR="$HOME/.config/rofi/styles"
 ASSET_DIR="$HOME/.config/rofi/assets"
@@ -9,8 +7,8 @@ THUMB_OUT="$HOME/.config/rofi/bg.thmb"
 
 # --- The "Worker" Function ---
 generate_thumbnail() {
-    local wall="$1"
-    local style="$2"
+    wall="$1"
+    style="$2"
 
     case "$style" in
         1|3|7|8)
@@ -23,7 +21,7 @@ generate_thumbnail() {
 }
 
 # --- Refresh Mode Check ---
-if [[ "${1:-}" == "--refresh" ]]; then
+if [ "${1:-}" = "--refresh" ]; then
     if [ -f "${2:-}" ] && [ -n "${3:-}" ]; then
         generate_thumbnail "$2" "$3"
         exit 0
@@ -41,12 +39,14 @@ WALLPAPER=$(swww query | awk -F'image: ' '/image:/ {print $2; exit}')
 # --- Launch Rofi Selector ---
 CHOICE=$(
     for file in "$STYLE_DIR"/style_*.rasi; do
+        # Prevent errors if glob doesn't match any files
+        [ -e "$file" ] || continue
         i=$(basename "$file" .rasi | cut -d'_' -f2)
-        printf "%s\0icon\x1f%s\n" "$i" "$ASSET_DIR/style_${i}.png"
+        printf "%s\0icon\037%s\n" "$i" "$ASSET_DIR/style_${i}.png"
     done | rofi -dmenu -i -p "Select Layout" -theme "$THEME"
 )
 
-STYLE_NUM="$(echo "$CHOICE" | tr -d '[:space:]')"
+STYLE_NUM=$(printf '%s\n' "$CHOICE" | tr -d '[:space:]')
 [ -z "$STYLE_NUM" ] && exit 0
 
 # --- Apply & Generate ---

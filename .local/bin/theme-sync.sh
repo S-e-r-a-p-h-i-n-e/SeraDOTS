@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # 1. Catch the wallpaper and Wallust config
 WALLPAPER="${1:-}"
 WALLUST_CONFIG="${2:-$HOME/.config/wallust/wallust-dark.toml}"  # default to dark if not passed

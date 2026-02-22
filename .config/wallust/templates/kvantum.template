@@ -1,0 +1,587 @@
+[%General]
+[cite_start]author=Alexey Varfolomeev, based on KvAdapta by Tsu Jan [cite: 1]
+[cite_start]comment=An uncomplicated theme inspired by the Materia GTK theme [cite: 1]
+[cite_start]alt_mnemonic=true [cite: 1]
+[cite_start]animate_states=true [cite: 1]
+[cite_start]attach_active_tab=false [cite: 1]
+[cite_start]blurring=false [cite: 1]
+[cite_start]button_contents_shift=false [cite: 1]
+[cite_start]button_icon_size=16 [cite: 1]
+[cite_start]center_toolbar_handle=true [cite: 1]
+[cite_start]check_size=16 [cite: 1]
+[cite_start]combo_as_lineedit=true [cite: 1]
+[cite_start]combo_focus_rect=false [cite: 1]
+[cite_start]combo_menu=true [cite: 1]
+[cite_start]composite=true [cite: 1]
+[cite_start]double_click=false [cite: 1]
+[cite_start]fill_rubberband=false [cite: 1]
+[cite_start]group_toolbar_buttons=false [cite: 1]
+[cite_start]groupbox_top_label=true [cite: 1]
+[cite_start]hide_combo_checkboxes=true [cite: 1]
+[cite_start]inline_spin_indicators=true [cite: 1]
+[cite_start]joined_inactive_tabs=true [cite: 1]
+[cite_start]large_icon_size=32 [cite: 1]
+[cite_start]layout_margin=9 [cite: 1]
+[cite_start]layout_spacing=6 [cite: 1]
+[cite_start]left_tabs=true [cite: 1]
+[cite_start]menu_shadow_depth=5 [cite: 1]
+[cite_start]menubar_mouse_tracking=true [cite: 1]
+[cite_start]merge_menubar_with_toolbar=true [cite: 1]
+[cite_start]mirror_doc_tabs=true [cite: 1]
+[cite_start]no_inactiveness=false [cite: 1]
+[cite_start]no_window_pattern=false [cite: 1]
+[cite_start]opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,digikam [cite: 1]
+[cite_start]popup_blurring=false [cite: 1]
+[cite_start]progressbar_thickness=2 [cite: 1]
+[cite_start]reduce_menu_opacity=0 [cite: 1]
+[cite_start]reduce_window_opacity=0 [cite: 1]
+[cite_start]respect_DE=true [cite: 1]
+[cite_start]scroll_arrows=false [cite: 1]
+[cite_start]scroll_min_extent=60 [cite: 1]
+[cite_start]scroll_width=9 [cite: 1]
+[cite_start]scrollable_menu=false [cite: 1]
+[cite_start]scrollbar_in_view=true [cite: 1]
+[cite_start]slider_handle_length=22 [cite: 1]
+[cite_start]slider_handle_width=23 [cite: 1]
+[cite_start]slider_width=2 [cite: 1]
+[cite_start]small_icon_size=16 [cite: 1]
+[cite_start]spin_button_width=24 [cite: 1]
+[cite_start]splitter_width=1 [cite: 1]
+[cite_start]spread_menuitems=true [cite: 1]
+[cite_start]spread_progressbar=true [cite: 1]
+[cite_start]submenu_delay=250 [cite: 1]
+[cite_start]submenu_overlap=0 [cite: 1]
+[cite_start]textless_progressbar=false [cite: 1]
+[cite_start]tickless_slider_handle_size=22 [cite: 1]
+[cite_start]toolbar_icon_size=22 [cite: 1]
+[cite_start]toolbar_interior_spacing=2 [cite: 1]
+[cite_start]toolbar_item_spacing=0 [cite: 1]
+[cite_start]toolbutton_style=1 [cite: 1]
+[cite_start]tooltip_delay=-1 [cite: 1]
+[cite_start]tooltip_shadow_depth=3 [cite: 1]
+[cite_start]transient_groove=false [cite: 1]
+[cite_start]transient_scrollbar=true [cite: 1]
+[cite_start]translucent_windows=false [cite: 1]
+[cite_start]tree_branch_line=true [cite: 1]
+[cite_start]vertical_spin_indicators=false [cite: 1]
+[cite_start]x11drag=menubar_and_primary_toolbar [cite: 1]
+
+[GeneralColors]
+alt.base.color={{background}}
+base.color={{background}}
+button.color={{color0}}
+button.text.color={{foreground}}
+dark.color={{color8}}
+disabled.text.color={{foreground_dim}}
+highlight.color={{accent_soft}}
+highlight.text.color={{background}}
+inactive.highlight.color={{accent_faint}}
+light.color={{color7}}
+link.color={{color4}}
+link.visited.color={{color5}}
+mid.color={{foreground_soft}}
+mid.light.color={{color0}}
+progress.indicator.text.color={{background}}
+text.color={{foreground}}
+tooltip.text.color={{background}}
+window.color={{background}}
+window.text.color={{foreground}}
+
+[Hacks]
+[cite_start]blur_translucent=false [cite: 1]
+[cite_start]disabled_icon_opacity=100 [cite: 1]
+[cite_start]force_size_grip=true [cite: 1]
+[cite_start]iconless_menu=false [cite: 1]
+[cite_start]iconless_pushbutton=true [cite: 1]
+[cite_start]kcapacitybar_as_progressbar=true [cite: 1]
+[cite_start]lxqtmainmenu_iconsize=16 [cite: 1]
+[cite_start]middle_click_scroll=false [cite: 1]
+[cite_start]no_selection_tint=true [cite: 1]
+[cite_start]normal_default_pushbutton=true [cite: 1]
+[cite_start]opaque_colors=false [cite: 1]
+[cite_start]respect_darkness=false [cite: 1]
+[cite_start]single_top_toolbar=true [cite: 1]
+[cite_start]tint_on_mouseover=0 [cite: 1]
+[cite_start]transparent_arrow_button=false [cite: 1]
+[cite_start]transparent_dolphin_view=false [cite: 1]
+[cite_start]transparent_ktitle_label=false [cite: 1]
+[cite_start]transparent_menutitle=false [cite: 1]
+[cite_start]transparent_pcmanfm_sidepane=false [cite: 1]
+[cite_start]transparent_pcmanfm_view=false [cite: 1]
+
+[PanelButtonCommand]
+[cite_start]frame=true [cite: 1]
+[cite_start]frame.element=button [cite: 1]
+[cite_start]frame.top=4 [cite: 1]
+[cite_start]frame.bottom=4 [cite: 1]
+[cite_start]frame.left=4 [cite: 1]
+[cite_start]frame.right=4 [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]interior.element=button [cite: 1]
+[cite_start]indicator.size=8 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{color4}}
+[cite_start]text.shadow=0 [cite: 1]
+[cite_start]text.margin=1 [cite: 1]
+[cite_start]text.iconspacing=4 [cite: 1]
+[cite_start]indicator.element=arrow [cite: 1]
+[cite_start]text.margin.top=2 [cite: 1]
+[cite_start]text.margin.bottom=3 [cite: 1]
+[cite_start]text.margin.left=2 [cite: 1]
+[cite_start]text.margin.right=2 [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[PanelButtonTool]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{color4}}
+[cite_start]text.bold=false [cite: 1]
+[cite_start]indicator.element=arrow [cite: 1]
+[cite_start]indicator.size=8 [cite: 1]
+[cite_start]frame.expansion=24 [cite: 1]
+
+[ToolbarButton]
+[cite_start]frame.element=tbutton [cite: 1]
+[cite_start]interior.element=tbutton [cite: 1]
+[cite_start]indicator.element=tarrow [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]text.bold=false [cite: 1]
+[cite_start]frame.expansion=24 [cite: 1]
+
+[Dock]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]interior.element=dock [cite: 1]
+[cite_start]frame.element=dock [cite: 1]
+[cite_start]frame.top=1 [cite: 1]
+[cite_start]frame.bottom=1 [cite: 1]
+[cite_start]frame.left=1 [cite: 1]
+[cite_start]frame.right=1 [cite: 1]
+text.normal.color={{foreground}}
+
+[DockTitle]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]interior=false [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+[cite_start]text.bold=false [cite: 1]
+
+[IndicatorSpinBox]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=true [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+[cite_start]indicator.element=spin [cite: 1]
+[cite_start]indicator.size=8 [cite: 1]
+text.normal.color={{foreground}}
+[cite_start]text.margin.top=2 [cite: 1]
+[cite_start]text.margin.bottom=2 [cite: 1]
+[cite_start]text.margin.left=2 [cite: 1]
+[cite_start]text.margin.right=2 [cite: 1]
+
+[RadioButton]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]interior.element=radio [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+[cite_start]min_width=+0.3font [cite: 1]
+[cite_start]min_height=+0.3font [cite: 1]
+
+[CheckBox]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]interior.element=checkbox [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+[cite_start]min_width=+0.3font [cite: 1]
+[cite_start]min_height=+0.3font [cite: 1]
+
+[Focus]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=true [cite: 1]
+[cite_start]frame.element=focus [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+[cite_start]frame.patternsize=14 [cite: 1]
+
+[GenericFrame]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=true [cite: 1]
+[cite_start]interior=false [cite: 1]
+[cite_start]frame.element=common [cite: 1]
+[cite_start]interior.element=common [cite: 1]
+[cite_start]frame.top=1 [cite: 1]
+[cite_start]frame.bottom=1 [cite: 1]
+[cite_start]frame.left=1 [cite: 1]
+[cite_start]frame.right=1 [cite: 1]
+
+[LineEdit]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=lineedit [cite: 1]
+[cite_start]interior.element=lineedit [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]frame.top=4 [cite: 1]
+[cite_start]frame.bottom=4 [cite: 1]
+[cite_start]frame.left=4 [cite: 1]
+[cite_start]frame.right=4 [cite: 1]
+[cite_start]text.margin.top=7 [cite: 1]
+[cite_start]text.margin.bottom=7 [cite: 1]
+[cite_start]text.margin.left=6 [cite: 1]
+[cite_start]text.margin.right=6 [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[ToolbarLineEdit]
+[cite_start]frame.element=tlineedit [cite: 1]
+[cite_start]interior.element=tlineedit [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]frame.top=4 [cite: 1]
+[cite_start]frame.bottom=4 [cite: 1]
+[cite_start]frame.left=4 [cite: 1]
+[cite_start]frame.right=4 [cite: 1]
+[cite_start]text.margin.top=7 [cite: 1]
+[cite_start]text.margin.bottom=7 [cite: 1]
+[cite_start]text.margin.left=6 [cite: 1]
+[cite_start]text.margin.right=6 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+
+[DropDownButton]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]indicator.element=arrow-down [cite: 1]
+
+[IndicatorArrow]
+[cite_start]indicator.element=arrow [cite: 1]
+[cite_start]indicator.size=8 [cite: 1]
+
+[ToolboxTab]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+text.normal.color={{foreground}}
+text.press.color={{foreground}}
+text.focus.color={{foreground}}
+
+[Tab]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]interior.element=tab [cite: 1]
+[cite_start]text.margin.left=8 [cite: 1]
+[cite_start]text.margin.right=8 [cite: 1]
+[cite_start]text.margin.top=2 [cite: 1]
+[cite_start]text.margin.bottom=2 [cite: 1]
+[cite_start]frame.element=tab [cite: 1]
+[cite_start]indicator.element=tab [cite: 1]
+[cite_start]indicator.size=22 [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{color4}}
+[cite_start]frame.expansion=0 [cite: 1]
+[cite_start]text.bold=false [cite: 1]
+[cite_start]focusFrame=true [cite: 1]
+
+[TabFrame]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=tabframe [cite: 1]
+[cite_start]interior.element=tabframe [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+
+[TreeExpander]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]indicator.size=8 [cite: 1]
+[cite_start]indicator.element=tree [cite: 1]
+
+[HeaderSection]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]interior.element=header [cite: 1]
+[cite_start]frame.element=header [cite: 1]
+[cite_start]frame.top=0 [cite: 1]
+[cite_start]frame.bottom=1 [cite: 1]
+[cite_start]frame.left=0 [cite: 1]
+[cite_start]frame.right=1 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]frame.expansion=0 [cite: 1]
+
+[SizeGrip]
+[cite_start]indicator.element=resize-grip [cite: 1]
+
+[Toolbar]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]indicator.element=toolbar [cite: 1]
+[cite_start]indicator.size=5 [cite: 1]
+[cite_start]text.margin=0 [cite: 1]
+[cite_start]interior.element=menubar [cite: 1]
+[cite_start]frame.element=menubar [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]frame.left=0 [cite: 1]
+[cite_start]frame.right=0 [cite: 1]
+[cite_start]frame.top=0 [cite: 1]
+[cite_start]frame.bottom=4 [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[Slider]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=slider [cite: 1]
+[cite_start]focusFrame=true [cite: 1]
+[cite_start]interior.element=slider [cite: 1]
+[cite_start]frame.top=3 [cite: 1]
+[cite_start]frame.bottom=3 [cite: 1]
+[cite_start]frame.left=3 [cite: 1]
+[cite_start]frame.right=3 [cite: 1]
+
+[SliderCursor]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]interior.element=slidercursor [cite: 1]
+
+[Progressbar]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=progress [cite: 1]
+[cite_start]interior.element=progress [cite: 1]
+[cite_start]text.margin=0 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]text.bold=false [cite: 1]
+[cite_start]frame.expansion=8 [cite: 1]
+
+[ProgressbarContents]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=true [cite: 1]
+[cite_start]frame.element=progress-pattern [cite: 1]
+[cite_start]interior.element=progress-pattern [cite: 1]
+
+[ItemView]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]text.margin=0 [cite: 1]
+[cite_start]frame.element=itemview [cite: 1]
+[cite_start]interior.element=itemview [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+[cite_start]text.margin.top=2 [cite: 1]
+[cite_start]text.margin.bottom=2 [cite: 1]
+[cite_start]text.margin.left=4 [cite: 1]
+[cite_start]text.margin.right=4 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]min_width=+0.3font [cite: 1]
+[cite_start]min_height=+0.3font [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[Splitter]
+[cite_start]indicator.size=48 [cite: 1]
+
+[Scrollbar]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]indicator.element=arrow [cite: 1]
+[cite_start]indicator.size=12 [cite: 1]
+
+[ScrollbarSlider]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=scrollbarslider [cite: 1]
+[cite_start]interior=false [cite: 1]
+[cite_start]frame.left=5 [cite: 1]
+[cite_start]frame.right=5 [cite: 1]
+[cite_start]frame.top=5 [cite: 1]
+[cite_start]frame.bottom=5 [cite: 1]
+[cite_start]indicator.element=grip [cite: 1]
+[cite_start]indicator.size=12 [cite: 1]
+
+[ScrollbarGroove]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]interior=false [cite: 1]
+[cite_start]frame=false [cite: 1]
+
+[MenuItem]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=true [cite: 1]
+[cite_start]frame.element=menuitem [cite: 1]
+[cite_start]interior.element=menuitem [cite: 1]
+[cite_start]indicator.element=menuitem [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+[cite_start]text.margin.top=1 [cite: 1]
+[cite_start]text.margin.bottom=1 [cite: 1]
+[cite_start]text.margin.left=5 [cite: 1]
+[cite_start]text.margin.right=5 [cite: 1]
+[cite_start]frame.top=0 [cite: 1]
+[cite_start]frame.bottom=0 [cite: 1]
+[cite_start]frame.left=0 [cite: 1]
+[cite_start]frame.right=0 [cite: 1]
+[cite_start]text.bold=false [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[MenuBar]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=menubar [cite: 1]
+[cite_start]interior.element=menubar [cite: 1]
+[cite_start]frame.bottom=0 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]frame.expansion=0 [cite: 1]
+[cite_start]text.bold=false [cite: 1]
+
+[MenuBarItem]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]interior.element=menubaritem [cite: 1]
+[cite_start]frame.element=menubaritem [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+[cite_start]text.margin.left=4 [cite: 1]
+[cite_start]text.margin.right=4 [cite: 1]
+[cite_start]text.margin.top=0 [cite: 1]
+[cite_start]text.margin.bottom=0 [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]text.bold=false [cite: 1]
+[cite_start]min_width=+0.3font [cite: 1]
+[cite_start]min_height=+0.3font [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[TitleBar]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]text.margin.top=2 [cite: 1]
+[cite_start]text.margin.bottom=2 [cite: 1]
+[cite_start]text.margin.left=2 [cite: 1]
+[cite_start]text.margin.right=2 [cite: 1]
+[cite_start]interior.element=titlebar [cite: 1]
+[cite_start]indicator.size=16 [cite: 1]
+[cite_start]indicator.element=mdi [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+[cite_start]text.bold=false [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[ComboBox]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.element=combo [cite: 1]
+[cite_start]interior.element=combo [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]frame.top=4 [cite: 1]
+[cite_start]frame.bottom=4 [cite: 1]
+[cite_start]frame.left=4 [cite: 1]
+[cite_start]frame.right=4 [cite: 1]
+[cite_start]text.margin.top=7 [cite: 1]
+[cite_start]text.margin.bottom=7 [cite: 1]
+[cite_start]text.margin.left=6 [cite: 1]
+[cite_start]text.margin.right=6 [cite: 1]
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+[cite_start]frame.expansion=0 [cite: 1]
+
+[ToolbarComboBox]
+[cite_start]frame.element=tcombo [cite: 1]
+[cite_start]interior.element=tcombo [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]frame.top=4 [cite: 1]
+[cite_start]frame.bottom=4 [cite: 1]
+[cite_start]frame.left=4 [cite: 1]
+[cite_start]frame.right=4 [cite: 1]
+[cite_start]text.margin.top=7 [cite: 1]
+[cite_start]text.margin.bottom=7 [cite: 1]
+[cite_start]text.margin.left=6 [cite: 1]
+[cite_start]text.margin.right=6 [cite: 1]
+[cite_start]indicator.element=tarrow-down [cite: 1]
+text.normal.color={{foreground}}
+text.focus.color={{foreground}}
+text.press.color={{foreground}}
+text.toggle.color={{foreground}}
+
+[Menu]
+[cite_start]inherits=PanelButtonCommand [cite: 1]
+[cite_start]frame.top=1 [cite: 1]
+[cite_start]frame.bottom=1 [cite: 1]
+[cite_start]frame.left=1 [cite: 1]
+[cite_start]frame.right=1 [cite: 1]
+[cite_start]frame.element=menu [cite: 1]
+[cite_start]interior.element=menu [cite: 1]
+text.normal.color={{foreground}}
+[cite_start]text.shadow=false [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+[cite_start]text.bold=false [cite: 1]
+
+[GroupBox]
+[cite_start]inherits=GenericFrame [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]text.shadow=0 [cite: 1]
+[cite_start]text.margin=0 [cite: 1]
+text.normal.color={{foreground}}96
+text.focus.color={{color4}}
+[cite_start]text.bold=false [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[TabBarFrame]
+[cite_start]inherits=GenericFrame [cite: 1]
+[cite_start]frame=true [cite: 1]
+[cite_start]frame.element=tabBarFrame [cite: 1]
+[cite_start]interior=false [cite: 1]
+[cite_start]frame.top=2 [cite: 1]
+[cite_start]frame.bottom=2 [cite: 1]
+[cite_start]frame.left=2 [cite: 1]
+[cite_start]frame.right=2 [cite: 1]
+
+[ToolTip]
+[cite_start]inherits=GenericFrame [cite: 1]
+[cite_start]frame.top=3 [cite: 1]
+[cite_start]frame.bottom=3 [cite: 1]
+[cite_start]frame.left=3 [cite: 1]
+[cite_start]frame.right=3 [cite: 1]
+[cite_start]interior=true [cite: 1]
+[cite_start]text.shadow=0 [cite: 1]
+[cite_start]text.margin=0 [cite: 1]
+[cite_start]interior.element=tooltip [cite: 1]
+[cite_start]frame.element=tooltip [cite: 1]
+[cite_start]frame.expansion=0 [cite: 1]
+
+[StatusBar]
+[cite_start]inherits=GenericFrame [cite: 1]
+[cite_start]frame=false [cite: 1]
+[cite_start]interior=false [cite: 1]
+
+[Window]
+[cite_start]interior=true [cite: 1]
+[cite_start]interior.element=window [cite: 1]
+[cite_start]text.bold=false [cite: 1]
+
+[Dialog]
+[cite_start]interior=true [cite: 1]
+[cite_start]interior.element=dialog [cite: 1]

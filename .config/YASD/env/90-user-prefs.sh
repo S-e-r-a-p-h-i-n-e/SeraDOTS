@@ -1,4 +1,4 @@
-# Optional User Prefs
+# Optional XDG user directories
 # The system should work without this, if it doesn't then something is wrong, I just can't prove and find it yet
 
 if command -v xdg-user-dir >/dev/null 2>&1; then

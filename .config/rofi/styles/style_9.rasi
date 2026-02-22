@@ -47,7 +47,7 @@ inputbar {
     padding:                     7em;
     children:                    [ "entry" ];
     background-color:            @main-bg;
-    background-image:            url("~/.config/rofi/bg.thmb", both);
+    background-image:            url("~/.config/rofi/bg.thmb", width);
     border-radius:               1em 1em 1em 1em;
 }
 entry {

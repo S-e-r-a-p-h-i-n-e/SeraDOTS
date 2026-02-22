@@ -1,5 +1,3 @@
-#!/bin/bash
-
 cava -p ~/.config/cava/config | awk -F';' '
 BEGIN {
     blocks[0]=" "; blocks[1]=" "; blocks[2]=" "; blocks[3]=" "; blocks[4]=" "

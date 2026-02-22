@@ -43,7 +43,7 @@ wallframe {
     padding:                     0em;
     expand:                      false;   
     background-color:            @main-bg;
-    background-image:            url("~/.config/rofi/bg.thmb", both); 
+    background-image:            url("~/.config/rofi/bg.thmb", width); 
 }
 
 

@@ -6,6 +6,8 @@ SeraDOTS is a reference implementation of a modern Linux desktop built around a 
 
 This project aims to be modular and understandable. It is not a distro, and it is not a one-size-fits-all rice. In here, Core defines what must work everywhere while Extensions define what works better somewhere.
 
+These dotfiles does **NOT** aim to abstract away Wayland or the compositor. It is meant to be transparent, predictable, and easy to modify
+
 ---
 
 ## 🎯 Project Goals

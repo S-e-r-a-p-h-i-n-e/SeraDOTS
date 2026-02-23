@@ -1,0 +1,39 @@
+# ==========================================
+# SeraDOTS .gitignore
+# ==========================================
+
+# ------------------------------------------
+# Shell History & Cache (Crucial Security)
+# ------------------------------------------
+.zsh_history
+.bash_history
+.zcompdump
+.zcompdump-*
+.zsh_sessions/
+
+# ------------------------------------------
+# Dynamic State & Logs
+# ------------------------------------------
+# Prevents clipboard history from being uploaded to your public repo
+userland/SeraDOTS/clipboard_favorites.txt
+
+# General cache and log files
+*.log
+.cache/
+
+# ------------------------------------------
+# Text Editor & IDE Clutter
+# ------------------------------------------
+# Vim / Neovim swap files
+*.swp
+*.swo
+*~
+
+# VS Code workspaces
+.vscode/
+
+# ------------------------------------------
+# OS-Specific Clutter
+# ------------------------------------------
+.DS_Store
+Thumbs.db

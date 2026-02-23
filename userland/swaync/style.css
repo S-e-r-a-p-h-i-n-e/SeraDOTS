@@ -1,0 +1,121 @@
+/* Import your dynamic wallpaper colors */
+@import url("../SeraDOTS/color.css");
+
+:root {
+  /* Mapping your variables to the SwayNC baseline */
+  --cc-bg: @bg-base;
+  --noti-border-color: @accent-alpha;
+  
+  /* SwayNC expects RGB triplets for some vars, but we'll use your hex colors directly */
+  --noti-bg: @bg-alt; 
+  --noti-bg-alpha: 0.8;
+  --noti-bg-hover: color-mix(in srgb, @accent, transparent 60%);
+  --noti-bg-focus: transparent;
+  --noti-close-bg: @accent-alpha;
+  --noti-close-bg-hover: @accent;
+  
+  --text-color: @text;
+  --text-color-disabled: @text-dim;
+  --bg-selected: @accent;
+  
+  /* Layout settings */
+  --notification-icon-size: 64px;
+  --border-radius: 12px;
+  --border: 1px solid var(--noti-border-color);
+  --font-size-summary: 16px;
+  --font-size-body: 14px;
+  
+}
+
+/* --- THE REST OF THE BASELINE --- */
+
+notificationwindow, blankwindow {
+  background: transparent;
+}
+
+.close-button {
+  background: var(--noti-close-bg);
+  color: var(--text-color);
+  border-radius: 100%;
+  margin: 8px;
+  border: none;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.close-button:hover {
+  background: var(--noti-close-bg-hover);
+  color: @bg-base; /* Invert text on hover */
+}
+
+.notification-row .notification-background .notification {
+  border-radius: var(--border-radius);
+  border: var(--border);
+  background: var(--noti-bg); /* Uses your bg-alt */
+  margin: 4px;
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  padding: 8px;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: var(--noti-bg-hover);
+  color: @bg-base; /* Contrast text against the dark accent hover */
+}
+
+/* Ensure the titles (summary) use your 'active' high-contrast color */
+.summary {
+  font-size: var(--font-size-summary);
+  font-weight: bold;
+  color: @active; 
+}
+
+.time {
+  color: @text-dim;
+}
+
+.body {
+  font-size: var(--font-size-body);
+  color: var(--text-color);
+}
+
+/* Control Center Drawer */
+.control-center {
+  background: var(--cc-bg);
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+  border: 2px solid @accent;
+}
+
+/*** Widget Styling ***/
+.widget-title > label {
+  color: @active;
+  font-size: 1.5rem;
+}
+
+.widget-title > button {
+  background: @accent;
+  color: @bg-base;
+  border-radius: 8px;
+}
+
+.widget-dnd switch {
+  background: @bg-alt;
+  border-radius: var(--border-radius);
+  border: 1px solid @accent;
+}
+
+.widget-dnd switch:checked {
+  background: @accent;
+}
+
+/* MPRIS (Media Player) Widget */
+.widget-mpris .widget-mpris-player {
+  background: @bg-alt;
+  padding: 8px;
+  border-radius: var(--border-radius);
+  border: 1px solid @accent-alpha;
+}

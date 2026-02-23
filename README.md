@@ -59,6 +59,8 @@ Then this project is probably for you.
 
 ## ⚠️ Disclaimer
 
-This project is a work in progress. Breaking changes may happen while the architecture is refined. However, the **design and layout is stable**, the **baseline is usable**, and regressions are avoided intentionally.
-Proper folders for scripts, core, and extensions will be added and configured later on once everything is stable, documented, and finished.
-Once it's finished the sky is the limit.
+This project is a work in progress. Breaking changes may happen while the architecture is refined. However, the **design principles and conceptual layout are stable**, the **baseline is usable**, regressions are avoided intentionally, and installers are **not** included until applications look like they belong in the system, extensions are finished, and everything is documented.
+
+Some folder layouts, scripts, and integration details may still be reorganized as the project is finalized.
+
+Once it's finished, the sky is the limit.

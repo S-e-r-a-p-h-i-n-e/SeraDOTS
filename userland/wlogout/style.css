@@ -1,0 +1,41 @@
+/* Color Scheme */
+@import url("../SeraDOTS/color.css");
+
+* {
+    background-image: none;
+    box-shadow: none;
+}
+
+window {
+    /* A semi-transparent dark background */
+    background-color: rgba(255, 255, 255, 0.15); 
+}
+
+button {
+    border-radius: 10px;
+    border-color: @bg-alt;
+    text-decoration-color: @text-color;
+    color: @text-color;
+    background-color: @bg-base;
+    border-style: solid;
+    border-width: 2px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    margin: 5px; 
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+button:focus, button:active, button:hover {
+    background-color: @accent;
+    border-color: @accent;
+    outline-style: none;
+}
+
+/* --- Icons --- */
+#lock {background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));}
+#logout {background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));}
+#suspend {background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));}s
+#hibernate {background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));}
+#shutdown {background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));}
+#reboot {background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));}

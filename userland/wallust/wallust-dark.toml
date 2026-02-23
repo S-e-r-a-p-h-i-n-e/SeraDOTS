@@ -7,7 +7,7 @@ color_space = "lab"
 
 [templates]
 code       = { src = "code-dark.template", dst = "~/.config/Code/User/settings.json" }
-css        = { src = "color.template", dst = "~/.config/YASD/color.css" }
+css        = { src = "color.template", dst = "~/.config/SeraDOTS/color.css" }
 fastfetch  = { src = "fastfetch.template", dst = "~/.config/fastfetch/config.jsonc" }
 kdeglobals = { src = "kdeglobals.template", dst = "~/.config/kdeglobals" }
 kitty      = { src = "kitty.template", dst = "~/.config/kitty/theme.conf" }

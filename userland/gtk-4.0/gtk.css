@@ -1,0 +1,23 @@
+/* 1. Import your Wallust-generated universal color scheme */
+/* Adjust this path to wherever Wallust actually outputs your color.css */
+@import url("../SeraDOTS/color.css");
+
+/* 2. Map your custom names to GTK3/GTK4 standard variables */
+@define-color accent_color @accent;
+@define-color accent_bg_color @accent;
+@define-color accent_fg_color @bg-base;
+
+@define-color theme_bg_color @bg-base;
+@define-color theme_fg_color @text;
+@define-color theme_text_color @text;
+@define-color theme_base_color @bg-alt;
+
+@define-color success_color @success;
+@define-color warning_color @warning;
+@define-color error_color @urgent;
+
+/* Libadwaita specific overrides (GTK4) */
+@define-color window_bg_color @bg-base;
+@define-color window_fg_color @text;
+@define-color view_bg_color @bg-alt;
+@define-color view_fg_color @text;

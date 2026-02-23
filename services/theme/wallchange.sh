@@ -3,7 +3,6 @@ set -eu
 # --- Paths ---
 WALL_DIR="$HOME/.config/YASD/wallpapers"
 THEME="$HOME/.config/rofi/selector.rasi"
-SYNC_SCRIPT="$HOME/.config/YASD/scripts/theme-sync.sh"
 
 WALLUST_LIGHT="$HOME/.config/wallust/wallust-light.toml"
 WALLUST_DARK="$HOME/.config/wallust/wallust-dark.toml"
@@ -37,20 +36,24 @@ if [ -n "$CHOICE" ]; then
 
         if [ "$IS_LIGHT" = "1" ]; then
             WALLUST_CONFIG="$WALLUST_LIGHT"
+            KVANTUM_THEME="MateriaLight"
             MODE_MSG="Light Mode"
         else
             WALLUST_CONFIG="$WALLUST_DARK"
+            KVANTUM_THEME="MateriaDark"
             MODE_MSG="Dark Mode"
         fi
 
-        if [ -f "$SYNC_SCRIPT" ]; then
-            sh "$SYNC_SCRIPT" "$FULL_PATH" "$WALLUST_CONFIG"
+        # Check if theme-sync is available in the system PATH
+        if command -v theme-sync.sh >/dev/null 2>&1; then
+            # Execute directly since it is in ~/.local/bin and executable
+            theme-sync.sh "$FULL_PATH" "$WALLUST_CONFIG" "$KVANTUM_THEME"
             
             # Remove decimal for clean display
             BRIGHTNESS_INT=${BRIGHTNESS%.*}
             notify-send -i "$FULL_PATH" "Wallpaper Applied" "Detected $MODE_MSG (Brightness: ${BRIGHTNESS_INT}%)"
         else
-            notify-send "Wallpaper Selector Warning" "theme-sync.sh not found at $SYNC_SCRIPT"
+            notify-send "Wallpaper Selector Warning" "theme-sync command not found in PATH"
         fi
     fi
 fi

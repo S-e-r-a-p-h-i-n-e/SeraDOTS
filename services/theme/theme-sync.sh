@@ -1,25 +1,29 @@
-# 1. Catch the wallpaper and Wallust config
+# 1. Catch the arguments
 WALLPAPER="${1:-}"
-WALLUST_CONFIG="${2:-$HOME/.config/wallust/wallust-dark.toml}"  # default to dark if not passed
+WALLUST_CONFIG="${2:-$HOME/.config/wallust/wallust-dark.toml}"
+KVANTUM_THEME="${3:-MateriaDark}"
 
 # If no wallpaper given, query the current one
 if [ -z "$WALLPAPER" ]; then
     WALLPAPER=$(swww query | awk -F'image: ' '/image:/ {print $2; exit}')
 fi
 
-# 2. Extract colors with Wallust using the selected config
+# 2. Extract colors with Wallust
 wallust run -C "$WALLUST_CONFIG" "$WALLPAPER"
 
-# 3. Update the Rofi layout / thumbnail
+# 3. Apply the Kvantum Theme (Modifies ~/.config/Kvantum/kvantum.kvconfig)
+kvantummanager --set "$KVANTUM_THEME"
+
+# 4. Update the Rofi layout / thumbnail
 CURRENT_STYLE=$(readlink "$HOME/.config/rofi/layout.rasi" | sed 's/.*style_\([0-9]*\).rasi/\1/')
 bash "$HOME/.config/YASD/scripts/rofi-layout.sh" --refresh "$WALLPAPER" "$CURRENT_STYLE"
 
-# 4. Reload desktop components
+# 5. Reload desktop components
 swaymsg reload
 killall -SIGUSR2 waybar
 swaync-client -R && swaync-client -rs
 kill -SIGUSR1 $(pgrep -u $USER kitty)
 kitty -e spicetify apply
 
-# 5. Notify
+# 6. Notify
 notify-send -i "$WALLPAPER" "System Synced" "Config: $(basename "$WALLUST_CONFIG")"

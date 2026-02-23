@@ -6,15 +6,15 @@ threshold = 20
 color_space = "lch"
 
 [templates]
-code       = { src = "code-light.template", dst = "~/.config/Code - OSS/User/settings.json" }
-css        = { src = "color.template", dst = "~/.config/SeraDOTS/color.css" }
+code       = { src = "code-light.template", dst = "~/.config/Code/User/settings.json" }
+css        = { src = "color.template", dst = "~/.config/YASD/color.css" }
 fastfetch  = { src = "fastfetch.template", dst = "~/.config/fastfetch/config.jsonc" }
 kdeglobals = { src = "kdeglobals.template", dst = "~/.config/kdeglobals" }
 kitty      = { src = "kitty.template", dst = "~/.config/kitty/theme.conf" }
-kvantum    = { src = "kvantum.template", dst = "~/.config/Kvantum/Materia/Materia.kvconfig" }
+kvantum    = { src = "kvantum-light.template", dst = "~/.config/Kvantum/MateriaLight/MateriaLight.kvconfig" }
 mako       = { src = "mako.template", dst = "~/.config/mako/config" }
 rofi       = { src = "rofi-theme.template", dst = "~/.config/rofi/theme.rasi" }
 spotify    = { src = "spotify.template", dst = "~/.config/spicetify/Themes/SeraDOTS/color.ini" }
-sway       = { src = "sway-theme.template", dst = "~/.config/sway/config.d/theme.conf" }
+sway       = { src = "swayfx-theme.template", dst = "~/.config/sway/config.d/theme.conf" }
 swaylock   = { src = "swaylock.template", dst = "~/.config/swaylock/config" }
 vencord    = { src = "vencord.template", dst = "/home/amelie/.config/vesktop/settings/quickCss.css" }

@@ -14,24 +14,25 @@ wallust run -C "$WALLUST_CONFIG" "$WALLPAPER"
 # 3. Apply the Kvantum Theme (Modifies ~/.config/Kvantum/kvantum.kvconfig)
 kvantummanager --set "$KVANTUM_THEME"
 
-# 4. Handle GTK Light/Dark Switching
+# 4. Handle GTK Light/Dark Switching (Adwaita Native)
 if [ "$KVANTUM_THEME" = "MateriaLight" ]; then
-    GTK_THEME="Materia-light"
+    # We still rely on the KVANTUM_THEME argument to know if we are in Light or Dark mode
+    GTK_THEME="Adwaita"
     GTK_DARK="0"
     COLOR_SCHEME="prefer-light"
 else
-    GTK_THEME="Materia-dark"
+    GTK_THEME="Adwaita-dark"
     GTK_DARK="1"
     COLOR_SCHEME="prefer-dark"
 fi
 
-# Edit GTK3 settings.ini strictly via files (Init/Daemon agnostic)
+# Edit GTK3 settings.ini strictly via files
 if [ -f "$HOME/.config/gtk-3.0/settings.ini" ]; then
     sed -i "s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/" "$HOME/.config/gtk-3.0/settings.ini"
     sed -i "s/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=$GTK_DARK/" "$HOME/.config/gtk-3.0/settings.ini"
 fi
 
-# Live Reload for GTK (Optional but recommended if glib2 is installed)
+# Live Reload via gsettings (Critical for GTK4/Libadwaita apps like Nautilus)
 if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
     gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"

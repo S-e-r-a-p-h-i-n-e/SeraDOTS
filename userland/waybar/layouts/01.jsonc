@@ -10,38 +10,38 @@
     ],
 
     "modules-left": [
-        "group/pill-hwinfo",
-        "group/pill-behavior"
+        "group/pill#hwinfo",
+        "group/pill#behavior"
     ],
     "modules-center": [
-        "group/pill-main"
+        "group/pill#main"
     ],
     "modules-right": [
-        "group/pill-sys",
-        "group/pill-tray",
-        "group/pill-tools"
+        "group/pill#sys",
+        "group/pill#tray",
+        "group/pill#tools"
     ],
-    "group/pill-hwinfo": {
+    "group/pill#hwinfo": {
         "orientation": "horizontal",
         "modules": ["cpu", "custom/gpuinfo", "memory"]
     },
-    "group/pill-behavior": {
+    "group/pill#behavior": {
         "orientation": "horizontal",
         "modules": ["idle_inhibitor", "custom/swaync", "clock"]
     },
-    "group/pill-main": {
+    "group/pill#main": {
         "orientation": "horizontal",
         "modules": ["sway/workspaces", "sway/window"] 
     },
-    "group/pill-sys": {
+    "group/pill#sys": {
         "orientation": "horizontal",
         "modules": ["backlight", "network", "pulseaudio"]
     },
-    "group/pill-tray": {
+    "group/pill#tray": {
         "orientation": "horizontal",
         "modules": ["tray", "battery"]
     },
-    "group/pill-tools": {
+    "group/pill#tools": {
         "orientation": "horizontal",
         "modules": ["custom/wallchange", "custom/cliphist", "custom/power"]
     }

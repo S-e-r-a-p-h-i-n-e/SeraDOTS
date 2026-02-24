@@ -17,19 +17,24 @@ kvantummanager --set "$KVANTUM_THEME"
 # 4. Handle GTK Light/Dark Switching (Adwaita Native)
 if [ "$KVANTUM_THEME" = "MateriaLight" ]; then
     # We still rely on the KVANTUM_THEME argument to know if we are in Light or Dark mode
-    GTK_THEME="Adwaita"
+    GTK_THEME="Materia-light"
     GTK_DARK="0"
     COLOR_SCHEME="prefer-light"
 else
-    GTK_THEME="Adwaita-dark"
+    GTK_THEME="Materia-dark"
     GTK_DARK="1"
     COLOR_SCHEME="prefer-dark"
 fi
 
-# Edit GTK3 settings.ini strictly via files
+# Edit GTK3 & GTK4 settings.ini strictly via files
 if [ -f "$HOME/.config/gtk-3.0/settings.ini" ]; then
     sed -i "s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/" "$HOME/.config/gtk-3.0/settings.ini"
     sed -i "s/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=$GTK_DARK/" "$HOME/.config/gtk-3.0/settings.ini"
+fi
+
+if [ -f "$HOME/.config/gtk-4.0/settings.ini" ]; then
+    sed -i "s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/" "$HOME/.config/gtk-4.0/settings.ini"
+    sed -i "s/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=$GTK_DARK/" "$HOME/.config/gtk-4.0/settings.ini"
 fi
 
 # Live Reload via gsettings (Critical for GTK4/Libadwaita apps like Nautilus)

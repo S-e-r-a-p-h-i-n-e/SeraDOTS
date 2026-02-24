@@ -11,23 +11,12 @@
         "~/.config/waybar/modules.jsonc"
     ],
     "modules-left": [
-        "group/pill#left1",
-        "group/pill#left2"
+        "group/pill#left"
     ],
-    "group/pill#left1": {
+    "group/pill#left": {
         "orientation": "inherit",
         "modules": [
-            "custom/power",
-            "custom/cliphist",
-            "custom/wbar",
-            "custom/wallchange"
-        ]
-    },
-    "group/pill#left2": {
-        "orientation": "inherit",
-        "modules": [
-            "sway/workspaces",
-            "mpris"
+            "wlr/taskbar"
         ]
     },
     "modules-center": [
@@ -36,9 +25,10 @@
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
+            "mpris",
+            "clock",
             "idle_inhibitor",
-            "custom/swaync",
-            "clock"
+            "custom/swaync"
         ]
     },
     "modules-right": [
@@ -48,18 +38,22 @@
     "group/pill#right1": {
         "orientation": "inherit",
         "modules": [
-            "privacy",
-            "tray",
-            "battery"
+            "backlight",
+            "network",
+            "pulseaudio",
+            "pulseaudio#microphone",
+            "custom/updates"
         ]
     },
     "group/pill#right2": {
         "orientation": "inherit",
         "modules": [
-            "backlight",
-            "network",
-            "pulseaudio",
-            "pulseaudio#microphone"
+            "tray",
+            "battery",
+            "custom/wallchange",
+            "custom/wbar",
+            "custom/cliphist",
+            "custom/power"
         ]
     }
 }

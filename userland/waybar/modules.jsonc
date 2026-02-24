@@ -1,7 +1,11 @@
 {
     // --- Sway Native Modules ---
-    "sway/workspaces": {
-        "disable-scroll": true,
+    "wlr/taskbar": {
+        "all-outputs": true,
+        "format": "{icon} {name}",
+        "on-click": "activate"
+    },
+    "ext/workspaces": {
         "all-outputs": true,
         "format": "{name}",
         "on-click": "activate"

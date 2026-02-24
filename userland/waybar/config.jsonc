@@ -1,48 +1,48 @@
 {
     "layer": "top",
-    "output": [
-        "*"
-    ],
     "height": 10,
     "exclusive": true,
     "passthrough": false,
     "reload_style_on_change": true,
     "include": [
-        "~/.config/waybar/modules.jsonc" 
+        "~/.config/waybar/modules.jsonc"
     ],
     "modules-left": [
         "group/pill#left"
     ],
-    "group/pill#left": {
-        "orientation": "inherit",
-        "modules": [
-            "sway/workspaces"
-        ]
-    },
     "modules-center": [
         "group/pill#center"
     ],
+    "modules-right": [
+        "group/pill#right"
+    ],
+    "group/pill#left": {
+        "orientation": "inherit",
+        "modules": [
+            "wlr/taskbar"
+        ]
+    },
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
-            "custom/cava",
             "idle_inhibitor",
             "custom/swaync",
             "clock"
         ]
     },
-    "modules-right": [
-        "group/pill#right"
-    ],
     "group/pill#right": {
         "orientation": "inherit",
         "modules": [
-            "backlight",
+            "cpu",
+            "custom/gpuinfo",
+            "memory",
+            "custom/updates",
+            "network",
             "pulseaudio",
             "pulseaudio#microphone",
-            "tray",
             "battery",
-            "custom/cliphist",
+            "backlight",
+            "tray",
             "custom/power"
         ]
     }

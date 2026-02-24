@@ -31,7 +31,7 @@
     },
     "group/pill#main": {
         "orientation": "horizontal",
-        "modules": ["sway/workspaces", "sway/window"] 
+        "modules": ["wlr/taskbar"] 
     },
     "group/pill#sys": {
         "orientation": "horizontal",

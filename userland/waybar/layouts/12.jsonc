@@ -8,7 +8,7 @@
     "passthrough": false,
     "reload_style_on_change": true,
     "include": [
-        "~/.config/waybar/modules.jsonc"
+        "~/.config/waybar/modules.jsonc" 
     ],
     "modules-left": [
         "group/pill#left"
@@ -16,8 +16,7 @@
     "group/pill#left": {
         "orientation": "inherit",
         "modules": [
-            "sway/workspaces",
-            "mpris"
+            "wlr/taskbar"
         ]
     },
     "modules-center": [
@@ -26,33 +25,23 @@
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
+            "custom/cava",
             "idle_inhibitor",
             "custom/swaync",
             "clock"
         ]
     },
     "modules-right": [
-        "group/pill#right1",
-        "group/pill#right2"
+        "group/pill#right"
     ],
-    "group/pill#right1": {
+    "group/pill#right": {
         "orientation": "inherit",
         "modules": [
             "backlight",
-            "network",
             "pulseaudio",
             "pulseaudio#microphone",
-            "custom/updates"
-        ]
-    },
-    "group/pill#right2": {
-        "orientation": "inherit",
-        "modules": [
-            "privacy",
             "tray",
             "battery",
-            "custom/wallchange",
-            "custom/wbar",
             "custom/cliphist",
             "custom/power"
         ]

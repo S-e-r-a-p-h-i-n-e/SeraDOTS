@@ -5,6 +5,7 @@
     ],
     "height": 10,
     "exclusive": true,
+    "passthrough": false,
     "reload_style_on_change": true,
     "include": [
         "~/.config/waybar/modules.jsonc"
@@ -35,15 +36,13 @@
     "group/pill#center": {
         "orientation": "inherit",
         "modules": [
-            "sway/workspaces",
-            "sway/window"
+            "wlr/taskbar"
         ]
     },
     "modules-right": [
         "group/pill#right1",
         "group/pill#right2",
-        "group/pill#right3",
-        "group/pill#right4"
+        "group/pill#right3"
     ],
     "group/pill#right1": {
         "orientation": "inherit",
@@ -58,7 +57,6 @@
     "group/pill#right2": {
         "orientation": "inherit",
         "modules": [
-            "privacy",
             "tray",
             "battery"
         ]
@@ -67,12 +65,7 @@
         "orientation": "inherit",
         "modules": [
             "custom/wallchange",
-            "custom/wbar"
-        ]
-    },
-    "group/pill#right4": {
-        "orientation": "inherit",
-        "modules": [
+            "custom/wbar",
             "custom/cliphist",
             "custom/power"
         ]

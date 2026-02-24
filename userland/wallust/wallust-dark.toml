@@ -7,8 +7,9 @@ color_space = "lab"
 
 [templates]
 code       = { src = "code-dark.template", dst = "~/.config/Code/User/settings.json" }
-css        = { src = "color.template", dst = "~/.config/SeraDOTS/color.css" }
+css        = { src = "color.template", dst = "~/.config/YASD/color.css" }
 fastfetch  = { src = "fastfetch.template", dst = "~/.config/fastfetch/config.jsonc" }
+hyprland  =  { src = "color-hyprland.template", dst = "~/.config/hypr/conf/colors.conf" }
 kdeglobals = { src = "kdeglobals.template", dst = "~/.config/kdeglobals" }
 kitty      = { src = "kitty.template", dst = "~/.config/kitty/theme.conf" }
 kvantum    = { src = "kvantum-dark.template", dst = "~/.config/Kvantum/MateriaDark/MateriaDark.kvconfig" }

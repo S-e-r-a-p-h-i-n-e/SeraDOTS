@@ -1,0 +1,47 @@
+// ~/.config/niri/conf/style.kdl
+
+layout {
+    // 1. Spacing
+    gaps 16
+    
+    struts {
+        left 0
+        right 0
+        top 0
+        bottom 0 
+    }
+
+    // 2. Sizing (No Colors!)
+    focus-ring {
+        width 2
+    }
+
+    border {
+        off
+    }
+
+    // 3. Shadow Geometry
+    shadow {
+        on
+        softness 6
+        spread 4
+    }
+}
+
+// 4. Window Rules (Rounding & Opacity)
+// These are usually static preferences, so they stay in 'Shape'.
+window-rule {
+    draw-border-with-background false
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+window-rule {
+    opacity 0.9
+}
+
+window-rule {
+    draw-border-with-background false
+    match is-active=false
+    opacity 0.3
+}

@@ -1,0 +1,72 @@
+//  █▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄
+//  █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀
+
+binds {
+    // --- Applications ---
+    Win+T { spawn "kitty"; }
+    Win+C { spawn "code"; }
+    Win+E { spawn "dolphin"; }
+    Win+B { spawn "librewolf"; }
+    Win+S { spawn "spotify-launcher" "--skip-update"; }
+    Win+D { spawn "vesktop"; }
+
+    // --- Window Management ---
+    Win+Q { close-window; }
+    Alt+F4 { close-window; }
+    Win+Delete { quit; }
+    Win+W { toggle-window-floating; }
+    Alt+Return { fullscreen-window; }
+    
+    // --- Custom Scripts ---
+    Win+Shift+R { spawn "rofi-layout.sh"; }
+    Win+Shift+W { spawn "wallchange.sh"; }
+    Win+Shift+V { spawn "clipmgr.sh"; }
+    Win+Shift+T { spawn "wbar-layout.sh"; }
+    Win+L { spawn "swaylock"; }
+    
+    // --- Rofi ---
+    Win+A { spawn "rofi" "-show" "drun" "-theme" "~/.config/rofi/layout.rasi"; }
+    Win+Tab { spawn "rofi" "-show" "window" "-theme" "~/.config/rofi/layout.rasi"; }
+    Win+Shift+E { spawn "rofi" "-show" "filebrowser" "-theme" "~/.config/rofi/layout.rasi"; }
+    Win+Shift+Period { spawn "rofi" "-Wini" "emoji" "-show" "emoji"; }
+
+    // --- Hardware Controls ---
+    XF86AudioMute { spawn "pamixer" "-t"; }
+    XF86AudioLowerVolume { spawn "pamixer" "-d" "5"; }
+    XF86AudioRaiseVolume { spawn "pamixer" "-i" "5"; }
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+
+    // --- Screenshots ---
+    Win+P { screenshot; }
+    Win+Ctrl+P { screenshot-screen; }
+    Win+Shift+P { screenshot-window; }
+
+    // --- Navigation (Column / Infinite Scroll) ---
+    Win+Left  { focus-column-left; }
+    Win+Right { focus-column-right; }
+    Win+Up    { focus-window-up; }
+    Win+Down  { focus-window-down; }
+
+    // --- Workspaces ---
+    Win+1 { focus-workspace 1; }
+    Win+2 { focus-workspace 2; }
+    Win+3 { focus-workspace 3; }
+    Win+4 { focus-workspace 4; }
+    Win+5 { focus-workspace 5; }
+    Win+6 { focus-workspace 6; }
+    Win+7 { focus-workspace 7; }
+    Win+8 { focus-workspace 8; }
+    Win+9 { focus-workspace 9; }
+
+    // --- Move Window to Workspace ---
+    Win+Shift+1 { move-column-to-workspace 1; }
+    Win+Shift+2 { move-column-to-workspace 2; }
+    Win+Shift+3 { move-column-to-workspace 3; }
+    Win+Shift+4 { move-column-to-workspace 4; }
+    Win+Shift+5 { move-column-to-workspace 5; }
+
+    // --- Mouse Resizing ---
+    Win+WheelScrollDown      { focus-column-left; }
+    Win+WheelScrollUp        { focus-column-right; }
+}

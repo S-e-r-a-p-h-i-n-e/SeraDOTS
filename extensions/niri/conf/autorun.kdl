@@ -1,0 +1,27 @@
+//  ▄▀█ █░█ ▀█▀ █▀█ █▀█ █░█ █▄░█
+//  █▀█ █▄█ ░█░ █▄█ █▀▄ █▄█ █░▀█
+
+// --- Environment Setup ---
+spawn-at-startup "sh" "-c" ". \"$HOME/.config/SeraDOTS/env/env.sh\""
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
+// --- UI Components ---
+spawn-at-startup "waybar"
+spawn-at-startup "swaync"
+spawn-at-startup "swww-daemon"
+
+// --- Clipboard & Tray ---
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "blueman-applet"
+spawn-at-startup "udiskie" "--tray"
+
+// --- Idle Daemon ---
+// Note: Changed 'hyprctl dispatch dpms' to Niri's native power actions
+spawn-at-startup "swayidle" "-w" \
+    "timeout" "300" "swaylock" \
+    "timeout" "600" "niri msg action power-off-monitors" \
+    "resume" "niri msg action power-on-monitors" \
+    "before-sleep" "swaylock -f -c 000000"

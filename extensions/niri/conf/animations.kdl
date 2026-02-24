@@ -1,0 +1,27 @@
+//  ▄▀█ █▄░█ █ █▀▄▀█
+//  █▀█ █░▀█ █ █░▀░█
+
+animations {
+    // Hyprland 'wind' feels snappy with a slight bounce.
+    // In Niri, high stiffness + low damping = bounce.
+    
+    window-open {
+        duration-ms 250
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+
+    // The scrolling movement
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    // Window resizing/movement
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+}

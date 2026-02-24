@@ -1,0 +1,14 @@
+//  █▄░█  █ █▀█ █
+//  █░▀█  █ █▀▄ █
+
+// --- Source Modules ---
+include "./conf/userprefs.kdl"
+include "./conf/autorun.kdl"
+include "./conf/input.kdl"
+include "./conf/binds.kdl"
+include "./conf/style.kdl"
+include "./conf/color.kdl"
+include "./conf/animations.kdl"
+
+// --- Debug / Screenshots ---
+screenshot-path "~/Pictures/Screenshot-%Y-%m-%d-%H%M%S.png"

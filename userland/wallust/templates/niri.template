@@ -1,0 +1,14 @@
+// ~/.config/niri/conf/colors.kdl
+
+layout {
+    focus-ring {
+        active-color "{{color4}}" 
+        
+        inactive-color "{{color8}}"
+    }
+
+    shadow {
+        // If you want the shadow to be black regardless of wallpaper, use "#000000"
+        color "{{color0}}" 
+    }
+}

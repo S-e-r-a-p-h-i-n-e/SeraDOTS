@@ -1,0 +1,17 @@
+// ~/.config/niri/conf/colors.kdl
+
+layout {
+    focus-ring {
+        // color4 is usually Blue/Accent. You can change this to #AB5071 (Cyan) or #BB87A0
+        active-color "#924665" 
+        
+        // color8 is usually Bright Black/Grey
+        inactive-color "#A37888"
+    }
+
+    shadow {
+        // color0 is the main background color. 
+        // If you want the shadow to be black regardless of wallpaper, use "#000000"
+        color "#45454A" 
+    }
+}

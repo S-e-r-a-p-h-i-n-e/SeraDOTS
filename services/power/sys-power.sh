@@ -25,7 +25,7 @@ case "$COMMAND" in
         hyprctl dispatch exit
         ;;
       niri)
-        niri msg exit
+        niri msg action quit
         ;;
       *)
         notify-send "Logout Error" "Unknown compositor: $XDG_CURRENT_DESKTOP"

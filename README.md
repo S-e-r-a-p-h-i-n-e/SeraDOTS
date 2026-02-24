@@ -33,8 +33,8 @@ This repository serves as a working system with its configurations transparent b
 
 ## 📈 Status
 * **Core and Baseline**: Completed
-* **Qt and GTK integration:** In progress
-* **Extensions:** Once theming and featureset is finalized
+* **Qt and GTK integration:** Completed
+* **Extensions:** In Progress
 * **Installer:** Once everything is finalized (Hyprland and Niri)
 * **Documentation:** Ongoing
 
@@ -60,6 +60,10 @@ Then this project is probably for you.
 ## ⚠️ Disclaimer
 
 This project is a work in progress. Breaking changes may happen while the architecture is refined. However, the **design principles and conceptual layout are stable**, the **baseline is usable**, regressions are avoided intentionally, and installers are **not** included until applications look like they belong in the system, extensions are finished, and everything is documented.
+
+For a minimal installation, the **core** is all you need. It defines the environmental contract and session behavior. After that you are free to set up the system however you like. 
+
+You may use the included **baseline, extensions, optionals, services, and userland configs** at your discretion seeing how some parts of the services are NOT compositor agnostic and is made with the baseline in mind with the rest usable no matter the init system and distro.
 
 Some folder layouts, scripts, and integration details may still be reorganized as the project is finalized.
 

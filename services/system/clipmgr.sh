@@ -1,6 +1,6 @@
 # Configuration
 THEME="~/.config/rofi/clipboard.rasi"
-FAV_FILE="$HOME/.config/YASD/clipboard_favorites.txt"
+FAV_FILE="$HOME/.config/SeraDOTS/clipboard_favorites.txt"
 
 # Ensure the favorites file exists
 touch "$FAV_FILE"

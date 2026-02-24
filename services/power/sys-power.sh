@@ -1,37 +1,66 @@
-COMMAND=$1
+COMMAND="$1"
 
-if pidof systemd > /dev/null 2>&1; then
-    INIT_SYS="systemd"
-else
-    INIT_SYS="runit"
-fi
+# Utility function to cleanly check if a command exists
+have() { command -v "$1" >/dev/null 2>&1; }
+
+# Logout and Suspend is NOT a guarantee.
+# Both are based on capability and what you use
 
 case "$COMMAND" in
-    "lock")
-        swaylock
-        ;;
-    "logout")
+  lock)
+    swaylock
+    ;;
+
+  logout)
+    # Check which compositor is running.
+    # Please edit this by either:
+    # Including the proper command for your Window Manager
+    # OR
+    # Replacing it entirely with how your Window Manager gracefully exits
+    case "$XDG_CURRENT_DESKTOP" in
+      sway|Sway)
         swaymsg exit
         ;;
-    "suspend")
-        if [ "$INIT_SYS" = "systemd" ]; then
-            systemctl suspend
-        else
-            loginctl suspend
-        fi
+      Hyprland)
+        hyprctl dispatch exit
         ;;
-    "reboot")
-        if [ "$INIT_SYS" = "systemd" ]; then
-            systemctl reboot
-        else
-            loginctl reboot
-        fi
+      niri)
+        niri msg exit
         ;;
-    "shutdown")
-        if [ "$INIT_SYS" = "systemd" ]; then
-            systemctl poweroff
-        else
-            loginctl poweroff
-        fi
+      *)
+        notify-send "Logout Error" "Unknown compositor: $XDG_CURRENT_DESKTOP"
         ;;
+    esac
+    ;;
+
+  suspend)
+    # The Waterfall Check (Arch -> Void/elogind -> Void/seatd -> Raw Kernel)
+    # Same with this. Please edit this by either:
+    # Including the proper command for your Init
+    # OR
+    # Replacing it entirely with how your Init suspends
+    # Seeing how mem is a last resort and can silently fail you
+    if have systemctl; then
+      systemctl suspend
+    elif have zzz; then
+      zzz
+    elif [ -w /sys/power/state ]; then
+      echo mem > /sys/power/state
+    else
+      notify-send "Power Manager" "Suspend not supported on this system"
+    fi
+    ;;
+
+  reboot)
+    reboot
+    ;;
+
+  shutdown)
+    poweroff
+    ;;
+
+  *)
+    notify-send "Power Manager" "Invalid command: $COMMAND"
+    exit 1
+    ;;
 esac

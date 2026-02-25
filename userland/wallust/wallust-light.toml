@@ -6,13 +6,13 @@ threshold = 20
 color_space = "lch"
 
 [templates]
-code       = { src = "code-light.template",      dst = "~/.config/Code/User/settings.json" }
+code       = { src = "code-light.template",     dst = "~/.config/Code/User/settings.json" }
 css        = { src = "color.template",          dst = "~/.config/YASD/color.css" }
 fastfetch  = { src = "fastfetch.template",      dst = "~/.config/fastfetch/config.jsonc" }
 hyprland  =  { src = "color-hyprland.template", dst = "~/.config/hypr/conf/colors.conf" }
 kdeglobals = { src = "kdeglobals.template",     dst = "~/.config/kdeglobals" }
 kitty      = { src = "kitty.template",          dst = "~/.config/kitty/theme.conf" }
-kvantum    = { src = "kvantum-light.template",   dst = "~/.config/Kvantum/MateriaLight/MateriaLight.kvconfig" }
+kvantum    = { src = "kvantum-light.template",  dst = "~/.config/Kvantum/MateriaLight/MateriaLight.kvconfig" }
 mako       = { src = "mako.template",           dst = "~/.config/mako/config" }
 niri       = { src = "niri.template",           dst = "~/.config/niri/conf/color.kdl"}
 rofi       = { src = "rofi-theme.template",     dst = "~/.config/rofi/theme.rasi" }

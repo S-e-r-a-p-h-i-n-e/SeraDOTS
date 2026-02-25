@@ -1,3 +1,4 @@
+# Idle Inhibitor Notifier for Waybar
 STATE_FILE="/tmp/waybar_idle_state"
 
 if [ ! -f "$STATE_FILE" ]; then

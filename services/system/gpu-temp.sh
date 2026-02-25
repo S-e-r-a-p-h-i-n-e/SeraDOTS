@@ -1,3 +1,4 @@
+# GPU Temperature Script for Waybar
 if command -v nvidia-smi > /dev/null 2>&1; then
     # NVIDIA
     nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{print $1"°C"}'

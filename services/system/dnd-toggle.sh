@@ -1,3 +1,4 @@
+# For Mako DND toggle
 if makoctl mode | grep -q "^dnd$"; then
     makoctl mode -r dnd
     notify-send -u low "Notifications" "Enabled (Normal Mode)"

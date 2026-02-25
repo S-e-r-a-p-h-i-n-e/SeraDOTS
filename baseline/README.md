@@ -1,7 +1,7 @@
 # Baseline (The Canvas)
 
 ## What it is
-This directory contains the foundational Window Manager (WM) and compositor configurations (e.g., Sway, SwayFX). 
+This directory contains the foundational Window Manager (WM) and compositor configurations (e.g., Sway). 
 
 ## What it does
 It defines the visual workspace, the window rules, and the raw keyboard/mouse bindings. It is explicitly stripped of complex logic, daemon management, and environment variables.

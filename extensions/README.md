@@ -1,12 +1,16 @@
 # Extensions
 
 ## What it is
-A repository for modular add-ons and optional, scoped capability layers that build on top of the base contract.
+A collection of compositor-session–scoped augmentation layers that translate global environment intent into spatial, visual, or interactive behavior.
 
 ## What it does
-Houses supplementary logic (like custom compositor wrappers or session modifiers) that are not strictly required for the core system to boot, but add specific, layered functionality.
+Houses compositor-aware logic such as window manager configurations, compositor-specific UI layers, and session augmentations that assume the presence of a display backend (Wayland or X11).
+
+Extensions are optional by design: they are not required for the core environment to initialize, but they shape how a graphical session behaves, looks, and feels.
 
 ## Purpose
-To provide a clean sandbox for expanding the system's capabilities without polluting the `core/` or `services/` directories. If an extension breaks, the baseline system remains completely intact.
+To provide a clean, isolated sandbox for session-level differentiation without polluting `core/`, `optionals/`, or `userland/`.
 
-**Extensions may consume the core contract, but must never redefine it.**
+Extensions may be opinionated, backend-specific, and impure. If an extension fails or is removed, the base environment and application convergence layers remain intact.
+
+**Extensions may consume the core contract, but must never define or override it.**

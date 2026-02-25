@@ -24,7 +24,7 @@ SeraDOTS is designed with the following principles in mind:
 At its current stage, SeraDOTS provides:
 
 * A finished core environment and baseline.
-* A working **Sway and Hyprland** reference profile.
+* A working **Sway, SwayFX, Hyprland, and Niri** reference profile.
 * A fully usable Wayland desktop.
 * Script-driven theming via Wallust.
 * Clean separation between **core**, **baseline**, and **optional extensions**.

@@ -1,18 +1,21 @@
 {
-    // --- Sway Native Modules ---
+    // --- Taskbar Related Modules ---
     "wlr/taskbar": {
         "all-outputs": true,
         "format": "{icon}",
-        "on-click": "activate"
+        "on-click": "activate",
+        "icon-size": 16
     },
     "ext/workspaces": {
         "all-outputs": true,
         "format": "{name}",
-        "on-click": "activate"
+        "on-click": "activate",
+        "icon-size": 16
     },
     "sway/window": {
         "format": "󰖯 {title}",
-        "max-length": 40
+        "max-length": 40,
+        "icon-size": 16
     },
 
     // --- System Resource Modules ---
@@ -58,8 +61,8 @@
         "on-click": "pavucontrol -tab 4"
     },
     "tray": {
-        "icon-size": 18,
-        "spacing": 10
+        "spacing": 10,
+        "icon-size": 16
     },
     "idle_inhibitor": {
         "format": "{icon}",

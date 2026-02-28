@@ -2,7 +2,7 @@
     // --- Sway Native Modules ---
     "wlr/taskbar": {
         "all-outputs": true,
-        "format": "{icon} {name}",
+        "format": "{icon}",
         "on-click": "activate"
     },
     "ext/workspaces": {

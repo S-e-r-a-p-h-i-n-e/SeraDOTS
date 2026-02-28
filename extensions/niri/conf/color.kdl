@@ -2,10 +2,8 @@
 
 layout {
     focus-ring {
-        // color4 is usually Blue/Accent. You can change this to #AB5071 (Cyan) or #BB87A0
         active-color "#924665" 
         
-        // color8 is usually Bright Black/Grey
         inactive-color "#A37888"
     }
 

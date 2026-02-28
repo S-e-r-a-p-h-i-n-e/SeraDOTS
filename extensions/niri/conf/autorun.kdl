@@ -3,7 +3,7 @@
 
 // --- Environment Setup ---
 spawn-at-startup "sh" "-c" ". \"$HOME/.config/SeraDOTS/env/env.sh\""
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-update-activation-environment" "--all" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
 // --- UI Components ---

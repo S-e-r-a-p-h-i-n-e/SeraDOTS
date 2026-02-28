@@ -35,7 +35,7 @@ window#waybar {
 }
 
 /* --- Individual Module Spacing --- */
-/* Universal spacing for every module used in your 18 layouts */
+/* Universal spacing for every module used in the 12 layouts */
 #workspaces, #window, #cpu, #memory, #backlight, #network, 
 #pulseaudio, #battery, #tray, #clock, #mpris, #idle_inhibitor, 
 #custom-power, #custom-wallchange, #custom-wbar, #custom-cliphist, 

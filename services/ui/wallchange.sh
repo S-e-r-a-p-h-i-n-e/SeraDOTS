@@ -1,7 +1,7 @@
 set -eu
 
 # --- Paths ---
-WALL_DIR="$HOME/.config/YASD/wallpapers"
+WALL_DIR="$HOME/.config/SeraDOTS/wallpapers"
 THEME="$HOME/.config/rofi/selector.rasi"
 
 WALLUST_LIGHT="$HOME/.config/wallust/wallust-light.toml"

@@ -56,8 +56,15 @@ deploy() {
 install_core() {
     log_info "PHASE: Deploying SeraDOTS Core & Services..."
     
-    deploy "core/env" "$SERA_CONFIG"
-    deploy "overrides" "$SERA_CONFIG/env"
+    # Target directory for all environment variables
+    local env_dest="$SERA_CONFIG/env"
+
+    # 1. Deploy contents of core/env -> SeraDOTS/env/
+    deploy "core/env" "$env_dest"
+    
+    # 2. Deploy contents of overrides/env-overrides -> SeraDOTS/env/
+    # We use the subpath to avoid nesting the folder itself
+    deploy "overrides/env-overrides" "$env_dest"
 
     execute mkdir -p "$USER_BIN"
     [[ -f "$SCRIPT_DIR/core/session/session.sh" ]] && \
@@ -67,7 +74,6 @@ install_core() {
     execute find "$SCRIPT_DIR/services" -type f -name "*.sh" -exec cp -n {} "$USER_BIN/" \;
     execute chmod +x "$USER_BIN"/*.sh
     
-    # Bootstrap ZSH so it finds userland/zsh
     setup_zsh_bootstrap
 }
 

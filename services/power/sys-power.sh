@@ -12,26 +12,23 @@ case "$COMMAND" in
     ;;
 
   logout)
-    # Check which compositor is running.
-    # Please edit this by either:
-    # Including the proper command for your Window Manager
-    # OR
-    # Replacing it entirely with how your Window Manager gracefully exits
-    case "$XDG_CURRENT_DESKTOP" in
-      sway|Sway)
-        swaymsg exit
-        ;;
-      Hyprland)
+      # Check for specific compositor sockets/signatures first
+      if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
         hyprctl dispatch exit
-        ;;
-      niri)
+      elif [ -n "$SWAYSOCK" ]; then
+        swaymsg exit
+      elif [ -n "$NIRI_SOCKET" ]; then
         niri msg action quit
-        ;;
-      *)
-        notify-send "Logout Error" "Unknown compositor: $XDG_CURRENT_DESKTOP"
-        ;;
-    esac
-    ;;
+      else
+        # Fallback to the string check with wildcards for SwayFX/variants
+        case "${XDG_CURRENT_DESKTOP,,}" in
+          sway*) swaymsg exit ;;
+          hyprland) hyprctl dispatch exit ;;
+          niri) niri msg action quit ;;
+          *) notify-send "Logout Error" "Unknown compositor: $XDG_CURRENT_DESKTOP" ;;
+        esac
+      fi
+      ;;
 
   suspend)
     # The Waterfall Check (Arch -> Void/elogind -> Void/seatd -> Raw Kernel)

@@ -28,6 +28,7 @@ At its current stage, SeraDOTS provides:
 * A fully usable Wayland desktop.
 * Script-driven theming via Wallust.
 * Clean separation between **core**, **baseline**, and **optional extensions**.
+* A Configuration Deployment Tool (Note that this does NOT install prerequisites like compositors and userland apps until further notice.)
 
 This repository serves as a working system with its configurations transparent by design. In here, everything has a reason, and those reasons are meant to be easily understood no matter the experience.
 
@@ -54,6 +55,16 @@ Well, I don't really know but I will tell you this. If you:
 * **are tired of fragile, over-engineered configs, and personalized configs**
 
 Then this project is probably for you.
+
+---
+
+## 🤍 Credits
+
+Credits to:
+* [NeKoRoSyS](https://github.com/NeKoRoSYS) for all the help and configs he's given me throughout this project. Feel free to check out NeKoRoSHELL [here](https://github.com/NeKoRoSYS/NeKoRoSHELL).
+* [The HyDE Project](https://github.com/HyDE-Project) for the initial Rofi Layouts and Waybar Layouts. You can check out HyDE [here](https://github.com/HyDE-Project/HyDE)
+* [Nana-4 and The Materia-GTK Contributors](https://github.com/nana-4/materia-theme) for the Materia-GTK theme used for GTK.
+* [The Papirus Development Team](https://github.com/PapirusDevelopmentTeam) for their port of the Materia-GTK theme to Qt and Kvantum
 
 ---
 

@@ -62,7 +62,7 @@ Then this project is probably for you.
 
 Credits to:
 * [NeKoRoSyS](https://github.com/NeKoRoSYS) for all the help and configs he's given me throughout this project. Feel free to check out NeKoRoSHELL [here](https://github.com/NeKoRoSYS/NeKoRoSHELL).
-* [The HyDE Project](https://github.com/HyDE-Project) for the initial Rofi Layouts and Waybar Layouts. You can check out HyDE [here](https://github.com/HyDE-Project/HyDE)
+* [The HyDE Project](https://github.com/HyDE-Project) for the initial Rofi Layouts, Waybar Layouts and assets. You can check out HyDE [here](https://github.com/HyDE-Project/HyDE)
 * [Nana-4 and The Materia-GTK Contributors](https://github.com/nana-4/materia-theme) for the Materia-GTK theme used for GTK.
 * [The Papirus Development Team](https://github.com/PapirusDevelopmentTeam) for their port of the Materia-GTK theme to Qt and Kvantum
 

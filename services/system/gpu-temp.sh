@@ -1,3 +1,4 @@
+#!/bin/sh
 # GPU Temperature Script for Waybar
 if command -v nvidia-smi > /dev/null 2>&1; then
     # NVIDIA

@@ -1,3 +1,4 @@
+#!/bin/sh
 # For Mako DND toggle
 if makoctl mode | grep -q "^dnd$"; then
     makoctl mode -r dnd

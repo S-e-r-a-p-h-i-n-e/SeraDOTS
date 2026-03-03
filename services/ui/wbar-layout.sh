@@ -1,3 +1,4 @@
+#!/bin/sh
 LAYOUT_DIR="$HOME/.config/waybar/layouts"
 CONFIG_FILE="$HOME/.config/waybar/config.jsonc"
 STYLE="$HOME/.config/waybar/style.css"

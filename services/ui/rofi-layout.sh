@@ -1,3 +1,4 @@
+#!/bin/sh
 # --- Paths ---
 STYLE_DIR="$HOME/.config/rofi/styles"
 ASSET_DIR="$HOME/.config/rofi/assets"

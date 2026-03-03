@@ -1,3 +1,4 @@
+#!/bin/sh
 fastfetch
 echo -e "\n--- Starting System Update---"
 if  {command -v topgrade > /dev/null 2>&1;}; then

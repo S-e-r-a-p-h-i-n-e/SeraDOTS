@@ -1,3 +1,4 @@
+#!/bin/sh
 # SeraDOTS environment loader
 
 ENV_DIR="$HOME/.config/SeraDOTS/env"

@@ -1,3 +1,4 @@
+#!/bin/sh
 # 1. Catch the arguments
 WALLPAPER="${1:-}"
 WALLUST_CONFIG="${2:-$HOME/.config/wallust/wallust-dark.toml}"
@@ -45,13 +46,13 @@ fi
 
 # 5. Update the Rofi layout / thumbnail
 CURRENT_STYLE=$(readlink "$HOME/.config/rofi/layout.rasi" | sed 's/.*style_\([0-9]*\).rasi/\1/')
-bash "rofi-layout.sh" --refresh "$WALLPAPER" "$CURRENT_STYLE"
+rofi-layout.sh --refresh "$WALLPAPER" "$CURRENT_STYLE"
 
 # 6. Reload desktop components
 swaymsg reload
 killall -SIGUSR2 waybar
 swaync-client -R && swaync-client -rs
-kill -SIGUSR1 $(pgrep -u $USER kitty)
+kill -SIGUSR1 $(pgrep -u "$USER" kitty | xargs -r kill -SIGUSR1)
 kitty -e spicetify apply
 
 # 7. Notify

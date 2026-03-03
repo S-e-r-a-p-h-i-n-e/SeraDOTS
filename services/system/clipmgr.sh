@@ -1,3 +1,4 @@
+#!/bin/sh
 # Configuration
 THEME="~/.config/rofi/clipboard.rasi"
 FAV_FILE="$HOME/.config/SeraDOTS/clipboard_favorites.txt"

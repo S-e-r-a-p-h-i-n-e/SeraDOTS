@@ -1,3 +1,4 @@
+#!/bin/sh
 COMMAND="$1"
 
 # Utility function to cleanly check if a command exists
@@ -8,7 +9,13 @@ have() { command -v "$1" >/dev/null 2>&1; }
 
 case "$COMMAND" in
   lock)
-    swaylock
+    if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+        hyprlock
+    elif command -v swaylock >/dev/null 2>&1; then
+        swaylock
+    else
+        notify-send "Lock Error" "No compatible lock command found"
+    fi
     ;;
 
   logout)
@@ -21,7 +28,7 @@ case "$COMMAND" in
         niri msg action quit
       else
         # Fallback to the string check with wildcards for SwayFX/variants
-        case "${XDG_CURRENT_DESKTOP,,}" in
+        case "$(printf '%s' "$XDG_CURRENT_DESKTOP" | tr '[:upper:]' '[:lower:]')" in
           sway*) swaymsg exit ;;
           hyprland) hyprctl dispatch exit ;;
           niri) niri msg action quit ;;

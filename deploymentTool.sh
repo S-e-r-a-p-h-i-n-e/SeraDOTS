@@ -69,6 +69,8 @@ install_core() {
 
     deploy "core/env"              "$env_dest"
     deploy "overrides/env-overrides" "$env_dest"
+    deploy "wallpapers"              "$SERA_CONFIG" "wallpapers"  # <-- add this
+
 
     execute mkdir -p "$USER_BIN"
 

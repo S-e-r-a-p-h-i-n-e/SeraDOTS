@@ -67,10 +67,9 @@ install_core() {
 
     env_dest="$SERA_CONFIG/env"
 
-    deploy "core/env"              "$env_dest"
+    deploy "core/env"                "$env_dest"
     deploy "overrides/env-overrides" "$env_dest"
-    deploy "wallpapers"              "$SERA_CONFIG" "wallpapers"  # <-- add this
-
+    deploy "wallpapers"              "$SERA_CONFIG" "wallpapers"
 
     execute mkdir -p "$USER_BIN"
 
@@ -88,21 +87,43 @@ install_core() {
 # --- Phase 2: Userland & Extensions ---
 install_env_layer() {
     log_info "PHASE: Deploying Userland & Shared Extensions..."
-    deploy "userland"                    "$HOME/.config"
-    deploy "extensions/waybar"           "$HOME/.config" "waybar"
+    deploy "userland"                      "$HOME/.config"
+    deploy "extensions/waybar"             "$HOME/.config" "waybar"
     deploy "extensions/xdg-desktop-portal" "$HOME/.config" "xdg-desktop-portal"
+    log_info "Pruning wallust from userland drop (compositor-specific deployment pending)..."
+    execute rm -rf "$HOME/.config/wallust"
 }
 
 # --- Phase 3: Compositor ---
+# Also deploys the wallust templates specific to the selected compositor.
 install_compositor() {
-    log_info "PHASE: Deploying $1 Extension..."
+    log_info "PHASE: Deploying $1..."
     case $1 in
-        sway)     deploy "baseline/sway"      "$HOME/.config" "sway"  ;;
-        swayfx)   deploy "extensions/swayfx"  "$HOME/.config" "sway"  ;;
-        hyprland) deploy "extensions/hypr"    "$HOME/.config" "hypr"  ;;
-        niri)     deploy "extensions/niri"    "$HOME/.config" "niri"  ;;
-        *)        log_warn "Unknown compositor: $1" ;;
+        sway)
+            deploy "baseline/sway"                                      "$HOME/.config" "sway"
+            deploy "userland/wallust/templates/sway.template"           "$HOME/.config/wallust/templates" "sway.template"
+            ;;
+        swayfx)
+            deploy "extensions/swayfx"                                  "$HOME/.config" "sway"
+            deploy "userland/wallust/templates/swayfx.template"         "$HOME/.config/wallust/templates" "swayfx.template"
+            ;;
+        hyprland)
+            deploy "extensions/hypr"                                    "$HOME/.config" "hypr"
+            deploy "userland/wallust/templates/hyprland.template"       "$HOME/.config/wallust/templates" "hyprland.template"
+            ;;
+        niri)
+            deploy "extensions/niri"                                    "$HOME/.config" "niri"
+            deploy "userland/wallust/templates/niri.template"           "$HOME/.config/wallust/templates" "niri.template"
+            ;;
+        *)
+            log_warn "Unknown compositor: $1"
+            ;;
     esac
+
+    # Deploy shared wallust config and any non-WM-specific templates
+    deploy "userland/wallust/wallust-dark.toml" "$HOME/.config/wallust" "wallust-dark.toml"
+    deploy "userland/wallust/wallust-light.toml" "$HOME/.config/wallust" "wallust-light.toml"
+    deploy "userland/wallust/templates/shared" "$HOME/.config/wallust/templates"
 }
 
 # --- Dynamic Contracts ---
@@ -135,7 +156,7 @@ apply_contracts() {
     if [ -d /sys/class/power_supply/BAT0 ]; then
         log_done "Chassis: Laptop detected."
         execute sed -i 's/IS_LAPTOP=false/IS_LAPTOP=true/g' \
-            "$SERA_CONFIG/00-core.env" 2>/dev/null || true
+            "$SERA_CONFIG/env/00-core.env" 2>/dev/null || true
     fi
 }
 

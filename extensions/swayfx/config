@@ -5,6 +5,7 @@
 
 include ~/.config/sway/config.d/autorun.conf
 include ~/.config/sway/config.d/binds.conf
+include ~/.config/sway/config.d/input.conf
 include ~/.config/sway/config.d/behavior.conf
 include ~/.config/sway/config.d/color.conf
 include ~/.config/sway/config.d/userprefs.conf

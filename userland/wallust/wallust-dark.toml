@@ -9,7 +9,7 @@ color_space = "lab"
 code       = { src = "code-dark.template",      dst = "~/.config/Code/User/settings.json" }
 css        = { src = "color.template",          dst = "~/.config/SeraDOTS/color.css" }
 fastfetch  = { src = "fastfetch.template",      dst = "~/.config/fastfetch/config.jsonc" }
-hyprland  =  { src = "color-hyprland.template", dst = "~/.config/hypr/conf/colors.conf" }
+hyprland  =  { src = "hyprland.template",       dst = "~/.config/hypr/conf/colors.conf" }
 kdeglobals = { src = "kdeglobals.template",     dst = "~/.config/kdeglobals" }
 kitty      = { src = "kitty.template",          dst = "~/.config/kitty/theme.conf" }
 kvantum    = { src = "kvantum-dark.template",   dst = "~/.config/Kvantum/MateriaDark/MateriaDark.kvconfig" }
@@ -17,6 +17,6 @@ mako       = { src = "mako.template",           dst = "~/.config/mako/config" }
 niri       = { src = "niri.template",           dst = "~/.config/niri/conf/color.kdl"}
 rofi       = { src = "rofi-theme.template",     dst = "~/.config/rofi/theme.rasi" }
 spotify    = { src = "spotify.template",        dst = "~/.config/spicetify/Themes/SeraDOTS/color.ini" }
-sway       = { src = "sway-theme.template",   dst = "~/.config/sway/config.d/color.conf" }
+sway       = { src = "sway-theme.template",     dst = "~/.config/sway/config.d/color.conf" }
 swaylock   = { src = "swaylock.template",       dst = "~/.config/swaylock/config" }
 vencord    = { src = "vencord.template",        dst = "/home/amelie/.config/vesktop/settings/quickCss.css" }

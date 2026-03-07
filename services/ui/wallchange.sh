@@ -3,7 +3,7 @@ set -eu
 
 # --- Paths ---
 WALL_DIR="$HOME/.config/SeraDOTS/wallpapers"
-THEME="$HOME/.config/rofi/selector.rasi"
+THEME="$HOME/.config/rofi/wallpaper.rasi"
 
 WALLUST_LIGHT="$HOME/.config/wallust/wallust-light.toml"
 WALLUST_DARK="$HOME/.config/wallust/wallust-dark.toml"

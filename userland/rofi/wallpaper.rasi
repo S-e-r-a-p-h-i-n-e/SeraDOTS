@@ -1,0 +1,108 @@
+/**
+ * Rofi Selector Grid Layout
+ * Based on NeKoRoSHELL's script parameters
+ **/
+
+@theme "~/.config/rofi/theme.rasi"
+
+configuration {
+    show-icons: true;
+    /* This ensures the dmenu reads the icons correctly */
+    dmenu {
+        display-column: 1;
+        format: "{name}";
+    }
+}
+
+/***** 1. The Window Structure *****/
+window {
+    width:              800px;
+    location:           center;
+    anchor:             center;
+    
+    /* Aesthetics */
+    border:             2px;
+    border-radius:      12px;
+    border-color:       @main-br;
+    background-color:   @main-bg;
+}
+
+mainbox {
+    padding:            20px;
+    children:           [ inputbar, listview ];
+    spacing:            15px;
+    background-color:   transparent;
+}
+
+/***** 2. Input Bar (Search) *****/
+inputbar {
+    children:           [ prompt, entry ];
+    spacing:            10px;
+    background-color:   transparent;
+    padding:            0px 0px 10px 0px;
+}
+
+prompt {
+    padding:            10px 15px;
+    background-color:   @main-ex;
+    text-color:         @select-fg;
+    border-radius:      8px;
+    font-weight:        bold;
+}
+
+entry {
+    padding:            10px;
+    background-color:   @main-bg;
+    text-color:         @main-fg;
+    placeholder:        "Search Wallpaper...";
+    placeholder-color:  @main-br; 
+}
+
+/***** 3. The Grid Layout *****/
+listview {
+    /* Grid Logic */
+    columns:            4;
+    lines:              3;
+    spacing:            15px;
+    fixed-columns:      true;
+    flow:               horizontal;
+    
+    /* Layout Logic */
+    layout:             vertical;
+    background-color:   transparent;
+}
+
+/***** 4. The Wallpaper Elements *****/
+element {
+    orientation:        vertical;
+    padding:            10px;
+    border-radius:      10px;
+    background-color:   transparent;
+    text-color:         @main-fg;
+    cursor:             pointer;
+}
+
+/* Hover/Active State */
+element selected {
+    background-color:   @select-bg;
+    text-color:         @select-fg;
+    border:             2px;
+    border-color:       @main-ex;
+}
+
+element-icon {
+    size:               120px;
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+    background-color:   transparent;
+    cursor:             inherit; /* Keeps pointer on icon */
+}
+
+element-text {
+    horizontal-align:   0.5;
+    vertical-align:     0.5;
+    padding:            8px 0px 0px 0px;
+    background-color:   transparent;
+    text-color:         inherit; /* Inherits from element selected/normal */
+    cursor:             inherit;
+}

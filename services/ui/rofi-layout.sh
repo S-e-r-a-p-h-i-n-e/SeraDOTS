@@ -2,7 +2,7 @@
 # --- Paths ---
 STYLE_DIR="$HOME/.config/rofi/styles"
 ASSET_DIR="$HOME/.config/rofi/assets"
-THEME="$HOME/.config/rofi/selector.rasi"
+THEME="$HOME/.config/rofi/rofi-layout.rasi"
 LAYOUT_LINK="$HOME/.config/rofi/layout.rasi"
 THUMB_OUT="$HOME/.config/rofi/bg.thmb"
 

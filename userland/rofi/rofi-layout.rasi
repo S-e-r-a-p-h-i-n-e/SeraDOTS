@@ -1,6 +1,6 @@
 /**
  * Rofi Selector Grid Layout
- * Based on the NeKoRoSHELL's script parameters
+ * Based on NeKoRoSHELL's script parameters
  **/
 
 @theme "~/.config/rofi/theme.rasi"
@@ -54,7 +54,7 @@ entry {
     padding:            10px;
     background-color:   @main-bg;
     text-color:         @main-fg;
-    placeholder:        "Search Wallpaper...";
+    placeholder:        "Search Rofi Layouts...";
     placeholder-color:  @main-br; 
 }
 
@@ -72,7 +72,7 @@ listview {
     background-color:   transparent;
 }
 
-/***** 4. The Wallpaper Elements *****/
+/***** 4. The Rofi Layout Preview Elements *****/
 element {
     orientation:        vertical;
     padding:            10px;

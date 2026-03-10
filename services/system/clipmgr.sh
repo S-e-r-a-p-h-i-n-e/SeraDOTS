@@ -41,7 +41,8 @@ case "$CHOICE" in
     "$OPT_3")
         SELECTED=$(cliphist list | rofi -dmenu -p "Save Fav" -theme "$THEME")
         if [ -n "$SELECTED" ]; then
-            printf '%s\n' "$SELECTED" | cliphist decode >> "$FAV_FILE"
+            # echo "$(...)" ensures a newline is always added at the end
+            echo "$(printf '%s\n' "$SELECTED" | cliphist decode)" >> "$FAV_FILE"
             notify-send -u low -h string:x-canonical-private-synchronous:clip "Clipboard" "Added to Favorites 🌟"
         fi
         ;;
@@ -50,7 +51,7 @@ case "$CHOICE" in
         if [ -s "$FAV_FILE" ]; then
             SELECTED=$(rofi -dmenu -p "Delete Fav" -theme "$THEME" < "$FAV_FILE")
             if [ -n "$SELECTED" ]; then
-                grep -v -F -x "$SELECTED" "$FAV_FILE" > "${FAV_FILE}.tmp"
+                awk -v target="$SELECTED" '$0 == target && !done {done=1; next} 1' "$FAV_FILE" > "${FAV_FILE}.tmp"
                 mv "${FAV_FILE}.tmp" "$FAV_FILE"
                 notify-send -u low -h string:x-canonical-private-synchronous:clip "Clipboard" "Removed from Favorites ❌"
             fi

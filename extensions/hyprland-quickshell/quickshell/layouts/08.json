@@ -1,0 +1,24 @@
+{
+  "left": [
+    [
+      "workspaces"
+    ]
+  ],
+  "center": [
+    [
+      "cava",
+      "idleinhibitor",
+      "clock"
+    ]
+  ],
+  "right": [
+    [
+      "audio",
+      "cliphist",
+      "tray",
+      "notifications",
+      "settings",
+      "power"
+    ]
+  ]
+}

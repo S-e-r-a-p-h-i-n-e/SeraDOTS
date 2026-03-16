@@ -88,8 +88,8 @@ install_core() {
 install_env_layer() {
     log_info "PHASE: Deploying Userland & Shared Extensions..."
     deploy "userland"                      "$HOME/.config"
-    deploy "extensions/waybar"             "$HOME/.config" "waybar"
     deploy "extensions/xdg-desktop-portal" "$HOME/.config" "xdg-desktop-portal"
+    
     log_info "Pruning wallust from userland drop (compositor-specific deployment pending)..."
     execute rm -rf "$HOME/.config/wallust"
 }
@@ -111,6 +111,11 @@ install_compositor() {
             deploy "extensions/hypr"                                    "$HOME/.config" "hypr"
             deploy "userland/wallust/templates/hyprland.template"       "$HOME/.config/wallust/templates" "hyprland.template"
             ;;
+        hyprland-quickshell)
+            deploy "extensions/hyprland-quickshell/hypr"                "$HOME/.config" "hypr"
+            deploy "extensions/hyprland-quickshell/quickshell"          "$HOME/.config" "quickshell"
+            deploy "userland/wallust/templates/hyprland.template"       "$HOME/.config/wallust/templates" "hyprland.template"
+            ;;
         niri)
             deploy "extensions/niri"                                    "$HOME/.config" "niri"
             deploy "userland/wallust/templates/niri.template"           "$HOME/.config/wallust/templates" "niri.template"
@@ -123,6 +128,7 @@ install_compositor() {
     # Deploy shared wallust config and any non-WM-specific templates
     deploy "userland/wallust/wallust-dark.toml" "$HOME/.config/wallust" "wallust-dark.toml"
     deploy "userland/wallust/wallust-light.toml" "$HOME/.config/wallust" "wallust-light.toml"
+    # Copy the contents of the shared templates folder into the main templates folder
     deploy "userland/wallust/templates/shared" "$HOME/.config/wallust/templates"
 }
 
@@ -146,8 +152,9 @@ apply_contracts() {
 
     if [ -n "$primary" ]; then
         log_done "Primary monitor detected: $primary"
+        # Added *.json to include Quickshell layout configs
         execute find "$HOME/.config" \
-            -type f \( -name "*.conf" -o -name "*.kdl" -o -name "*.jsonc" \) \
+            -type f \( -name "*.conf" -o -name "*.kdl" -o -name "*.jsonc" -o -name "*.json" \) \
             -exec sed -i "s/__PRIMARY__/$primary/g" {} +
     else
         log_warn "Could not detect primary monitor — __PRIMARY__ left unreplaced."
@@ -175,17 +182,19 @@ printf '  1) Core Only\n'
 printf '  2) Baseline  (Core + Sway + Userland)\n'
 printf '  3) Extension (Core + SwayFX + Userland)\n'
 printf '  4) Extension (Core + Hyprland + Userland)\n'
-printf '  5) Extension (Core + Niri + Userland)\n'
+printf '  5) Extension (Core + Hyprland & Quickshell + Userland)\n'
+printf '  6) Extension (Core + Niri + Userland)\n'
 printf '  q) Quit\n'
 printf 'Selection: '
 read -r choice
 
 case $choice in
     1) install_core ;;
-    2) install_core; install_env_layer; install_compositor "sway"     ;;
-    3) install_core; install_env_layer; install_compositor "swayfx"   ;;
+    2) install_core; install_env_layer; install_compositor "sway" ;;
+    3) install_core; install_env_layer; install_compositor "swayfx" ;;
     4) install_core; install_env_layer; install_compositor "hyprland" ;;
-    5) install_core; install_env_layer; install_compositor "niri"     ;;
+    5) install_core; install_env_layer; install_compositor "hyprland-quickshell" ;;
+    6) install_core; install_env_layer; install_compositor "niri" ;;
     *) exit 0 ;;
 esac
 

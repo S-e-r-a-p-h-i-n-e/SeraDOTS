@@ -1,0 +1,86 @@
+// components/AnimatedElement.qml
+//
+// A self-contained show/hide animation wrapper.
+// Wrap any content in this and toggle `show` to animate it in/out.
+//
+// Properties:
+//   show    — true = animate in, false = animate out
+//   preset  — "slide" | "scale" | "fade"
+//   edge    — "top" | "bottom" | "left" | "right"
+//             The edge the content slides in FROM (usually the bar side).
+//             Ignored for "scale" and "fade" presets.
+//
+// The `isSurfaceVisible` readonly property stays true during the
+// exit animation so the parent can keep the window alive until
+// the animation completes, then hide it.
+//
+import QtQuick
+import qs.globals
+
+Item {
+    id: root
+
+    property bool   show:   false
+    property string preset: "slide"
+    property string edge:   "top"
+
+    // True while visible OR animating out — use this to gate PanelWindow.visible
+    // so the window isn't destroyed mid-animation.
+    readonly property bool isSurfaceVisible: container.opacity > 0.0
+
+    // Expose raw progress (0.0 → 1.0) so Panel.qml can drive fillet offset.
+    readonly property real animProgress: show ? 1.0 : 0.0
+
+    default property alias content: container.data
+
+    Item {
+        id: container
+        anchors.fill: parent
+
+        // ── Opacity ───────────────────────────────────────────────────────
+        opacity: root.show ? 1.0 : 0.0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: root.preset === "slide" ? Animations.slow * 0.5 : Animations.normal
+                easing.type: Animations.easeInOut
+            }
+        }
+
+        // ── Scale ─────────────────────────────────────────────────────────
+        scale: root.preset === "scale" ? (root.show ? 1.0 : 0.95) : 1.0
+        transformOrigin: {
+            if (root.edge === "top")    return Item.Top
+            if (root.edge === "bottom") return Item.Bottom
+            if (root.edge === "left")   return Item.Left
+            if (root.edge === "right")  return Item.Right
+            return Item.Center
+        }
+        Behavior on scale {
+            NumberAnimation { duration: Animations.normal; easing.type: Animations.easeBack }
+        }
+
+        // ── Slide ─────────────────────────────────────────────────────────
+        transform: Translate {
+            id: slideTranslate
+
+            readonly property real maxSlide: {
+                if (root.preset !== "slide") return 0
+                if (root.edge === "left" || root.edge === "right")
+                    return root.width  > 0 ? root.width  : 400
+                return root.height > 0 ? root.height : 400
+            }
+            readonly property real offset: root.show ? 0 : maxSlide
+
+            x: root.preset !== "slide" ? 0
+             : root.edge === "left"    ? -offset
+             : root.edge === "right"   ?  offset : 0
+
+            y: root.preset !== "slide" ? 0
+             : root.edge === "top"     ? -offset
+             : root.edge === "bottom"  ?  offset : 0
+
+            Behavior on x { NumberAnimation { duration: Animations.slow * 0.5; easing.type: Animations.easeOut } }
+            Behavior on y { NumberAnimation { duration: Animations.slow * 0.5; easing.type: Animations.easeOut } }
+        }
+    }
+}

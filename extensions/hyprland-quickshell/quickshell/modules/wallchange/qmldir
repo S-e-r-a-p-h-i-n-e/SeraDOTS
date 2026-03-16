@@ -1,0 +1,2 @@
+module qs.modules.wallchange
+singleton WallChange 1.0 WallChange.qml

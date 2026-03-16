@@ -1,0 +1,3 @@
+module qs.modules.workspaces
+singleton Workspaces 1.0 Workspaces.qml
+WorkspacesView       1.0 WorkspacesView.qml

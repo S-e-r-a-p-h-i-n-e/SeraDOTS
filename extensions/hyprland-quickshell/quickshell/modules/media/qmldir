@@ -1,0 +1,3 @@
+module qs.modules.media
+singleton Media 1.0 Media.qml
+MediaView       1.0 MediaView.qml

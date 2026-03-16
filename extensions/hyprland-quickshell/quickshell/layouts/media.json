@@ -1,0 +1,15 @@
+{
+  "left": [
+    "workspaces"
+  ],
+  "center": [
+    "media",
+    "clock"
+  ],
+  "right": [
+    "tray",
+    "notifications",
+    "settings",
+    "power"
+  ]
+}

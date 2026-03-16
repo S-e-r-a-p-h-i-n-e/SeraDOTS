@@ -1,0 +1,4 @@
+module qs.modules.tray
+
+singleton Tray    1.0 Tray.qml
+         TrayView 1.0 TrayView.qml

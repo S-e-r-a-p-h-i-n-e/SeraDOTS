@@ -1,0 +1,26 @@
+{
+  "left": [
+    [
+      "tray",
+      "notifications",
+      "settings",
+      "power",
+      "cliphist",
+      "wallchange",
+      "workspaces"
+    ]
+  ],
+  "center": [
+  ],
+  "right": [
+    [
+      "idleinhibitor",
+      "clock",
+      "media"
+    ],
+    [
+      "audio",
+      "network"
+    ]
+  ]
+}

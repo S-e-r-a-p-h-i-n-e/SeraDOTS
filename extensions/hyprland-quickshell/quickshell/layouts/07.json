@@ -8,6 +8,7 @@
       "clock"
     ],
     [
+      "start",
       "workspaces"
     ]
   ],
@@ -20,10 +21,9 @@
       "updates"
     ],
     [
+      "tray",
       "wallchange",
       "cliphist",
-      "tray",
-      "notifications",
       "settings",
       "power"
     ]

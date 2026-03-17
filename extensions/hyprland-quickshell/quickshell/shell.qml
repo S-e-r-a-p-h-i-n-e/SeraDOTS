@@ -1,6 +1,7 @@
 // shell.qml — entry point
 //@ pragma UseQApplication
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import qs.globals
 import qs.components
@@ -25,6 +26,55 @@ import qs.modules.workspaces
 
 Scope {
     id: shell
+
+    // The cross-compositor IPC listener
+    IpcHandler {
+        target: "launcher"
+
+        // Explicit type annotations (: void) are REQUIRED for Quickshell IPC!
+        function toggle(): void {
+            EventBus.togglePanel("launcher", null) // <-- Added null here
+        }
+
+        // You can easily add more commands here later!
+        function close(): void {
+            if (shell.activePanel === "launcher") {
+                EventBus.togglePanel("launcher", null) // <-- And added null here
+            }
+        }
+    }
+
+    IpcHandler {
+        target: "clipboard"
+
+        // Explicit type annotations (: void) are REQUIRED for Quickshell IPC!
+        function toggle(): void {
+            EventBus.togglePanel("clipboard", null) // <-- Added null here
+        }
+
+        // You can easily add more commands here later!
+        function close(): void {
+            if (shell.activePanel === "clipboard") {
+                EventBus.togglePanel("clipboard", null) // <-- And added null here
+            }
+        }
+    }
+
+    IpcHandler {
+        target: "wallpaper"
+
+        // Explicit type annotations (: void) are REQUIRED for Quickshell IPC!
+        function toggle(): void {
+            EventBus.togglePanel("wallpaper", null) // <-- Added null here
+        }
+
+        // You can easily add more commands here later!
+        function close(): void {
+            if (shell.activePanel === "wallpaper") {
+                EventBus.togglePanel("wallpaper", null) // <-- And added null here
+            }
+        }
+    }
 
     // Extend Qt's icon search paths to match what GTK/Waybar searches automatically.
     // Qt's image://icon/ provider only searches theme paths it knows at startup —
@@ -53,6 +103,24 @@ Scope {
 
     property string activePanel: ""
     property var    activeScreen: null
+
+    Launcher {
+        showPanel:    shell.activePanel === "launcher"
+        targetScreen: shell.activeScreen
+        navbarOffset: loader.barSize
+    }
+
+    ClipManager {
+        showPanel:    shell.activePanel === "clipboard"
+        targetScreen: shell.activeScreen
+        navbarOffset: loader.barSize
+    }
+
+    Wallpaper {
+        showPanel:    shell.activePanel === "wallpaper"
+        targetScreen: shell.activeScreen
+        navbarOffset: loader.barSize
+    }
 
     Dashboard {
         showPanel:    shell.activePanel === "dashboard"

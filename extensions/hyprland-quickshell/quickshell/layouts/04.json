@@ -4,6 +4,7 @@
   "center": [
     [
       "cpu",
+      "start",
       "workspaces"
     ],
     [
@@ -16,10 +17,9 @@
       "network"
     ],
     [
+      "tray",
       "wallchange",
       "cliphist",
-      "tray",
-      "notifications",
       "settings",
       "power"
     ]

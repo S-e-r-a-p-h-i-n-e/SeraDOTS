@@ -127,7 +127,9 @@ Panel {
                                 "07","08","09"]
                         delegate: Rectangle {
                             required property string modelData
-                            width:  80; height: 28; radius: 14
+                            width:  (parent.width - (parent.spacing * 3)) / 4
+                            height: 28; 
+                            radius: 14
                             color:  Config.activeLayout === modelData ? Colors.color7 : Colors.color0
                             Behavior on color { ColorAnimation { duration: 150 } }
 

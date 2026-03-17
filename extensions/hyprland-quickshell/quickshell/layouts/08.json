@@ -1,6 +1,7 @@
 {
   "left": [
     [
+      "start",
       "workspaces"
     ]
   ],
@@ -14,9 +15,9 @@
   "right": [
     [
       "audio",
-      "cliphist",
       "tray",
-      "notifications",
+      "cliphist",
+      "wallchange",
       "settings",
       "power"
     ]

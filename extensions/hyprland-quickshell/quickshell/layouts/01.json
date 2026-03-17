@@ -3,17 +3,17 @@
   "center": [
     [
       "tray",
-      "notifications",
+      "cliphist",
+      "wallchange",
       "settings",
       "power"
     ],
     [
-      "cliphist",
-      "wallchange",
       "idleinhibitor",
       "clock"
     ],
     [
+      "start",
       "workspaces"
     ]
   ],

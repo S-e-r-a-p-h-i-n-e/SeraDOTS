@@ -1,13 +1,15 @@
 {
   "left": [
     [
+      "start",
+      "workspaces"
+    ],
+    [
       "tray",
-      "notifications",
-      "settings",
-      "power",
       "cliphist",
       "wallchange",
-      "workspaces"
+      "settings",
+      "power"
     ]
   ],
   "center": [

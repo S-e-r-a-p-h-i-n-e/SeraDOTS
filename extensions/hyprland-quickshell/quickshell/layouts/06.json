@@ -1,6 +1,7 @@
 {
   "left": [
     [
+      "start",
       "workspaces"
     ],
     [
@@ -17,10 +18,9 @@
       "network"
     ],
     [
+      "tray",
       "cliphist",
       "wallchange",
-      "tray",
-      "notifications",
       "settings",
       "power"
     ]

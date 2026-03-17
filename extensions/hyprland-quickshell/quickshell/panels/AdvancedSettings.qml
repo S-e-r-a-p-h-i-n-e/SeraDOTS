@@ -99,47 +99,48 @@ Panel {
 
     // ── Tab content components ────────────────────────────────────────────
     property Component navbarTabComp: Column {
-        width:      parent?.width ?? 0
+        width:      parent ? parent.width : 0 // FIX: Safely inherit the Loader's width
         spacing:    0
         topPadding: 12
 
         StyleSection { label: "Bar" }
-        StyleField { label: "Bar Size";      value: Style.barSize;    onCommitted: (v) => Style.saveSetting("barSize", v) }
-        StyleField { label: "Module Size";   value: Style.moduleSize; onCommitted: (v) => Style.saveSetting("moduleSize", v) }
-        StyleField { label: "Bar Padding";   value: Style.barPadding; onCommitted: (v) => Style.saveSetting("barPadding", v) }
-        StyleField { label: "Bar Font";      value: Style.barFont;    isText: true; onCommitted: (v) => Style.saveSetting("barFont", v) }
+        // FIX 2: Use the magically exposed 'newValue' variable directly
+        StyleField { label: "Bar Size";      value: Style.barSize;      onCommitted: Style.saveSetting("barSize", newValue) }
+        StyleField { label: "Module Size";   value: Style.moduleSize;   onCommitted: Style.saveSetting("moduleSize", newValue) }
+        StyleField { label: "Bar Padding";   value: Style.barPadding;   onCommitted: Style.saveSetting("barPadding", newValue) }
+        StyleField { label: "Bar Font";      value: Style.barFont;      isText: true; onCommitted: Style.saveSetting("barFont", newValue) }
 
         StyleSection { label: "Slots" }
-        StyleField { label: "Slot Spacing";  value: Style.slotSpacing; onCommitted: (v) => Style.saveSetting("slotSpacing", v) }
+        StyleField { label: "Slot Spacing";  value: Style.slotSpacing;  onCommitted: Style.saveSetting("slotSpacing", newValue) }
 
         StyleSection { label: "Pills" }
-        StyleField { label: "Pill Padding";  value: Style.pillPadding; onCommitted: (v) => Style.saveSetting("pillPadding", v) }
-        StyleField { label: "Pill Spacing";  value: Style.pillSpacing; onCommitted: (v) => Style.saveSetting("pillSpacing", v) }
-        StyleField { label: "Pill Opacity";  value: Style.pillOpacity; isDecimal: true; onCommitted: (v) => Style.saveSetting("pillOpacity", v) }
+        StyleField { label: "Pill Padding";  value: Style.pillPadding;  onCommitted: Style.saveSetting("pillPadding", newValue) }
+        StyleField { label: "Pill Spacing";  value: Style.pillSpacing;  onCommitted: Style.saveSetting("pillSpacing", newValue) }
+        StyleField { label: "Pill Opacity";  value: Style.pillOpacity;  isDecimal: true; onCommitted: Style.saveSetting("pillOpacity", newValue) }
 
         StyleSection { label: "Chips" }
-        StyleField { label: "Chip Spacing";       value: Style.chipSpacing;      onCommitted: (v) => Style.saveSetting("chipSpacing", v) }
-        StyleField { label: "Chip Inner Spacing"; value: Style.chipInnerSpacing; onCommitted: (v) => Style.saveSetting("chipInnerSpacing", v) }
+        StyleField { label: "Chip Spacing";       value: Style.chipSpacing;      onCommitted: Style.saveSetting("chipSpacing", newValue) }
+        StyleField { label: "Chip Inner Spacing"; value: Style.chipInnerSpacing; onCommitted: Style.saveSetting("chipInnerSpacing", newValue) }
 
         StyleSection { label: "Borders" }
-        StyleField { label: "Border Width";  value: Style.borderWidth;  disabled: Config.transparentNavbar; onCommitted: (v) => Style.saveSetting("borderWidth", v) }
-        StyleField { label: "Corner Radius"; value: Style.cornerRadius; disabled: Config.transparentNavbar; onCommitted: (v) => Style.saveSetting("cornerRadius", v) }
+        StyleField { label: "Border Width";  value: Style.borderWidth;  disabled: Config.transparentNavbar; onCommitted: Style.saveSetting("borderWidth", newValue) }
+        StyleField { label: "Corner Radius"; value: Style.cornerRadius; disabled: Config.transparentNavbar; onCommitted: Style.saveSetting("cornerRadius", newValue) }
 
         Item { width: 1; height: 12 }
     }
 
     property Component panelsTabComp: Column {
-        width:      parent?.width ?? 0
+        width:      parent ? parent.width : 0 // FIX: Safely inherit the Loader's width
         spacing:    0
         topPadding: 12
 
         StyleSection { label: "Size" }
-        StyleField { label: "Panel Width";   value: Style.panelWidth;   onCommitted: (v) => Style.saveSetting("panelWidth", v) }
-        StyleField { label: "Panel Height";  value: Style.panelHeight;  onCommitted: (v) => Style.saveSetting("panelHeight", v) }
+        StyleField { label: "Panel Width";   value: Style.panelWidth;   onCommitted: Style.saveSetting("panelWidth", newValue) }
+        StyleField { label: "Panel Height";  value: Style.panelHeight;  onCommitted: Style.saveSetting("panelHeight", newValue) }
 
         StyleSection { label: "Shape" }
-        StyleField { label: "Panel Radius";  value: Style.panelRadius;  onCommitted: (v) => Style.saveSetting("panelRadius", v) }
-        StyleField { label: "Panel Padding"; value: Style.panelPadding; onCommitted: (v) => Style.saveSetting("panelPadding", v) }
+        StyleField { label: "Panel Radius";  value: Style.panelRadius;  onCommitted: Style.saveSetting("panelRadius", newValue) }
+        StyleField { label: "Panel Padding"; value: Style.panelPadding; onCommitted: Style.saveSetting("panelPadding", newValue) }
 
         Item { width: 1; height: 12 }
     }

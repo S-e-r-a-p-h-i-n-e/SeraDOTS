@@ -22,6 +22,7 @@ import qs.modules.tray
 import qs.modules.updates
 import qs.modules.wallchange
 import qs.modules.workspaces
+import qs.modules.start
 
 QtObject {
     id: root
@@ -42,6 +43,7 @@ QtObject {
         "settings":      settingsStatic,
         "tray":          trayView,
         "wallchange":    wallchangeStatic,
+        "start":         startStatic,
         // Custom
         "cava":          cavaView,
         "clock":         clockView,
@@ -92,6 +94,7 @@ QtObject {
     property Component settingsStatic:      Component { StaticChip { item: SettingsModule.item } }
     property Component trayView:            Component { TrayView {} }
     property Component wallchangeStatic:    Component { StaticChip { item: WallChange.item } }
+    property Component startStatic:         Component { StaticChip { item: StartMenu.item } }
 
     // ── Navbar: Custom ────────────────────────────────────────────────────
     property Component cavaView:       Component { CavaView {} }

@@ -28,13 +28,16 @@ Panel {
             contentItem: Rectangle { implicitWidth: 4; radius: 2; color: Colors.color7; opacity: 0.4 }
         }
         ScrollBar.horizontal: ScrollBar { policy: ScrollBar.AlwaysOff }
+        
         contentWidth: width
+        contentHeight: mainCol.height // FIX: Explicitly bind the scroll boundary to the column!
 
         Column {
+            id: mainCol // FIX: Give the column an ID so the ScrollView can track it
             width:      scroll.width
             spacing:    14
             topPadding: 4
-
+            
             // ── Header ────────────────────────────────────────────────────
             Item {
                 width:  parent.width
@@ -362,13 +365,16 @@ Panel {
                     }
                 }
                 Text {
-                    visible:                  Notifications.count === 0
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: Notifications.count === 0
+                    
+                    // FIX: Center using X math instead of anchors to avoid breaking the Column positioner
+                    x: (parent.width - width) / 2 
+                    
                     text: "No notifications"; color: Colors.color8; font.family: Style.barFont; font.pixelSize: 12; opacity: 0.5
                 }
             }
 
-            Item { width: 1; height: 4 }
+            Item { width: 1; height: 4 } // Bottom spacer
         }
     }
 

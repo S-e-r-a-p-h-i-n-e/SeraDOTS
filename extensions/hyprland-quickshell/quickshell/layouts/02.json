@@ -9,6 +9,7 @@
     ],
     [
       "idleinhibitor",
+      "start",
       "workspaces",
       "clock"
     ],
@@ -17,10 +18,9 @@
       "updates"
     ],
     [
+      "tray",
       "wallchange",
       "cliphist",
-      "tray",
-      "notifications",
       "settings",
       "power"
     ]

@@ -7,14 +7,14 @@
       "cpu",
       "network",
       "idleinhibitor",
+      "start",
       "workspaces",
       "clock",
       "audio",
       "updates",
+      "tray",
       "wallchange",
       "cliphist",
-      "tray",
-      "notifications",
       "settings",
       "power"
     ]

@@ -41,7 +41,7 @@ Scope {
         // time, so creating a window while navbarLocation still holds the
         // hardcoded default ("top") would permanently mis-anchor the panel
         // when the user has a side navbar saved.
-        model: Config.loaded ? Quickshell.screens : null
+        model: Config.loaded ? Quickshell.screens : [] // FIXED: Changed null to [] to prevent Variant warnings
 
         // ── Dismiss overlay ───────────────────────────────────────────────
         // Full-screen transparent window just for catching outside clicks.
@@ -63,7 +63,7 @@ Scope {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked:    EventBus.togglePanel(rootScope.panelId)
+                onClicked:    EventBus.togglePanel(rootScope.panelId, null) // FIXED: Added null to satisfy arguments
                 hoverEnabled: false
             }
         }
@@ -84,6 +84,16 @@ Scope {
             exclusionMode:               ExclusionMode.Ignore
             WlrLayershell.keyboardFocus: rootScope.keyboardFocus
             WlrLayershell.namespace:     "quickshell-panel"
+
+            // NEW: Global panel shortcut for the Escape key
+            Shortcut {
+                sequence: "Escape"
+                onActivated: {
+                    if (rootScope.showPanel) {
+                        EventBus.togglePanel(rootScope.panelId, null)
+                    }
+                }
+            }
 
             anchors {
                 top:    Config.navbarLocation === "top"
@@ -108,14 +118,9 @@ Scope {
                 : rootScope.panelHeight
 
             // ── AnimatedElement ───────────────────────────────────────────
-            // All show/hide animation lives here — Panel.qml just flips
-            // animator.show and everything else follows.
             AnimatedElement {
                 id: animator
                 anchors.fill: parent
-
-                // Only animate on the target screen so isSurfaceVisible
-                // doesn't stay true on non-target screens
                 show:   rootScope.showPanel && isTargetScreen
                 preset: rootScope.animationPreset
                 edge:   rootScope.barEdge
@@ -123,8 +128,14 @@ Scope {
                 // ── Panel background ──────────────────────────────────────
                 Rectangle {
                     id: bg
-                    color:        Config.transparentNavbar
-                                  ? Qt.rgba(Colors.background.r, Colors.background.g, Colors.background.b, 0.01)
+                    
+                    // FIX: Hardcode the width/height to the panel dimensions
+                    // so it doesn't expand into the fillet zones!
+                    width:  rootScope.panelWidth
+                    height: rootScope.panelHeight
+                    
+                    color:        Config.transparentNavbar 
+                                  ? Qt.rgba(Colors.background.r, Colors.background.g, Colors.background.b, 0.01) 
                                   : Colors.background
                     radius:       rootScope.panelRadius
                     border.width: Config.transparentNavbar ? 1 : 0
@@ -135,22 +146,27 @@ Scope {
                     Behavior on border.width { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
 
                     anchors {
-                        fill:         parent
+                        // Center it horizontally or vertically depending on orientation
+                        horizontalCenter: rootScope.isHorizontal  ? parent.horizontalCenter : undefined
+                        verticalCenter:   !rootScope.isHorizontal ? parent.verticalCenter   : undefined
+
+                        // Anchor the flat edge to the bar
+                        top:    Config.navbarLocation === "top"    ? parent.top    : undefined
+                        bottom: Config.navbarLocation === "bottom" ? parent.bottom : undefined
+                        left:   Config.navbarLocation === "left"   ? parent.left   : undefined
+                        right:  Config.navbarLocation === "right"  ? parent.right  : undefined
+
+                        // Square off the connecting edge
                         topMargin:    (!Config.transparentNavbar && Config.navbarLocation === "top")    ? -radius : 0
                         bottomMargin: (!Config.transparentNavbar && Config.navbarLocation === "bottom") ? -radius : 0
                         leftMargin:   (!Config.transparentNavbar && Config.navbarLocation === "left")   ? -radius : 0
                         rightMargin:  (!Config.transparentNavbar && Config.navbarLocation === "right")  ? -radius : 0
                     }
-
-                    Behavior on anchors.topMargin    { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
-                    Behavior on anchors.bottomMargin { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
-                    Behavior on anchors.leftMargin   { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
-                    Behavior on anchors.rightMargin  { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
                 }
 
                 // ── Panel content ─────────────────────────────────────────
                 Item {
-                    anchors.fill:    parent
+                    anchors.fill:    bg // Anchor to the restricted bg, not the parent!
                     anchors.margins: Style.panelPadding
                     clip: true
 
@@ -161,25 +177,18 @@ Scope {
                 }
 
                 // ── Tension fillets ───────────────────────────────────────
-                // Keep bar/panel corner join seamless during slide-in.
-                // Hidden in transparent mode since there's no solid bar to blend into.
                 Item {
                     anchors.fill: parent
-                    visible:      rootScope.animationPreset === "slide"
-                    opacity:      Config.transparentNavbar ? 0.0 : 1.0
-                    Behavior on opacity { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
-
-                    transform: Translate {
-                        x: Config.navbarLocation === "left"  ? -rootScope.filletOffset
-                         : Config.navbarLocation === "right" ?  rootScope.filletOffset : 0
-                        y: Config.navbarLocation === "top"   ? -rootScope.filletOffset
-                         : Config.navbarLocation === "bottom"?  rootScope.filletOffset : 0
-                    }
-
-                    // ── top ──────────────────────────────────────────────────
+                    
+                    // Only show fillets if it's sliding and NOT transparent
+                    visible: rootScope.animationPreset === "slide" && !Config.transparentNavbar
+                    
+                    // ── top (Horizontal) ──────────────────────────────────
                     Item {
                         visible: Config.navbarLocation === "top"
                         anchors.fill: parent
+                        
+                        // Left Fillet (╮)
                         Shape {
                             anchors { left: parent.left; top: parent.top }
                             width: rootScope.tensionRadius; height: rootScope.tensionRadius
@@ -193,22 +202,23 @@ Scope {
                                            direction: PathArc.Clockwise }
                             }
                         }
+                        // Right Fillet (╭)
                         Shape {
                             anchors { right: parent.right; top: parent.top }
                             width: rootScope.tensionRadius; height: rootScope.tensionRadius
                             ShapePath {
                                 fillColor: Colors.background; strokeWidth: 0
-                                startX: rootScope.tensionRadius; startY: 0
+                                startX: 0; startY: rootScope.tensionRadius
                                 PathLine { x: 0; y: 0 }
-                                PathLine { x: 0; y: rootScope.tensionRadius }
-                                PathArc  { x: rootScope.tensionRadius; y: 0
+                                PathLine { x: rootScope.tensionRadius; y: 0 }
+                                PathArc  { x: 0; y: rootScope.tensionRadius
                                            radiusX: rootScope.tensionRadius; radiusY: rootScope.tensionRadius
-                                           direction: PathArc.Clockwise }
+                                           direction: PathArc.Counterclockwise }
                             }
                         }
                     }
 
-                    // ── bottom ───────────────────────────────────────────────
+                    // ── bottom (Horizontal) ───────────────────────────────
                     Item {
                         visible: Config.navbarLocation === "bottom"
                         anchors.fill: parent
@@ -217,12 +227,12 @@ Scope {
                             width: rootScope.tensionRadius; height: rootScope.tensionRadius
                             ShapePath {
                                 fillColor: Colors.background; strokeWidth: 0
-                                startX: 0; startY: rootScope.tensionRadius
+                                startX: rootScope.tensionRadius; startY: 0
                                 PathLine { x: rootScope.tensionRadius; y: rootScope.tensionRadius }
-                                PathLine { x: rootScope.tensionRadius; y: 0 }
-                                PathArc  { x: 0; y: rootScope.tensionRadius
+                                PathLine { x: 0; y: rootScope.tensionRadius }
+                                PathArc  { x: rootScope.tensionRadius; y: 0
                                            radiusX: rootScope.tensionRadius; radiusY: rootScope.tensionRadius
-                                           direction: PathArc.Clockwise }
+                                           direction: PathArc.Counterclockwise } 
                             }
                         }
                         Shape {
@@ -240,7 +250,7 @@ Scope {
                         }
                     }
 
-                    // ── left ─────────────────────────────────────────────────
+                    // ── left (Vertical) ───────────────────────────────────
                     Item {
                         visible: Config.navbarLocation === "left"
                         anchors.fill: parent
@@ -249,12 +259,12 @@ Scope {
                             width: rootScope.tensionRadius; height: rootScope.tensionRadius
                             ShapePath {
                                 fillColor: Colors.background; strokeWidth: 0
-                                startX: 0; startY: 0
+                                startX: rootScope.tensionRadius; startY: rootScope.tensionRadius
                                 PathLine { x: 0; y: rootScope.tensionRadius }
-                                PathLine { x: rootScope.tensionRadius; y: rootScope.tensionRadius }
-                                PathArc  { x: 0; y: 0
+                                PathLine { x: 0; y: 0 }
+                                PathArc  { x: rootScope.tensionRadius; y: rootScope.tensionRadius
                                            radiusX: rootScope.tensionRadius; radiusY: rootScope.tensionRadius
-                                           direction: PathArc.Clockwise }
+                                           direction: PathArc.Counterclockwise } 
                             }
                         }
                         Shape {
@@ -272,7 +282,7 @@ Scope {
                         }
                     }
 
-                    // ── right ────────────────────────────────────────────────
+                    // ── right (Vertical) ──────────────────────────────────
                     Item {
                         visible: Config.navbarLocation === "right"
                         anchors.fill: parent
@@ -294,12 +304,12 @@ Scope {
                             width: rootScope.tensionRadius; height: rootScope.tensionRadius
                             ShapePath {
                                 fillColor: Colors.background; strokeWidth: 0
-                                startX: rootScope.tensionRadius; startY: rootScope.tensionRadius
+                                startX: 0; startY: 0
                                 PathLine { x: rootScope.tensionRadius; y: 0 }
-                                PathLine { x: 0; y: 0 }
-                                PathArc  { x: rootScope.tensionRadius; y: rootScope.tensionRadius
+                                PathLine { x: rootScope.tensionRadius; y: rootScope.tensionRadius }
+                                PathArc  { x: 0; y: 0
                                            radiusX: rootScope.tensionRadius; radiusY: rootScope.tensionRadius
-                                           direction: PathArc.Clockwise }
+                                           direction: PathArc.Counterclockwise } 
                             }
                         }
                     }

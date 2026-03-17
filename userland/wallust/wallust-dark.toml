@@ -15,6 +15,7 @@ kitty      = { src = "kitty.template",          dst = "~/.config/kitty/theme.con
 kvantum    = { src = "kvantum-dark.template",   dst = "~/.config/Kvantum/MateriaDark/MateriaDark.kvconfig" }
 mako       = { src = "mako.template",           dst = "~/.config/mako/config" }
 niri       = { src = "niri.template",           dst = "~/.config/niri/conf/color.kdl"}
+quickshell = { src = "quickshell.template",     dst = "~/.config/quickshell/globals/Colors.qml"}
 rofi       = { src = "rofi-theme.template",     dst = "~/.config/rofi/theme.rasi" }
 spotify    = { src = "spotify.template",        dst = "~/.config/spicetify/Themes/SeraDOTS/color.ini" }
 sway       = { src = "sway-theme.template",     dst = "~/.config/sway/config.d/color.conf" }

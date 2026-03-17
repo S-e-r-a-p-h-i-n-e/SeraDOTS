@@ -15,6 +15,6 @@ QtObject {
 
     function open() {
         Quickshell.execDetached({ command: ["sh", "-c",
-            "qs ipc call wallpaper toggle"] })
+            "wallchange.sh"] })
     }
 }

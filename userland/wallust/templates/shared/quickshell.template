@@ -12,7 +12,7 @@ Singleton {
 
   readonly property color background: themeAdapter.special.background
   readonly property color foreground: themeAdapter.special.foreground
-  readonly property color cursor: themeAdapter.special.cursor
+  readonly property color cursor: "#FFFFFF"
 
   readonly property color color0: themeAdapter.colors.color0
   readonly property color color1: themeAdapter.colors.color1

@@ -37,27 +37,27 @@ Singleton {
       id: themeAdapter
 
       property JsonObject special: JsonObject {
-        property color background: "#1C1C1E"
-        property color foreground: "#F0CAC6"
+        property color background: "#1C1A1B"
+        property color foreground: "#EAD2D3"
       }
 
       property JsonObject colors: JsonObject {
-        property color color0: "#434345"
-        property color color1: "#432829"
-        property color color2: "#5A3130"
-        property color color3: "#713B37"
-        property color color4: "#87443D"
-        property color color5: "#9E4E44"
-        property color color6: "#9E4E44"
-        property color color7: "#E1ABA4"
-        property color color8: "#9D7873"
-        property color color9: "#5A3537"
-        property color color10: "#784240"
-        property color color11: "#964E49"
-        property color color12: "#B55B52"
-        property color color13: "#D3685B"
-        property color color14: "#D3685B"
-        property color color15: "#E1ABA4"
+        property color color0: "#434142"
+        property color color1: "#422C2E"
+        property color color2: "#56383B"
+        property color color3: "#6A4547"
+        property color color4: "#7F5254"
+        property color color5: "#935F61"
+        property color color6: "#935F61"
+        property color color7: "#D9B6B8"
+        property color color8: "#987F80"
+        property color color9: "#583A3E"
+        property color color10: "#734B4E"
+        property color color11: "#8E5C5F"
+        property color color12: "#A96D70"
+        property color color13: "#C47E81"
+        property color color14: "#C47E81"
+        property color color15: "#D9B6B8"
       }
     }
   }

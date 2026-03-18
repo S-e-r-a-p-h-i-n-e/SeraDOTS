@@ -11,7 +11,7 @@ Scope {
     property var  targetScreen: null
 
     // Animation state — true while fading in or out
-    readonly property bool isAnimating: overlayAnim.running
+    property bool isAnimating: false
 
     readonly property var actions: [
         { label: "Lock",     icon: "\uf023", command: " hyprlock || swaylock || loginctl lock-session"                      },
@@ -60,6 +60,7 @@ Scope {
                         id: overlayAnim
                         duration: Animations.normal
                         easing.type: Animations.easeInOut
+                        onRunningChanged: rootScope.isAnimating = running
                     }
                 }
 

@@ -17,7 +17,6 @@ kvantummanager --set "$KVANTUM_THEME"
 
 # 4. Handle GTK Light/Dark Switching (Adwaita Native)
 if [ "$KVANTUM_THEME" = "MateriaLight" ]; then
-    # We still rely on the KVANTUM_THEME argument to know if we are in Light or Dark mode
     GTK_THEME="Materia-light"
     GTK_DARK="0"
     COLOR_SCHEME="prefer-light"
@@ -45,15 +44,25 @@ if command -v gsettings >/dev/null 2>&1; then
 fi
 
 # 5. Update the Rofi layout / thumbnail
-CURRENT_STYLE=$(readlink "$HOME/.config/rofi/layout.rasi" | sed 's/.*style_\([0-9]*\).rasi/\1/')
-rofi-layout.sh --refresh "$WALLPAPER" "$CURRENT_STYLE"
+CURRENT_STYLE=$(readlink "$HOME/.config/rofi/layout.rasi" 2>/dev/null | sed 's/.*style_\([0-9]*\).rasi/\1/')
+[ -n "$CURRENT_STYLE" ] && rofi-layout.sh --refresh "$WALLPAPER" "$CURRENT_STYLE"
 
 # 6. Reload desktop components
-swaymsg reload
-killall -SIGUSR2 waybar
-swaync-client -R && swaync-client -rs
-kill -SIGUSR1 $(pgrep -u "$USER" kitty | xargs -r kill -SIGUSR1)
-kitty -e spicetify apply
+
+# Sway — only if running
+pgrep -x sway >/dev/null 2>&1 && swaymsg reload
+
+# Waybar — only if running
+pgrep -x waybar >/dev/null 2>&1 && killall -SIGUSR2 waybar
+
+# SwayNC — only if running
+pgrep -x swaync >/dev/null 2>&1 && swaync-client -R && swaync-client -rs
+
+# Kitty — reload theme in all running instances
+pgrep -u "$USER" kitty >/dev/null 2>&1 && kill -SIGUSR1 $(pgrep -u "$USER" kitty)
+
+# Spicetify — only if installed
+command -v spicetify >/dev/null 2>&1 && kitty -e spicetify apply
 
 # 7. Notify
 notify-send -i "$WALLPAPER" "System Synced" "Config: $(basename "$WALLUST_CONFIG")"

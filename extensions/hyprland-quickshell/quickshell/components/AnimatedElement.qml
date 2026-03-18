@@ -28,6 +28,9 @@ Item {
     // so the window isn't destroyed mid-animation.
     readonly property bool isSurfaceVisible: container.opacity > 0.0
 
+    // True while any animation is still in flight — use this to block input.
+    readonly property bool isAnimating: opacityAnim.running || slideXAnim.running || slideYAnim.running || scaleAnim.running
+
     // Expose raw progress (0.0 → 1.0) so Panel.qml can drive fillet offset.
     readonly property real animProgress: show ? 1.0 : 0.0
 
@@ -41,6 +44,7 @@ Item {
         opacity: root.show ? 1.0 : 0.0
         Behavior on opacity {
             NumberAnimation {
+                id: opacityAnim
                 duration: root.preset === "slide" ? Animations.slow * 0.5 : Animations.normal
                 easing.type: Animations.easeInOut
             }
@@ -56,7 +60,7 @@ Item {
             return Item.Center
         }
         Behavior on scale {
-            NumberAnimation { duration: Animations.normal; easing.type: Animations.easeBack }
+            NumberAnimation { id: scaleAnim; duration: Animations.normal; easing.type: Animations.easeBack }
         }
 
         // ── Slide ─────────────────────────────────────────────────────────
@@ -79,8 +83,8 @@ Item {
              : root.edge === "top"     ? -offset
              : root.edge === "bottom"  ?  offset : 0
 
-            Behavior on x { NumberAnimation { duration: Animations.slow * 0.5; easing.type: Animations.easeOut } }
-            Behavior on y { NumberAnimation { duration: Animations.slow * 0.5; easing.type: Animations.easeOut } }
+            Behavior on x { NumberAnimation { id: slideXAnim; duration: Animations.slow * 0.5; easing.type: Animations.easeOut } }
+            Behavior on y { NumberAnimation { id: slideYAnim; duration: Animations.slow * 0.5; easing.type: Animations.easeOut } }
         }
     }
 }

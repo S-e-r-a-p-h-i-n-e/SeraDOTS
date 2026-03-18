@@ -46,32 +46,40 @@ Scope {
 
     IpcHandler {
         target: "clipboard"
-
-        // Explicit type annotations (: void) are REQUIRED for Quickshell IPC!
-        function toggle(): void {
-            EventBus.togglePanel("clipboard", null) // <-- Added null here
-        }
-
-        // You can easily add more commands here later!
+        function toggle(): void { EventBus.togglePanel("clipboard", null) }
         function close(): void {
             if (shell.activePanel === "clipboard") {
-                EventBus.togglePanel("clipboard", null) // <-- And added null here
+                EventBus.togglePanel("clipboard", null)
             }
         }
     }
 
     IpcHandler {
         target: "wallpaper"
-
-        // Explicit type annotations (: void) are REQUIRED for Quickshell IPC!
-        function toggle(): void {
-            EventBus.togglePanel("wallpaper", null) // <-- Added null here
-        }
-
-        // You can easily add more commands here later!
+        function toggle(): void { EventBus.togglePanel("wallpaper", null) }
         function close(): void {
             if (shell.activePanel === "wallpaper") {
-                EventBus.togglePanel("wallpaper", null) // <-- And added null here
+                EventBus.togglePanel("wallpaper", null)
+            }
+        }
+    }
+
+    IpcHandler {
+        target: "theming"
+        function toggle(): void { EventBus.togglePanel("theming", null) }
+        function close(): void {
+            if (shell.activePanel === "theming") {
+                EventBus.togglePanel("theming", null) // <-- And added null here
+            }
+        }
+    }
+
+    IpcHandler {
+        target: "emoji"
+        function toggle(): void { EventBus.togglePanel("emoji", null) }
+        function close(): void  {
+            if (shell.activePanel === "emoji") {
+                EventBus.togglePanel("emoji", null)
             }
         }
     }
@@ -108,6 +116,7 @@ Scope {
         showPanel:    shell.activePanel === "launcher"
         targetScreen: shell.activeScreen
         navbarOffset: loader.barSize
+        panelId:      "launcher"
     }
 
     ClipManager {
@@ -118,6 +127,12 @@ Scope {
 
     Wallpaper {
         showPanel:    shell.activePanel === "wallpaper"
+        targetScreen: shell.activeScreen
+        navbarOffset: loader.barSize
+    }
+
+    EmojiPicker {
+        showPanel:    shell.activePanel === "emoji"
         targetScreen: shell.activeScreen
         navbarOffset: loader.barSize
     }
@@ -144,6 +159,14 @@ Scope {
         panelId:      "advanced"
         navbarOffset: loader.barSize
     }
+
+    PowerManager {
+        showPanel:    shell.activePanel === "power"
+        targetScreen: shell.activeScreen
+    }
+
+    // Always-on popup layer — manages its own visibility per notification
+    NotificationPopups {}
 
     Connections {
         target: EventBus

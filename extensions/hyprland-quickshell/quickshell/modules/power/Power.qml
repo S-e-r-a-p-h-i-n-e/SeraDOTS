@@ -10,11 +10,6 @@ QtObject {
 
     readonly property var item: ({
         icon:      "⏻",
-        onClicked: function() { Power.open() }
+        onClicked: function() { EventBus.togglePanel("power", null) }
     })
-
-    function open() {
-        Quickshell.execDetached({ command: ["sh", "-c",
-            "wlogout -b 5 -l ~/.config/wlogout/layout -C ~/.config/wlogout/style.css"] })
-    }
 }

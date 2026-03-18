@@ -1,8 +1,12 @@
 module qs.panels
 
-AdvancedSettings 1.0 AdvancedSettings.qml
-ClipManager      1.0 ClipManager.qml
-Dashboard        1.0 Dashboard.qml
-Launcher         1.0 Launcher.qml
-Settings         1.0 Settings.qml
-Wallpaper        1.0 Wallpaper.qml
+AdvancedSettings   1.0 AdvancedSettings.qml
+ClipManager        1.0 ClipManager.qml
+Dashboard          1.0 Dashboard.qml
+EmojiPicker        1.0 EmojiPicker.qml
+Launcher           1.0 Launcher.qml
+NotificationCard   1.0 NotificationCard.qml
+NotificationPopups 1.0 NotificationPopups.qml
+PowerManager       1.0 PowerManager.qml
+Settings           1.0 Settings.qml
+Wallpaper          1.0 Wallpaper.qml

@@ -65,6 +65,7 @@ Scope {
                 anchors.fill: parent
                 onClicked:    EventBus.togglePanel(rootScope.panelId, null) // FIXED: Added null to satisfy arguments
                 hoverEnabled: false
+                enabled: !animator.isAnimating
             }
         }
 
@@ -89,7 +90,7 @@ Scope {
             Shortcut {
                 sequence: "Escape"
                 onActivated: {
-                    if (rootScope.showPanel) {
+                    if (rootScope.showPanel && !animator.isAnimating) {
                         EventBus.togglePanel(rootScope.panelId, null)
                     }
                 }
@@ -173,6 +174,13 @@ Scope {
                     Loader {
                         anchors.fill:    parent
                         sourceComponent: rootScope.panelContent
+                    }
+
+                    // Block all mouse input while the panel is animating in or out
+                    MouseArea {
+                        anchors.fill: parent
+                        enabled:      animator.isAnimating
+                        hoverEnabled: false
                     }
                 }
 

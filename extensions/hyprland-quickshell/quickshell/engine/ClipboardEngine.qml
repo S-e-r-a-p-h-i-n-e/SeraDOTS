@@ -11,7 +11,7 @@ Singleton {
     property var history: []
     property var favorites: []
     
-    readonly property string favFile: Quickshell.env("HOME") + "/.config/YASD/clipboard_favorites.txt"
+    readonly property string favFile: Quickshell.env("HOME") + "/.config/SeraDOTS/clipboard_favorites.txt"
 
     // 1. Fetch normal history
     Process {

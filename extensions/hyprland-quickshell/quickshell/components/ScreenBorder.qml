@@ -33,13 +33,13 @@ Scope {
         borderColor.r,
         borderColor.g,
         borderColor.b,
-        animatedAlpha * borderColor.a
+        animatedAlpha
     )
 
     // Corners always stay fully opaque — they persist even when borders are
     // disabled to keep the screen corners rounded at all times.
     // Exception: transparent mode hides them since there's no solid bar to blend into.
-    property real animatedCornerAlpha: Config.transparentNavbar ? 0.0 : borderColor.a
+    property real animatedCornerAlpha: Config.transparentNavbar ? 0.0 : 1.0
     Behavior on animatedCornerAlpha { NumberAnimation { duration: Animations.normal; easing.type: Animations.easeInOut } }
 
     readonly property color animatedCornerColor: Qt.rgba(

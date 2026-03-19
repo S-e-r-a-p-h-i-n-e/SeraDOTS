@@ -216,12 +216,14 @@ Item {
         }
 
         // ── Mouse area (hover to pause) ───────────────────────────────────
+        // propagateComposedEvents: true so closeMouse inside the card can
+        // still receive clicks — cardMouse only needs hover, not click capture.
         MouseArea {
             id: cardMouse
             anchors.fill: parent
             hoverEnabled: true
-            // Don't propagate so the dismiss overlay behind doesn't fire
-            propagateComposedEvents: false
+            propagateComposedEvents: true
+            onClicked: (mouse) => { mouse.accepted = false }
         }
     }
 }

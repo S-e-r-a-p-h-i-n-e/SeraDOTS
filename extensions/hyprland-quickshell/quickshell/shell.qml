@@ -33,13 +33,12 @@ Scope {
 
         // Explicit type annotations (: void) are REQUIRED for Quickshell IPC!
         function toggle(): void {
-            EventBus.togglePanel("launcher", null) // <-- Added null here
+            EventBus.togglePanel("launcher", null)
         }
 
-        // You can easily add more commands here later!
         function close(): void {
             if (shell.activePanel === "launcher") {
-                EventBus.togglePanel("launcher", null) // <-- And added null here
+                EventBus.togglePanel("launcher", null)
             }
         }
     }
@@ -69,7 +68,7 @@ Scope {
         function toggle(): void { EventBus.togglePanel("theming", null) }
         function close(): void {
             if (shell.activePanel === "theming") {
-                EventBus.togglePanel("theming", null) // <-- And added null here
+                EventBus.togglePanel("theming", null)
             }
         }
     }
@@ -85,8 +84,6 @@ Scope {
     }
 
     // Extend Qt's icon search paths to match what GTK/Waybar searches automatically.
-    // Qt's image://icon/ provider only searches theme paths it knows at startup —
-    // this adds pixmaps and user-local icon dirs so AUR packages resolve correctly.
     Component.onCompleted: {
         let extra = [
             "/usr/share/pixmaps",
@@ -98,6 +95,8 @@ Scope {
                 Qt.iconSearchPaths = (Qt.iconSearchPaths ?? []).concat([p])
         }
     }
+
+    // ── Wallpaper — self-contained, handles its own Variants internally ──
 
     LayoutLoader { id: loader }
 
@@ -152,7 +151,6 @@ Scope {
         bordersEnabled: Config.enableBorders
     }
 
-
     AdvancedSettings {
         showPanel:    shell.activePanel === "advanced"
         targetScreen: shell.activeScreen
@@ -166,6 +164,31 @@ Scope {
     }
 
     // Always-on popup layer — manages its own visibility per notification
+    // Pending location change — held until the exit animation completes
+    property string pendingLocation: ""
+
+    Timer {
+        id: locationChangeTimer
+        // Animations.normal (275ms) + small buffer for the window to settle
+        interval: 300
+        onTriggered: {
+            Config.saveSetting("navbarLocation", shell.pendingLocation)
+            // Reopen the panel from the new edge after windows have recreated
+            reopenTimer.restart()
+        }
+    }
+
+    Timer {
+        id: reopenTimer
+        interval: 50
+        onTriggered: {
+            if (shell.pendingLocation !== "") {
+                shell.activePanel = "theming"
+                shell.pendingLocation = ""
+            }
+        }
+    }
+
     NotificationPopups {}
 
     Connections {
@@ -181,7 +204,15 @@ Scope {
             }
         }
         function onChangeLocation(newLocation) {
-            Config.saveSetting("navbarLocation", newLocation)
+            if (shell.activePanel !== "") {
+                // Close the panel, wait for exit animation, then change location
+                shell.pendingLocation = newLocation
+                shell.activePanel = ""
+                shell.activeScreen = null
+                locationChangeTimer.restart()
+            } else {
+                Config.saveSetting("navbarLocation", newLocation)
+            }
         }
         function onToggleBorders(state) {
             Config.saveSetting("enableBorders", state)

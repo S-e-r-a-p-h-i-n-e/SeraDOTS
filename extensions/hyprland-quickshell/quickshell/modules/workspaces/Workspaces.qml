@@ -4,6 +4,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
+import qs.globals
 
 QtObject {
     readonly property var workspaces: Hyprland.workspaces
@@ -11,31 +12,7 @@ QtObject {
     function activate(ws)      { ws.activate() }
     function focusWindow(addr) { Hyprland.dispatch("focuswindow address:0x" + addr) }
 
-    readonly property var iconMap: ({
-        "firefox":           "󰈹",
-        "librewolf":         "󰈹",
-        "kitty":             "󰄛",
-        "alacritty":         "󰄛",
-        "discord":           "󰙯",
-        "vesktop":           "󰙯",
-        "code":              "󰨞",
-        "code-oss":          "󰨞",
-        "unity":             "󰚯",
-        "unityhub":          "󰚯",
-        "spotify":           "󰓇",
-        "steam":             "󰓓",
-        "obs":               "󰑋",
-        "vlc":               "󰕼",
-        "mpv":               "󰕼",
-        "thunar":            "󰉋",
-        "nautilus":          "󰉋",
-        "org.kde.dolphin":   "󰉋",
-        "cs2":               "󰖺",
-        "csgo":              "󰖺",
-        "valorant":          "󰖺",
-        "osu!":              "󰣄"
-    })
-
+    // Delegates to globals/Icons.qml — single source of truth for all app icons.
     function iconFor(toplevel) {
         let appClass = ""
         if (toplevel.wayland && toplevel.wayland.appId) {
@@ -44,6 +21,6 @@ QtObject {
             let ipc = toplevel.lastIpcObject || {}
             appClass = (ipc["class"] || ipc["initialClass"] || toplevel.title || "?").toLowerCase()
         }
-        return iconMap[appClass] || appClass.substring(0, 1).toUpperCase()
+        return Icons.getIcon(appClass)
     }
 }

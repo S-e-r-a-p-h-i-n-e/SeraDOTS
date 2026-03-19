@@ -19,17 +19,6 @@ Item {
     implicitWidth:  isHorizontal ? container.implicitWidth  : barThickness
     implicitHeight: isHorizontal ? barThickness              : container.implicitHeight
 
-    // Pill background
-    Rectangle {
-        visible: !root.inPill && Tray.items.length > 0
-        anchors.centerIn: parent
-        width:  root.isHorizontal ? container.implicitWidth + dotSize * 0.6 : root.barThickness
-        height: root.isHorizontal ? root.barThickness                        : container.implicitHeight + dotSize * 0.6
-        radius: (root.isHorizontal ? height : width) / 2
-        color:   Colors.color7
-        opacity: 0.325
-    }
-
     Grid {
         id: container
         anchors.centerIn: parent

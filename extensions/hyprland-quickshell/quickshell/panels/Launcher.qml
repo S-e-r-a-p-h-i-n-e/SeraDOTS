@@ -103,7 +103,7 @@ Panel {
             if (appsModel.count > 0 && launcherRoot.selectedIndex >= 0 && launcherRoot.selectedIndex < appsModel.count) {
                 let cmd = appsModel.get(launcherRoot.selectedIndex).appExec;
                 Quickshell.execDetached({ command: ["sh", "-c", cmd] });
-                EventBus.togglePanel(launcherPanel.panelId);
+                EventBus.togglePanel(launcherPanel.panelId, null);
             }
         }
 

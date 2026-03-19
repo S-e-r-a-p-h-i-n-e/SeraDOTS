@@ -41,17 +41,24 @@ Scope {
         // time, so creating a window while navbarLocation still holds the
         // hardcoded default ("top") would permanently mis-anchor the panel
         // when the user has a side navbar saved.
-        model: Config.loaded ? Quickshell.screens : [] // FIXED: Changed null to [] to prevent Variant warnings
+        // navbarLocation is embedded in the model key so Variants recreates
+        // PanelWindows when the bar edge changes — layer-shell anchors are
+        // immutable after window creation so reactive updates have no effect.
+        model: Config.loaded
+            ? Quickshell.screens.map(s => s.name + "|" + Config.navbarLocation)
+            : []
 
         // ── Dismiss overlay ───────────────────────────────────────────────
         // Full-screen transparent window just for catching outside clicks.
         // Kept separate so the blur window can be sized exactly to the panel.
         PanelWindow {
             required property var modelData
-            screen: modelData
+            readonly property string screenName: modelData.split("|")[0]
+            readonly property var    realScreen:  Quickshell.screens.find(s => s.name === screenName) ?? null
+            screen: realScreen
 
-            visible: rootScope.showPanel && rootScope.panelId !== "" &&
-                     (!rootScope.targetScreen || rootScope.targetScreen.name === modelData.name)
+            visible: rootScope.showPanel && rootScope.panelId !== "" && realScreen !== null &&
+                     (!rootScope.targetScreen || rootScope.targetScreen.name === screenName)
             color:   "transparent"
 
             WlrLayershell.layer:         WlrLayer.Top
@@ -63,7 +70,7 @@ Scope {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked:    EventBus.togglePanel(rootScope.panelId, null) // FIXED: Added null to satisfy arguments
+                onClicked:    EventBus.togglePanel(rootScope.panelId, null)
                 hoverEnabled: false
                 enabled: !animator.isAnimating
             }
@@ -73,9 +80,11 @@ Scope {
         // Sized exactly to the panel so Hyprland's blur is confined to it.
         PanelWindow {
             required property var modelData
-            screen: modelData
+            readonly property string screenName: modelData.split("|")[0]
+            readonly property var    realScreen:  Quickshell.screens.find(s => s.name === screenName) ?? null
+            screen: realScreen
 
-            readonly property bool isTargetScreen: !rootScope.targetScreen || rootScope.targetScreen.name === modelData.name
+            readonly property bool isTargetScreen: realScreen !== null && (!rootScope.targetScreen || rootScope.targetScreen.name === screenName)
 
             // Stay alive while AnimatedElement is still fading out
             visible: animator.isSurfaceVisible && isTargetScreen
@@ -86,7 +95,6 @@ Scope {
             WlrLayershell.keyboardFocus: rootScope.keyboardFocus
             WlrLayershell.namespace:     "quickshell-panel"
 
-            // NEW: Global panel shortcut for the Escape key
             Shortcut {
                 sequence: "Escape"
                 onActivated: {
@@ -130,8 +138,6 @@ Scope {
                 Rectangle {
                     id: bg
                     
-                    // FIX: Hardcode the width/height to the panel dimensions
-                    // so it doesn't expand into the fillet zones!
                     width:  rootScope.panelWidth
                     height: rootScope.panelHeight
                     

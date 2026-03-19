@@ -55,7 +55,7 @@ Singleton {
     function apply(path) {
         if (isVideo(path)) {
             _applyVideo(path)
-            // No theme sync for video — no static frame to sample
+            _runThemeSync(path)   // extracts snapshot then syncs
         } else {
             _applyImage(path)
             _runThemeSync(path)
@@ -63,55 +63,40 @@ Singleton {
     }
 
     function _applyImage(path) {
-        let kill = activeBackend === "mpvpaper"
-            ? "pkill -x mpvpaper; sleep 0.3; "
-            : ""
-        let cmd = kill + "swww img '" + path + "' --transition-type grow --transition-pos 0.5,0.5 --transition-step 90"
+        // Always kill mpvpaper — it may have been started outside the engine
+        let kill = "pkill -x mpvpaper 2>/dev/null || true; sleep 0.3; "
+        // Ensure swww-daemon is running — it may have been killed for mpvpaper
+        let daemonGuard = "pgrep -x swww-daemon >/dev/null 2>&1 || { swww-daemon & sleep 0.5; }; "
+        let cmd = kill + daemonGuard +
+            "swww img '" + path + "' --transition-type grow --transition-pos 0.5,0.5 --transition-step 90"
         Quickshell.execDetached({ command: ["sh", "-c", cmd] })
         activeBackend = "swww"
     }
 
     function _applyVideo(path) {
-        let kill = activeBackend !== "" ? "pkill -x mpvpaper; pkill -x swww-daemon; sleep 0.3; " : ""
-        let cmd  = kill + "mpvpaper -o 'no-audio loop' '*' '" + path + "'"
+        let kill = activeBackend !== "" ? "pkill -x mpvpaper 2>/dev/null || true; pkill -x swww-daemon 2>/dev/null || true; sleep 0.5; " : ""
+        // Detect monitor name — mpvpaper requires the actual output name, not a wildcard
+        let monitorCmd =
+            "MONITOR=\"\"; " +
+            "if command -v hyprctl >/dev/null 2>&1; then " +
+            "  MONITOR=$(hyprctl monitors -j 2>/dev/null | grep -m1 '\"name\"' | sed 's/.*\"name\": *\"\\([^\"]*\\)\".*/\\1/'); " +
+            "fi; " +
+            "if [ -z \"$MONITOR\" ]; then " +
+            "  MONITOR=$(find /sys/class/drm -name status 2>/dev/null | xargs grep -l '^connected$' 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | xargs basename 2>/dev/null | sed 's/card[0-9]*-//'); " +
+            "fi; "
+        let cmd = kill + monitorCmd +
+            "mpvpaper -f -o 'no-audio loop' \"$MONITOR\" '" + path + "'"
         Quickshell.execDetached({ command: ["sh", "-c", cmd] })
         activeBackend = "mpvpaper"
     }
 
-    // ── Theme sync — brightness detection then theme-sync.sh ──────────────
-    // Matches wallchange.sh: measure brightness, pick config, call theme-sync.sh
-    property string _pendingPath: ""
+    // ── Theme sync ────────────────────────────────────────────────────────
+    // Delegates to ThemeSyncEngine which is a native QML port of theme-sync.sh.
+    // For videos, passes the snapshot path so wallust gets a valid image.
+    readonly property string snapDir: "/tmp/wallchange_snaps"
 
     function _runThemeSync(path) {
-        _pendingPath = path
-        brightnessProc.running = true
+        ThemeSyncEngine.sync(path, isVideo(path))
     }
-
-    Process {
-        id: brightnessProc
-        command: [
-            "sh", "-c",
-            "magick '" + root._pendingPath + "' -colorspace Gray -format \"%[fx:100*median]\" info:"
-        ]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let val = parseFloat(this.text.trim())
-                let isLight = !isNaN(val) && val > 60
-
-                let wallustConfig = isLight
-                    ? root.home + "/.config/wallust/wallust-light.toml"
-                    : root.home + "/.config/wallust/wallust-dark.toml"
-                let kvantumTheme = isLight ? "MateriaLight" : "MateriaDark"
-
-                // Call theme-sync.sh with the same args as wallchange.sh
-                Quickshell.execDetached({
-                    command: ["/bin/bash", "-l", "-c",
-                        "theme-sync.sh '" + root._pendingPath + "' '" + wallustConfig + "' '" + kvantumTheme + "'"
-                    ]
-                })
-            }
-        }
-    }
-
     Component.onCompleted: refresh()
 }

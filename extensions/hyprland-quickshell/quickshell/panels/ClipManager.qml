@@ -229,8 +229,11 @@ Panel {
                             Text {
                                 text: clipRoot.showFavorites ? "❌" : "➕"
                                 font.pixelSize: 14
+                                z: 1
                                 MouseArea {
-                                    anchors.fill: parent; anchors.margins: -5; cursorShape: Qt.PointingHandCursor
+                                    anchors.fill: parent; anchors.margins: -5
+                                    cursorShape: Qt.PointingHandCursor
+                                    z: 1
                                     onClicked: {
                                         if (clipRoot.showFavorites) {
                                             ClipboardEngine.removeFavorite(model.clipContent)
@@ -248,10 +251,11 @@ Panel {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        // We only want the main area to trigger a copy, not the inline buttons
+                        propagateComposedEvents: true
                         onClicked: (mouse) => {
-                            clipRoot.selectedIndex = index;
-                            clipRoot.executeSelected();
+                            clipRoot.selectedIndex = index
+                            clipRoot.executeSelected()
+                            mouse.accepted = false
                         }
                     }
                 }

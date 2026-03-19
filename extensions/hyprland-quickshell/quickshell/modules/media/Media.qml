@@ -11,8 +11,15 @@ Singleton {
 
     readonly property string moduleType: "custom"
 
+    // Exclude mpvpaper — it registers as mpv via MPRIS but is just a wallpaper
+    function _isMpvpaper(p) {
+        let id = (p.identity ?? "").toLowerCase()
+        let de = (p.desktopEntry ?? "").toLowerCase()
+        return id === "mpv" || de === "mpv"
+    }
+
     readonly property var player: {
-        let players = Mpris.players.values
+        let players = Mpris.players.values.filter(p => !root._isMpvpaper(p))
         for (let i = 0; i < players.length; i++)
             if (players[i].playbackState === MprisPlaybackState.Playing) return players[i]
         return players.length > 0 ? players[0] : null

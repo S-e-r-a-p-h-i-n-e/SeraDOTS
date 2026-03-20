@@ -18,7 +18,10 @@ Scope {
     property int    keyboardFocus:   WlrKeyboardFocus.OnDemand
     property string animationPreset: "slide"
 
-    readonly property real tensionRadius: 20
+    // Must be at least panelRadius so the rounded bottom corners of bg are never
+    // clipped by the window boundary.  Also drives the fillet shapes, so keep it
+    // at the original 20 minimum so small-radius panels still look right.
+    readonly property real tensionRadius: Math.max(20, rootScope.panelRadius)
     readonly property real panelRadius:   Style.panelRadius
     readonly property bool isHorizontal:  Config.isHorizontal
 
@@ -132,12 +135,14 @@ Scope {
                 : 0
 
             // Sized exactly to the panel — no excess surface for blur to spill onto.
+            // tensionRadius extra on the bar-parallel axis gives fillet shapes room (opaque only).
+            // transparentExtra on the bar-perpendicular axis gives the bg room to sit past the navbar.
             implicitWidth:  rootScope.isHorizontal
-                ? rootScope.panelWidth + (rootScope.tensionRadius * 2)
-                : rootScope.panelWidth + transparentExtra
-            implicitHeight: !rootScope.isHorizontal
-                ? rootScope.panelHeight + (rootScope.tensionRadius * 2) + transparentExtra
-                : rootScope.panelHeight
+                ? rootScope.panelWidth  + (rootScope.tensionRadius * 2)
+                : rootScope.panelWidth  + transparentExtra
+            implicitHeight: rootScope.isHorizontal
+                ? rootScope.panelHeight + transparentExtra
+                : rootScope.panelHeight + (rootScope.tensionRadius * 2) + transparentExtra
 
             // ── AnimatedElement ───────────────────────────────────────────
             AnimatedElement {

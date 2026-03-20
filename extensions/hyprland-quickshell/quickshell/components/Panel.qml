@@ -111,28 +111,44 @@ Scope {
                 right:  Config.navbarLocation === "right"
             }
 
+            // When transparent: window starts at the screen edge (margin = 0) so the
+            // panel can visually slide up from behind the navbar.
+            // When opaque: window starts after the navbar (margin = navbarOffset + gap).
+            readonly property real windowMargin: Config.transparentNavbar
+                ? 0
+                : (rootScope.navbarOffset + rootScope.visualGap)
+
             margins {
-                top:    Config.navbarLocation === "top"    ? (rootScope.navbarOffset + rootScope.visualGap) : 0
-                bottom: Config.navbarLocation === "bottom" ? (rootScope.navbarOffset + rootScope.visualGap) : 0
-                left:   Config.navbarLocation === "left"   ? (rootScope.navbarOffset + rootScope.visualGap) : 0
-                right:  Config.navbarLocation === "right"  ? (rootScope.navbarOffset + rootScope.visualGap) : 0
+                top:    Config.navbarLocation === "top"    ? windowMargin : 0
+                bottom: Config.navbarLocation === "bottom" ? windowMargin : 0
+                left:   Config.navbarLocation === "left"   ? windowMargin : 0
+                right:  Config.navbarLocation === "right"  ? windowMargin : 0
             }
+
+            // When transparent, the window must be tall/wide enough to cover the
+            // navbar region too (so the panel content can be positioned after it).
+            readonly property real transparentExtra: Config.transparentNavbar
+                ? rootScope.navbarOffset + rootScope.visualGap
+                : 0
 
             // Sized exactly to the panel — no excess surface for blur to spill onto.
             implicitWidth:  rootScope.isHorizontal
                 ? rootScope.panelWidth + (rootScope.tensionRadius * 2)
-                : rootScope.panelWidth
+                : rootScope.panelWidth + transparentExtra
             implicitHeight: !rootScope.isHorizontal
-                ? rootScope.panelHeight + (rootScope.tensionRadius * 2)
+                ? rootScope.panelHeight + (rootScope.tensionRadius * 2) + transparentExtra
                 : rootScope.panelHeight
 
             // ── AnimatedElement ───────────────────────────────────────────
             AnimatedElement {
                 id: animator
                 anchors.fill: parent
-                show:   rootScope.showPanel && isTargetScreen
-                preset: rootScope.animationPreset
-                edge:   rootScope.barEdge
+                show:        rootScope.showPanel && isTargetScreen
+                preset:      rootScope.animationPreset
+                edge:        rootScope.barEdge
+                slideOffset: Config.transparentNavbar
+                    ? rootScope.navbarOffset + rootScope.visualGap
+                    : rootScope.navbarOffset
 
                 // ── Panel background ──────────────────────────────────────
                 Rectangle {
@@ -163,11 +179,27 @@ Scope {
                         left:   Config.navbarLocation === "left"   ? parent.left   : undefined
                         right:  Config.navbarLocation === "right"  ? parent.right  : undefined
 
-                        // Square off the connecting edge
-                        topMargin:    (!Config.transparentNavbar && Config.navbarLocation === "top")    ? -radius : 0
-                        bottomMargin: (!Config.transparentNavbar && Config.navbarLocation === "bottom") ? -radius : 0
-                        leftMargin:   (!Config.transparentNavbar && Config.navbarLocation === "left")   ? -radius : 0
-                        rightMargin:  (!Config.transparentNavbar && Config.navbarLocation === "right")  ? -radius : 0
+                        // Square off the connecting edge (opaque) OR push past the navbar (transparent)
+                        topMargin:    Config.navbarLocation === "top"
+                            ? (Config.transparentNavbar
+                                ? (rootScope.navbarOffset + rootScope.visualGap)
+                                : -radius)
+                            : 0
+                        bottomMargin: Config.navbarLocation === "bottom"
+                            ? (Config.transparentNavbar
+                                ? (rootScope.navbarOffset + rootScope.visualGap)
+                                : -radius)
+                            : 0
+                        leftMargin:   Config.navbarLocation === "left"
+                            ? (Config.transparentNavbar
+                                ? (rootScope.navbarOffset + rootScope.visualGap)
+                                : -radius)
+                            : 0
+                        rightMargin:  Config.navbarLocation === "right"
+                            ? (Config.transparentNavbar
+                                ? (rootScope.navbarOffset + rootScope.visualGap)
+                                : -radius)
+                            : 0
                     }
                 }
 

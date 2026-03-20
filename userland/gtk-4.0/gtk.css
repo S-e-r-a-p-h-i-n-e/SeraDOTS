@@ -1,5 +1,4 @@
 /* 1. Import your Wallust-generated universal color scheme */
-/* Adjust this path to wherever Wallust actually outputs your color.css */
 @import url("../SeraDOTS/color.css");
 
 /* ---------------------------------------------------

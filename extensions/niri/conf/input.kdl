@@ -24,6 +24,5 @@ input {
         accel-speed -0.2
     }
 
-    // Match Hyprland's 'follow_mouse = 1'
     focus-follows-mouse
 }

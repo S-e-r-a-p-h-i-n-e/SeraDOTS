@@ -1,0 +1,182 @@
+# =============================================================================
+# SeraDOTS — Arch Linux Package Lists
+# Generated from config analysis of SeraDOTS source
+# =============================================================================
+# Each section lists packages for a specific deployment option.
+# Install with: pacman -S --needed $(grep -v '^#' <section> | tr '\n' ' ')
+# AUR packages are marked with [AUR] — use your AUR helper (e.g. yay, paru)
+# =============================================================================
+
+
+# =============================================================================
+# [0] CORE — Required by ALL profiles
+#     Install this first, then pick a compositor profile below.
+# =============================================================================
+
+# --- Shell ---
+zsh
+
+# --- Display & Session ---
+dbus                        # dbus-update-activation-environment
+xdg-desktop-portal          # base portal support
+xdg-user-dirs               # XDG directory setup
+
+# --- Theming Engine ---
+wallust                     # [AUR] color extraction from wallpaper
+kvantum                     # Qt theming engine
+qt5ct                       # Qt5 platform theme config
+qt6ct                       # Qt6 platform theme config (optional but recommended)
+materia-gtk-theme           # GTK2/3/4 theme (Materia-dark / Materia-light)
+papirus-icon-theme          # icon theme (used by Kvantum/Materia port)
+
+# --- Cursor ---
+bibata-cursor-theme         # [AUR] Bibata-Modern-Ice cursor
+
+# --- Wallpaper & Media ---
+swww                        # [AUR] wallpaper daemon
+mpvpaper                    # [AUR] video wallpaper support
+ffmpeg                      # video snapshot extraction for wallpaper previews
+imagemagick                 # brightness detection + rofi thumbnail generation
+bc                          # floating-point math in wallchange.sh
+
+# --- Notifications ---
+libnotify                   # notify-send (used throughout all scripts)
+
+# --- Clipboard ---
+wl-clipboard                # wl-paste / wl-copy
+cliphist                    # [AUR] clipboard history manager
+
+# --- Tray & System Integration ---
+network-manager-applet      # nm-applet
+blueman                     # blueman-applet
+udiskie                     # automount tray daemon
+polkit-gnome                # authentication agent
+
+# --- App Launcher ---
+rofi-wayland                # [AUR] app launcher, window switcher, clipboard, emoji UI
+
+# --- Audio ---
+pamixer                     # volume keybinds (XF86Audio*)
+playerctl                   # media key support (play/pause/next/prev)
+pavucontrol                 # audio GUI (Waybar pulseaudio on-click)
+pipewire                    # audio server (recommended)
+wireplumber                 # PipeWire session manager
+
+# --- Default Applications ---
+kitty                       # terminal emulator
+dolphin                     # file manager
+librewolf                   # [AUR] browser
+spotify-launcher             # [AUR] Spotify wrapper
+vesktop                     # [AUR] Discord client (Vencord-patched)
+code                        # VSCode (or: vscodium [AUR])
+
+# --- System Info & Monitoring ---
+lm_sensors                  # sensors command for GPU temp (gpu-temp.sh)
+btop                        # system monitor (Waybar CPU/memory on-click)
+fastfetch                   # [AUR] system info display
+
+# --- Screenshots ---
+grim                        # screenshot capture
+slurp                       # region selection
+satty                       # [AUR] screenshot annotation tool
+
+# --- Idle ---
+swayidle                    # idle daemon (used across ALL compositor profiles)
+
+# --- Logout UI ---
+wlogout                     # [AUR] power/logout menu
+
+# --- Fonts ---
+ttf-nerd-fonts-symbols      # Nerd Font symbols for Waybar/Rofi glyphs
+                            # (or any full Nerd Font, e.g. ttf-jetbrains-mono-nerd)
+
+# --- Arch-specific (update checker in Waybar) ---
+pacman-contrib              # provides checkupdates (custom/updates module)
+
+# --- Optional / Referenced ---
+spicetify-cli               # [AUR] Spotify theming (theme-sync.sh applies if present)
+mako                        # notification daemon alt (dnd-toggle.sh uses makoctl)
+
+
+# =============================================================================
+# [1] BASELINE — Sway
+#     Core + this section.
+# =============================================================================
+
+sway                        # Wayland compositor (baseline)
+waybar                      # status bar
+swaync                      # [AUR] notification center + control panel
+swaylock                    # screen locker
+xdg-desktop-portal-wlr      # [AUR] portal backend for wlroots compositors
+cava                        # [AUR] audio visualizer (Waybar custom/cava)
+
+
+# =============================================================================
+# [2] EXTENSION — SwayFX
+#     Core + this section. (Replaces Sway)
+# =============================================================================
+
+swayfx                      # [AUR] Sway fork with blur/shadows/rounded corners
+waybar                      # status bar
+swaync                      # [AUR] notification center + control panel
+swaylock                    # screen locker
+xdg-desktop-portal-wlr      # [AUR] portal backend for wlroots compositors
+autotiling                  # [AUR] autotiling script (added in SwayFX autorun)
+cava                        # [AUR] audio visualizer (Waybar custom/cava)
+
+
+# =============================================================================
+# [3] EXTENSION — Hyprland
+#     Core + this section. (Replaces Sway)
+# =============================================================================
+
+hyprland                    # Wayland compositor
+waybar                      # status bar
+swaync                      # [AUR] notification center + control panel
+hyprlock                    # [AUR] screen locker (replaces swaylock)
+swayidle                    # idle daemon (calls hyprlock instead of swaylock)
+xdg-desktop-portal-hyprland # [AUR] Hyprland-specific portal backend
+jq                          # JSON parser (keyboard layout display via hyprctl -j)
+cava                        # [AUR] audio visualizer (Waybar custom/cava)
+
+
+# =============================================================================
+# [4] EXTENSION — Hyprland + Quickshell
+#     Core + this section. (Replaces Sway; Quickshell replaces Waybar)
+# =============================================================================
+
+hyprland                    # Wayland compositor
+quickshell                  # [AUR] QML-based shell (replaces waybar entirely)
+hyprlock                    # [AUR] screen locker
+swayidle                    # idle daemon (calls hyprlock)
+xdg-desktop-portal-hyprland # [AUR] Hyprland-specific portal backend
+jq                          # JSON parser (keyboard layout display via hyprctl -j)
+hyprshot                    # [AUR] region screenshot tool (used in QS binds)
+rofi-wayland                # [AUR] still used for emoji picker keybind
+cava                        # [AUR] audio visualizer (Quickshell cava module)
+
+# NOTE: Quickshell sets QT_QPA_PLATFORMTHEME=gtk3 and QML_XHR_ALLOW_FILE_READ=1
+#       in its autorun.conf. Waybar is NOT launched in this profile.
+
+
+# =============================================================================
+# [5] EXTENSION — Niri
+#     Core + this section. (Replaces Sway)
+# =============================================================================
+
+niri                        # [AUR] scrollable-tiling Wayland compositor
+waybar                      # status bar
+swaync                      # [AUR] notification center + control panel
+swaylock                    # screen locker (Niri uses swaylock, not hyprlock)
+swayidle                    # idle daemon (uses niri msg action power-off-monitors)
+xdg-desktop-portal-gnome    # portal backend (or xdg-desktop-portal-gtk)
+cava                        # [AUR] audio visualizer (Waybar custom/cava)
+
+# NOTE: Screenshots in Niri use niri's built-in screenshot action (Win+P).
+#       grim/slurp are NOT bound in the Niri config, but still useful to have
+#       from Core for manual use.
+
+
+# =============================================================================
+# END
+# =============================================================================

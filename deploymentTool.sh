@@ -11,6 +11,8 @@ SERA_CONFIG="$HOME/.config/SeraDOTS"
 USER_BIN="$HOME/.local/bin"
 readonly SCRIPT_DIR SERA_CONFIG USER_BIN
 DRY_RUN=0
+INSTALL_PKGS=0
+AUR_HELPER_ARG=""
 
 # --- Visual Helpers ---
 log_info() { printf '\033[0;34m[INFO]\033[0m %s\n' "$1"; }
@@ -167,10 +169,35 @@ apply_contracts() {
     fi
 }
 
+# --- Package Installation ---
+# Calls install-arch.sh, which must live alongside this script.
+run_installer() {
+    compositor="$1"
+    installer="$SCRIPT_DIR/install-arch.sh"
+
+    if [ ! -f "$installer" ]; then
+        log_warn "install-arch.sh not found at $SCRIPT_DIR — skipping package installation."
+        return
+    fi
+
+    if [ ! -x "$installer" ]; then
+        execute chmod +x "$installer"
+    fi
+
+    installer_args="$compositor"
+    [ "$DRY_RUN" -eq 1 ] && installer_args="$installer_args --dry-run"
+    [ -n "$AUR_HELPER_ARG" ] && installer_args="$installer_args --aur-helper $AUR_HELPER_ARG"
+
+    log_info "PHASE: Installing packages for profile: $compositor"
+    execute "$installer" $installer_args
+}
+
 # --- Argument Parsing ---
 for arg in "$@"; do
     case $arg in
-        --dry-run|-d) DRY_RUN=1 ;;
+        --dry-run|-d)      DRY_RUN=1 ;;
+        --install-pkgs|-i) INSTALL_PKGS=1 ;;
+        --aur-helper=*)    AUR_HELPER_ARG="${arg#*=}" ;;
     esac
 done
 
@@ -188,14 +215,43 @@ printf '  q) Quit\n'
 printf 'Selection: '
 read -r choice
 
+# If --install-pkgs was not passed as a flag, ask interactively.
+if [ "$INSTALL_PKGS" -eq 0 ] && [ "$choice" != "q" ] && [ "$choice" != "Q" ]; then
+    printf '\nInstall required packages via pacman/AUR? [y/N] '
+    read -r pkg_choice
+    case "$pkg_choice" in
+        y|Y|yes|Yes) INSTALL_PKGS=1 ;;
+    esac
+fi
+
 case $choice in
-    1) install_core ;;
-    2) install_core; install_env_layer; install_compositor "sway" ;;
-    3) install_core; install_env_layer; install_compositor "swayfx" ;;
-    4) install_core; install_env_layer; install_compositor "hyprland" ;;
-    5) install_core; install_env_layer; install_compositor "hyprland-quickshell" ;;
-    6) install_core; install_env_layer; install_compositor "niri" ;;
-    *) exit 0 ;;
+    1)
+        install_core
+        [ "$INSTALL_PKGS" -eq 1 ] && run_installer "core"
+        ;;
+    2)
+        install_core; install_env_layer; install_compositor "sway"
+        [ "$INSTALL_PKGS" -eq 1 ] && run_installer "sway"
+        ;;
+    3)
+        install_core; install_env_layer; install_compositor "swayfx"
+        [ "$INSTALL_PKGS" -eq 1 ] && run_installer "swayfx"
+        ;;
+    4)
+        install_core; install_env_layer; install_compositor "hyprland"
+        [ "$INSTALL_PKGS" -eq 1 ] && run_installer "hyprland"
+        ;;
+    5)
+        install_core; install_env_layer; install_compositor "hyprland-quickshell"
+        [ "$INSTALL_PKGS" -eq 1 ] && run_installer "hyprland-quickshell"
+        ;;
+    6)
+        install_core; install_env_layer; install_compositor "niri"
+        [ "$INSTALL_PKGS" -eq 1 ] && run_installer "niri"
+        ;;
+    *)
+        exit 0
+        ;;
 esac
 
 apply_contracts

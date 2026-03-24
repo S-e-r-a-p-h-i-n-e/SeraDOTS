@@ -3,26 +3,23 @@
     [
       "start",
       "workspaces"
-    ],
-    [
-      "media"
     ]
   ],
   "center": [
     [
+      "cava",
       "idleinhibitor",
-      "clock"
+      "clock",
+      "media"
     ]
   ],
   "right": [
     [
       "audio",
-      "network"
-    ],
-    [
+      "updates",
       "tray",
-      "wallchange",
       "cliphist",
+      "wallchange",
       "settings",
       "power"
     ]

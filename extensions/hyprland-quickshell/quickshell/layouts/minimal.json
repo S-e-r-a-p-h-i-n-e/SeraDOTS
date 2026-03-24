@@ -1,11 +1,13 @@
 {
   "left": [
-    "start"
+    "start",
+    "settings"
   ],
   "center": [
     
   ],
   "right": [
+    "audio",
     "clock"
   ]
 }

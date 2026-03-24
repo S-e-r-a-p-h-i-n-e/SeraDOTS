@@ -1,11 +1,12 @@
 // engine/ThemeSyncEngine.qml
-// Native QML port of theme-sync.sh for the hyprland-quickshell extension.
-// Each step runs as a sequential Process chain.
+// Native QML port of theme-sync.sh
 //
-// Dead steps from theme-sync.sh omitted:
-//   swaymsg reload          — not running in hyprland-quickshell
-//   killall -SIGUSR2 waybar — not running
-//   swaync-client           — replaced by native NotificationPopups
+// Steps 2-7 (wallust, kvantum, gtk, rofi, spicetify, notify) all run in a
+// single execDetached shell script. This sidesteps the hot-reload problem
+// entirely — wallust writing Colors.qml triggers a reload, but since the
+// whole post-brightness work is detached, the reload can't kill it.
+// Only snap (video) and brightness need to be QML Process chains since we
+// need their output to build the script arguments.
 pragma Singleton
 
 import QtQuick
@@ -23,35 +24,31 @@ Singleton {
     property bool   syncing:    false
     property string _wallpaper: ""
     property string _sample:    ""
-    property bool   _isVideo:   false
-
-    property string _wallustConfig: wallustDark
-    property string _kvantumTheme:  "MateriaDark"
-    property string _gtkTheme:      "Materia-dark"
-    property string _gtkDark:       "1"
-    property string _colorScheme:   "prefer-dark"
 
     // ── Public entry point ────────────────────────────────────────────────
     function sync(wallpaperPath, isVideo) {
-        if (root.syncing) return
+        if (root.syncing) {
+            console.log("ThemeSync: already syncing, ignoring call")
+            return
+        }
+        console.log("ThemeSync: sync() called — path=" + wallpaperPath + " isVideo=" + isVideo)
         root.syncing    = true
         root._wallpaper = wallpaperPath
-        root._isVideo   = isVideo
 
         if (isVideo) {
             let name     = wallpaperPath.substring(wallpaperPath.lastIndexOf("/") + 1)
             root._sample = snapDir + "/" + name + ".jpg"
-            snapProc.running = true
+            _startSnap()
         } else {
             root._sample = wallpaperPath
-            brightnessProc.running = true
+            _startBrightness()
         }
     }
 
-    // ── Step 0 (video only) — extract snapshot frame ──────────────────────
-    Process {
-        id: snapProc
-        command: [
+    // ── Step 0 (video only) — extract snapshot ────────────────────────────
+    function _startSnap() {
+        console.log("ThemeSync: [0] snap start")
+        snapProc.command = [
             "sh", "-c",
             "mkdir -p '" + root.snapDir + "'; " +
             "OUT='" + root._sample + "'; " +
@@ -60,67 +57,74 @@ Singleton {
             "ffmpeg        -i '" + root._wallpaper + "' -frames:v 1 -q:v 2 \"$OUT\" -y >/dev/null 2>&1; " +
             "[ -f \"$OUT\" ] && printf '%s' \"$OUT\""
         ]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let snap = this.text.trim()
-                if (snap !== "") {
-                    root._sample = snap
-                    brightnessProc.running = true
-                } else {
-                    console.warn("ThemeSyncEngine: snapshot extraction failed")
-                    root.syncing = false
-                }
+        snapProc.running = true
+    }
+
+    Process {
+        id: snapProc
+        property string _buf: ""
+        stdout: SplitParser { onRead: (l) => { snapProc._buf = l.trim() } }
+        onExited: (code) => {
+            let snap = _buf.trim()
+            _buf = ""
+            console.log("ThemeSync: [0] snap exited code=" + code + " snap='" + snap + "'")
+            if (snap !== "") {
+                root._sample = snap
+                _startBrightness()
+            } else {
+                console.warn("ThemeSync: snapshot extraction FAILED — aborting")
+                root.syncing = false
             }
         }
     }
 
     // ── Step 1 — brightness detection ─────────────────────────────────────
-    Process {
-        id: brightnessProc
-        command: [
+    function _startBrightness() {
+        console.log("ThemeSync: [1] brightness start — sample=" + root._sample)
+        brightnessProc.command = [
             "sh", "-c",
             "magick '" + root._sample + "' -colorspace Gray -format '%[fx:100*median]' info:"
         ]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let val     = parseFloat(this.text.trim())
-                let isLight = !isNaN(val) && val > 60
+        brightnessProc.running = true
+    }
 
-                root._wallustConfig = isLight ? root.wallustLight  : root.wallustDark
-                root._kvantumTheme  = isLight ? "MateriaLight"     : "MateriaDark"
-                root._gtkTheme      = isLight ? "Materia-light"    : "Materia-dark"
-                root._gtkDark       = isLight ? "0"                : "1"
-                root._colorScheme   = isLight ? "prefer-light"     : "prefer-dark"
+    Process {
+        id: brightnessProc
+        property string _buf: ""
+        stdout: SplitParser { onRead: (l) => { brightnessProc._buf = l.trim() } }
+        onExited: (code) => {
+            let val     = parseFloat(_buf.trim())
+            _buf = ""
+            let isLight = !isNaN(val) && val > 60
+            console.log("ThemeSync: [1] brightness exited code=" + code + " val=" + val + " isLight=" + isLight)
 
-                wallustProc.running = true
-            }
+            let wallustConfig = isLight ? root.wallustLight : root.wallustDark
+            let kvantumTheme  = isLight ? "MateriaLight"    : "MateriaDark"
+            let gtkTheme      = isLight ? "Materia-light"   : "Materia-dark"
+            let gtkDark       = isLight ? "0"               : "1"
+            let colorScheme   = isLight ? "prefer-light"    : "prefer-dark"
+
+            _runPostBrightness(wallustConfig, kvantumTheme, gtkTheme, gtkDark, colorScheme)
         }
     }
 
-    // ── Step 2 — wallust ──────────────────────────────────────────────────
-    Process {
-        id: wallustProc
-        command: [
-            "wallust", "run", "-C", root._wallustConfig, root._sample
-        ]
-        onRunningChanged: { if (!running) kvantumProc.running = true }
-    }
+    // ── Steps 2-7 — single detached script ───────────────────────────────
+    // Runs entirely outside QML so the hot-reload triggered by wallust
+    // writing Colors.qml cannot interrupt it.
+    function _runPostBrightness(wallustConfig, kvantumTheme, gtkTheme, gtkDark, colorScheme) {
+        console.log("ThemeSync: [2-7] launching detached script — kvantum=" + kvantumTheme)
 
-    // ── Step 3 — Kvantum ──────────────────────────────────────────────────
-    Process {
-        id: kvantumProc
-        command: ["kvantummanager", "--set", root._kvantumTheme]
-        onRunningChanged: { if (!running) gtkProc.running = true }
-    }
+        let cmd =
+            // 2. wallust
+            "kitty -e wallust run -C '" + wallustConfig + "' '" + root._sample + "'; " +
 
-    // ── Step 4 — GTK settings.ini + gsettings live reload ─────────────────
-    Process {
-        id: gtkProc
-        command: [
-            "sh", "-c",
-            "GTK_THEME='" + root._gtkTheme + "'; " +
-            "GTK_DARK='" + root._gtkDark + "'; " +
-            "COLOR_SCHEME='" + root._colorScheme + "'; " +
+            // 3. kvantum
+            "kvantummanager --set '" + kvantumTheme + "'; " +
+
+            // 4. gtk settings.ini + gsettings
+            "GTK_THEME='" + gtkTheme + "'; " +
+            "GTK_DARK='" + gtkDark + "'; " +
+            "COLOR_SCHEME='" + colorScheme + "'; " +
             "for f in \"$HOME/.config/gtk-3.0/settings.ini\" \"$HOME/.config/gtk-4.0/settings.ini\"; do " +
             "  [ -f \"$f\" ] || continue; " +
             "  sed -i \"s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/\" \"$f\"; " +
@@ -129,49 +133,24 @@ Singleton {
             "command -v gsettings >/dev/null 2>&1 && { " +
             "  gsettings set org.gnome.desktop.interface gtk-theme \"$GTK_THEME\"; " +
             "  gsettings set org.gnome.desktop.interface color-scheme \"$COLOR_SCHEME\"; " +
-            "}"
-        ]
-        onRunningChanged: { if (!running) rofiProc.running = true }
-    }
+            "}; " +
 
-    // ── Step 5 — rofi thumbnail + kitty reload ────────────────────────────
-    Process {
-        id: rofiProc
-        command: [
-            "sh", "-c",
+            // 5. rofi layout refresh + kitty theme reload
             "CURRENT_STYLE=$(readlink \"$HOME/.config/rofi/layout.rasi\" 2>/dev/null | " +
             "  sed 's/.*style_\\([0-9]*\\).rasi/\\1/'); " +
             "[ -n \"$CURRENT_STYLE\" ] && command -v rofi-layout.sh >/dev/null 2>&1 && " +
             "  rofi-layout.sh --refresh '" + root._sample + "' \"$CURRENT_STYLE\"; " +
             "pgrep -u \"$USER\" kitty >/dev/null 2>&1 && " +
-            "  kill -SIGUSR1 $(pgrep -u \"$USER\" kitty)"
-        ]
-        onRunningChanged: { if (!running) spicetifyProc.running = true }
-    }
+            "  kill -SIGUSR1 $(pgrep -u \"$USER\" kitty); " +
 
-    // ── Step 6 — spicetify ────────────────────────────────────────────────
-    // Uses Quickshell.execDetached with a login shell — same pattern as
-    // Updates.qml's kitty launch which is confirmed working.
-    Process {
-        id: spicetifyProc
-        command: ["sh", "-c", "true"]  // no-op — spicetify fires via execDetached
-        onRunningChanged: {
-            if (!running) {
-                Quickshell.execDetached({ command: ["/bin/bash", "-l", "-c", "kitty -e spicetify apply"] })
-                notifyProc.running = true
-            }
-        }
-    }
+            // 6. spicetify (guarded)
+            "command -v spicetify >/dev/null 2>&1 && kitty -e spicetify apply; " +
 
-    // ── Step 7 — notify ───────────────────────────────────────────────────
-    Process {
-        id: notifyProc
-        command: [
-            "notify-send",
-            "-i", root._sample,
-            "System Synced",
-            "Config: " + root._wallustConfig.substring(root._wallustConfig.lastIndexOf("/") + 1)
-        ]
-        onRunningChanged: { if (!running) root.syncing = false }
+            // 7. notify
+            "notify-send -i '" + root._sample + "' 'System Synced' " +
+            "'Config: " + wallustConfig.substring(wallustConfig.lastIndexOf("/") + 1) + "'"
+
+        Quickshell.execDetached({ command: ["sh", "-c", cmd] })
+        root.syncing = false
     }
 }

@@ -23,6 +23,10 @@ Item {
     property bool   show:   false
     property string preset: "slide"
     property string edge:   "top"
+    // Extra offset already applied by the PanelWindow margin (navbar height).
+    // Subtracting it from maxSlide makes the animation start from the navbar
+    // edge rather than from the screen edge.
+    property real   slideOffset: 0
 
     // True while visible OR animating out — use this to gate PanelWindow.visible
     // so the window isn't destroyed mid-animation.
@@ -70,8 +74,8 @@ Item {
             readonly property real maxSlide: {
                 if (root.preset !== "slide") return 0
                 if (root.edge === "left" || root.edge === "right")
-                    return root.width  > 0 ? root.width  : 400
-                return root.height > 0 ? root.height : 400
+                    return root.width  > 0 ? root.width  - root.slideOffset : 400
+                return root.height > 0 ? root.height - root.slideOffset : 400
             }
             readonly property real offset: root.show ? 0 : maxSlide
 

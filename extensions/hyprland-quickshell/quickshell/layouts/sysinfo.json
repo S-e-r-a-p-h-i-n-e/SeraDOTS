@@ -5,7 +5,7 @@
       "workspaces"
     ],
     [
-      "media"
+      "cpu"
     ]
   ],
   "center": [
@@ -17,7 +17,8 @@
   "right": [
     [
       "audio",
-      "network"
+      "network",
+      "updates"
     ],
     [
       "tray",

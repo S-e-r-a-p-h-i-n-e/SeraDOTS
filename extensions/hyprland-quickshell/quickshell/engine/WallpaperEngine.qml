@@ -11,7 +11,7 @@ Singleton {
     property var    wallpapers:    []
     property string activeBackend: ""   // "swww" | "mpvpaper" | ""
 
-    readonly property string wallDir:   Quickshell.env("HOME") + "/.config/SeraDOTS/wallpapers"
+    readonly property string wallDir:   Quickshell.env("HOME") + "/.config/YASD/wallpapers"
     readonly property string home:      Quickshell.env("HOME")
     readonly property var    videoExts: ["mp4", "webm", "mkv", "mov", "avi"]
 
@@ -21,6 +21,7 @@ Singleton {
     }
 
     // ── File discovery ────────────────────────────────────────────────────
+    // finder.command only runs once at startup so static binding is fine here
     Process {
         id: finder
         command: [
@@ -31,21 +32,22 @@ Singleton {
             "-iname \\*.mp4 -o -iname \\*.webm -o -iname \\*.mkv -o " +
             "-iname \\*.mov -o -iname \\*.avi \\)"
         ]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let files  = this.text.split('\n').filter(p => p.trim().length > 0)
-                let parsed = []
-                for (let i = 0; i < files.length; i++) {
-                    let path  = files[i]
-                    let name  = path.substring(path.lastIndexOf('/') + 1)
-                    let ext   = name.substring(name.lastIndexOf('.') + 1).toLowerCase()
-                    let video = root.videoExts.indexOf(ext) !== -1
-                    let gif   = ext === "gif"
-                    parsed.push({ name, path, video, gif })
-                }
-                parsed.sort((a, b) => a.name.localeCompare(b.name))
-                root.wallpapers = parsed
+        property string _buf: ""
+        stdout: SplitParser { onRead: (l) => { if (l.trim()) finder._buf += l.trim() + "\n" } }
+        onExited: {
+            let files  = _buf.split('\n').filter(p => p.trim().length > 0)
+            _buf = ""
+            let parsed = []
+            for (let i = 0; i < files.length; i++) {
+                let path  = files[i]
+                let name  = path.substring(path.lastIndexOf('/') + 1)
+                let ext   = name.substring(name.lastIndexOf('.') + 1).toLowerCase()
+                let video = root.videoExts.indexOf(ext) !== -1
+                let gif   = ext === "gif"
+                parsed.push({ name, path, video, gif })
             }
+            parsed.sort((a, b) => a.name.localeCompare(b.name))
+            root.wallpapers = parsed
         }
     }
 
@@ -55,48 +57,56 @@ Singleton {
     function apply(path) {
         if (isVideo(path)) {
             _applyVideo(path)
-            _runThemeSync(path)   // extracts snapshot then syncs
         } else {
             _applyImage(path)
-            _runThemeSync(path)
         }
+        ThemeSyncEngine.sync(path, isVideo(path))
     }
 
     function _applyImage(path) {
-        // Always kill mpvpaper — it may have been started outside the engine
-        let kill = "pkill -x mpvpaper 2>/dev/null || true; sleep 0.3; "
-        // Ensure swww-daemon is running — it may have been killed for mpvpaper
+        // Always kill mpvpaper unconditionally — it may have been started
+        // outside the engine (e.g. by wallchange.sh directly), so we can't
+        // rely on activeBackend being set.
+        let kill        = "pkill -x mpvpaper 2>/dev/null || true; sleep 0.3; "
         let daemonGuard = "pgrep -x swww-daemon >/dev/null 2>&1 || { swww-daemon & sleep 0.5; }; "
-        let cmd = kill + daemonGuard +
-            "swww img '" + path + "' --transition-type grow --transition-pos 0.5,0.5 --transition-step 90"
-        Quickshell.execDetached({ command: ["sh", "-c", cmd] })
+        let swww        = "swww img '" + path + "' --transition-type grow --transition-pos 0.5,0.5 --transition-step 90"
+        Quickshell.execDetached({ command: ["sh", "-c", kill + daemonGuard + swww] })
         activeBackend = "swww"
     }
 
     function _applyVideo(path) {
-        let kill = activeBackend !== "" ? "pkill -x mpvpaper 2>/dev/null || true; pkill -x swww-daemon 2>/dev/null || true; sleep 0.5; " : ""
-        // Detect monitor name — mpvpaper requires the actual output name, not a wildcard
+        // Always kill both backends unconditionally — matches wallchange.sh
+        // behaviour and handles the case where a video was set externally
+        // (activeBackend = "") so the old conditional guard would skip the kill.
+        let kill =
+            "pkill -x mpvpaper 2>/dev/null || true; " +
+            "pkill -x swww-daemon 2>/dev/null || true; " +
+            "sleep 0.5; "
+
+        // Detect connected monitor name — mpvpaper requires the actual output
+        // name. Mirrors the two-stage detection in wallchange.sh exactly.
         let monitorCmd =
             "MONITOR=\"\"; " +
             "if command -v hyprctl >/dev/null 2>&1; then " +
             "  MONITOR=$(hyprctl monitors -j 2>/dev/null | grep -m1 '\"name\"' | sed 's/.*\"name\": *\"\\([^\"]*\\)\".*/\\1/'); " +
             "fi; " +
             "if [ -z \"$MONITOR\" ]; then " +
-            "  MONITOR=$(find /sys/class/drm -name status 2>/dev/null | xargs grep -l '^connected$' 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | xargs basename 2>/dev/null | sed 's/card[0-9]*-//'); " +
+            "  MONITOR=$(find /sys/class/drm -name status 2>/dev/null " +
+            "    | xargs grep -l '^connected$' 2>/dev/null " +
+            "    | head -n 1 " +
+            "    | xargs dirname 2>/dev/null " +
+            "    | xargs basename 2>/dev/null " +
+            "    | sed 's/card[0-9]*-//'); " +
+            "fi; " +
+            "if [ -z \"$MONITOR\" ]; then " +
+            "  notify-send 'Wallpaper Error' 'Could not detect monitor name for mpvpaper'; " +
+            "  exit 1; " +
             "fi; "
-        let cmd = kill + monitorCmd +
-            "mpvpaper -f -o 'no-audio loop' \"$MONITOR\" '" + path + "'"
-        Quickshell.execDetached({ command: ["sh", "-c", cmd] })
+
+        let mpv = "mpvpaper -f -o 'no-audio loop' \"$MONITOR\" '" + path + "'"
+        Quickshell.execDetached({ command: ["sh", "-c", kill + monitorCmd + mpv] })
         activeBackend = "mpvpaper"
     }
 
-    // ── Theme sync ────────────────────────────────────────────────────────
-    // Delegates to ThemeSyncEngine which is a native QML port of theme-sync.sh.
-    // For videos, passes the snapshot path so wallust gets a valid image.
-    readonly property string snapDir: "/tmp/wallchange_snaps"
-
-    function _runThemeSync(path) {
-        ThemeSyncEngine.sync(path, isVideo(path))
-    }
     Component.onCompleted: refresh()
 }

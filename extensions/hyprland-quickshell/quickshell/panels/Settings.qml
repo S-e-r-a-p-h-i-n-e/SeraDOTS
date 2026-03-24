@@ -1,5 +1,6 @@
 // panels/Settings.qml
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
 import qs.components
@@ -8,7 +9,7 @@ import qs.globals
 Panel {
     id: settingsPanel
 
-
+    property var availableLayouts: []
     property bool bordersEnabled: Config.enableBorders
 
     Column {
@@ -116,30 +117,48 @@ Panel {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
 
+                Process {
+                    id: layoutScanner
+                    command: ["sh", "-c", "find ~/.config/quickshell/layouts/ -maxdepth 1 -name '*.json' -print0 | xargs -0 -n1 basename | sed 's/\\.json$//'"]
+                    stdout: StdioCollector {
+                    onStreamFinished: {
+                        const pinned = ["default", "minimal", "media", "centerpill"]
+                        let names = this.text.split('\n').filter(n => n.trim().length > 0)
+                        let rest = names
+                            .filter(n => !pinned.includes(n))
+                            .sort((a, b) => a.localeCompare(b))
+                            settingsPanel.availableLayouts = pinned.filter(p => names.includes(p)).concat(rest)
+                        }
+                    }   
+                    Component.onCompleted: running = true
+                }           
+
                 Flow {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width:   parent.width - 40
                     spacing: 2
 
                     Repeater {
-                        model: ["default", "minimal", "media",
-                                "01","02","03","04","05","06",
-                                "07","08","09"]
+                        model: settingsPanel.availableLayouts
                         delegate: Rectangle {
                             required property string modelData
                             width:  (parent.width - (parent.spacing * 3)) / 4
-                            height: 28; 
+                            height: 28
                             radius: 14
                             color:  Config.activeLayout === modelData ? Colors.color7 : Colors.color0
                             Behavior on color { ColorAnimation { duration: 150 } }
 
                             Text {
                                 anchors.centerIn: parent
+                                width:            parent.width - 8
                                 text:            parent.modelData
                                 color:           Config.activeLayout === parent.modelData ? Colors.background : Colors.foreground
                                 font.family:     Style.barFont
-                                font.pixelSize:  11
-                                font.weight:     Font.Bold
+                                font.pixelSize:  14
+                                minimumPixelSize: 9
+                                fontSizeMode:    Text.HorizontalFit
+                                horizontalAlignment: Text.AlignHCenter
+                                elide:           Text.ElideNone
                             }
                             MouseArea {
                                 anchors.fill: parent

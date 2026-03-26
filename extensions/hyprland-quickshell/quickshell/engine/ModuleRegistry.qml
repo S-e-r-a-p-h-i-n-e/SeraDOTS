@@ -23,6 +23,7 @@ import qs.modules.updates
 import qs.modules.wallchange
 import qs.modules.workspaces
 import qs.modules.start
+import qs.modules.taskbar
 
 QtObject {
     id: root
@@ -48,7 +49,8 @@ QtObject {
         "cava":          cavaView,
         "clock":         clockView,
         "media":         mediaView,
-        "workspaces":    workspacesView,
+        "taskbar":       taskbarView,
+        "workspaces":    workspacesView
     })
 
     function resolve(name) {
@@ -101,6 +103,7 @@ QtObject {
     property Component clockView:      Component { ClockView {} }
     property Component mediaView:      Component { MediaView {} }
     property Component workspacesView: Component { WorkspacesView {} }
+    property Component taskbarView:    Component { TaskbarView {} }
 
     // ── Dashboard: Stats ──────────────────────────────────────────────────
     property Component statsWidget: Component {

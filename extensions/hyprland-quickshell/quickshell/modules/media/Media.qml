@@ -11,15 +11,24 @@ Singleton {
 
     readonly property string moduleType: "custom"
 
-    // Exclude mpvpaper — it registers as mpv via MPRIS but is just a wallpaper
-    function _isMpvpaper(p) {
-        let id = (p.identity ?? "").toLowerCase()
-        let de = (p.desktopEntry ?? "").toLowerCase()
-        return id === "mpv" || de === "mpv"
+    // ── Player list & pin ─────────────────────────────────────────────────
+    readonly property var players: Mpris.players.values
+
+    property var pinnedPlayer: null
+
+    // Auto-clear pin when the pinned player disconnects
+    onPlayersChanged: {
+        if (pinnedPlayer && players.indexOf(pinnedPlayer) === -1)
+            pinnedPlayer = null
     }
 
+    function selectPlayer(p) { pinnedPlayer = p }
+    function clearPin()       { pinnedPlayer = null }
+
     readonly property var player: {
-        let players = Mpris.players.values.filter(p => !root._isMpvpaper(p))
+        // Use pinned player if it's still alive
+        if (pinnedPlayer && players.indexOf(pinnedPlayer) !== -1) return pinnedPlayer
+        // Otherwise auto-select: prefer whichever is playing, fall back to first
         for (let i = 0; i < players.length; i++)
             if (players[i].playbackState === MprisPlaybackState.Playing) return players[i]
         return players.length > 0 ? players[0] : null

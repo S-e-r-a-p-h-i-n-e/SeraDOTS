@@ -214,15 +214,15 @@ Panel {
 
             // ── Media card ────────────────────────────────────────────────
             Rectangle {
-                width: parent.width; height: mediaInner.implicitHeight + 24
+                width: parent.width
+                height: mediaInner.height + 28
                 radius: 12; color: Colors.color0; visible: Media.hasPlayer
 
                 Column {
                     id: mediaInner
-                    anchors.left:    parent.left
-                    anchors.right:   parent.right
-                    anchors.top:     parent.top
-                    anchors.margins: 14
+                    width:   parent.width - 28
+                    x:       14
+                    y:       14
                     spacing: 10
 
                     Row {
@@ -291,6 +291,124 @@ Panel {
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: Media.fmt(Media.length); color: Colors.color8; font.family: Style.barFont; font.pixelSize: 10
                             }
+                        }
+                    }
+
+                    // ── Player picker ─────────────────────────────────────────────────
+                    // One pill. Collapsed: just the active player row.
+                    // Expanded: all players listed inside the same pill, active highlighted.
+                    Rectangle {
+                        id: playerPicker
+                        visible: Media.hasPlayer
+
+                        // rowCount and height are pure JS — no child measurement, no loop
+                        property bool expanded: false
+                        property int  rowCount: expanded ? Media.players.length
+                                                         : (Media.player ? 1 : 0)
+
+                        width:  160
+                        height: rowCount * 36 + 8
+                        // Center inside the Column parent using x offset
+                        x: (parent.width - width) / 2
+                        radius: 12
+                        color:  Colors.color0
+                        clip:   true
+
+                        Behavior on height { NumberAnimation { duration: 180; easing.type: Easing.InOutQuad } }
+
+                        // Collapse when player count drops to 1
+                        Connections {
+                            target: Media
+                            function onPlayersChanged() {
+                                if (Media.players.length <= 1)
+                                    playerPicker.expanded = false
+                            }
+                        }
+
+                        Column {
+                            id: playerPickerCol
+                            anchors.top:     parent.top
+                            anchors.left:    parent.left
+                            anchors.right:   parent.right
+                            anchors.margins: 4
+                            spacing:         2
+
+                            Repeater {
+                                model: playerPicker.expanded
+                                       ? Media.players
+                                       : (Media.player ? [Media.player] : [])
+
+                                delegate: Rectangle {
+                                    required property var modelData
+                                    required property int index
+                                    readonly property bool isActive:  modelData === Media.player
+                                    readonly property bool isPlaying: modelData.playbackState === MprisPlaybackState.Playing
+
+                                    width:  playerPickerCol.width
+                                    height: 28
+                                    radius: 8
+                                    color:  isActive ? Colors.color7 : "transparent"
+
+                                    Behavior on color { ColorAnimation { duration: 150 } }
+
+                                    Row {
+                                        anchors.left:           parent.left
+                                        anchors.leftMargin:     8
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        spacing: 6
+
+                                        Rectangle {
+                                            visible: isPlaying && !isActive
+                                            width: 5; height: 5; radius: 3
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            color: Colors.color7
+                                        }
+
+                                        Text {
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            text: modelData.identity ?? "Unknown"
+                                            color: isActive ? Colors.background : Colors.foreground
+                                            font.family: Style.barFont
+                                            font.pixelSize: 11
+                                            font.weight: isActive ? Font.Bold : Font.Medium
+                                            Behavior on color { ColorAnimation { duration: 150 } }
+                                        }
+                                    }
+
+                                    Text {
+                                        visible: isActive && Media.players.length > 1
+                                        anchors.right:          parent.right
+                                        anchors.rightMargin:    8
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        text: playerPicker.expanded ? "󰅃" : "󰅀"
+                                        color: Colors.background
+                                        font.family: Style.barFont
+                                        font.pixelSize: 9
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: (!isActive || Media.players.length > 1) ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                        onClicked: {
+                                            if (isActive) {
+                                                if (Media.players.length > 1)
+                                                    playerPicker.expanded = !playerPicker.expanded
+                                            } else {
+                                                Media.selectPlayer(modelData)
+                                                playerPicker.expanded = false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Click-outside-to-close
+                        MouseArea {
+                            z: -1
+                            enabled: playerPicker.expanded
+                            anchors { fill: parent; margins: -400 }
+                            onClicked: playerPicker.expanded = false
                         }
                     }
 

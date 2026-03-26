@@ -6,7 +6,7 @@
     [
       "cpu",
       "network",
-      "workspaces",
+      "taskbar",
       "start",
       "clock",
       "idleinhibitor",

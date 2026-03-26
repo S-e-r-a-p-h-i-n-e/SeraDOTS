@@ -2,7 +2,7 @@
   "barSize": 40,
   "moduleSize": 28,
   "barFont": "JetBrainsMono Nerd Font",
-  "barPadding": 10,
+  "barPadding": 20,
   "slotSpacing": 4,
   "pillPadding": 16,
   "pillSpacing": 6,
@@ -13,6 +13,6 @@
   "panelHeight": 840,
   "panelRadius": 15,
   "panelPadding": 25,
-  "borderWidth": 15,
+  "borderWidth": 20,
   "cornerRadius": 15
 }

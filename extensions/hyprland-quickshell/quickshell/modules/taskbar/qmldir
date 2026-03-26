@@ -1,0 +1,3 @@
+module qs.modules.taskbar
+singleton Taskbar    1.0 Taskbar.qml
+TaskbarView          1.0 TaskbarView.qml

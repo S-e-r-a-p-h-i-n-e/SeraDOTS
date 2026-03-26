@@ -11,7 +11,7 @@ Singleton {
     property var    wallpapers:    []
     property string activeBackend: ""   // "swww" | "mpvpaper" | ""
 
-    readonly property string wallDir:   Quickshell.env("HOME") + "/.config/YASD/wallpapers"
+    readonly property string wallDir:   Quickshell.env("HOME") + "/.config/SeraDOTS/wallpapers"
     readonly property string home:      Quickshell.env("HOME")
     readonly property var    videoExts: ["mp4", "webm", "mkv", "mov", "avi"]
 

@@ -20,8 +20,10 @@ Item {
         ? barThickness
         : (repeater.count > 0 ? repeater.count * (dotSize + itemSpacing) - itemSpacing : 0)
 
-    Row {
+    Grid {
         anchors.centerIn: parent
+        columns: root.isHorizontal ? 0 : 1
+        rows:    root.isHorizontal ? 1 : 0
         spacing: root.itemSpacing
 
         Repeater {

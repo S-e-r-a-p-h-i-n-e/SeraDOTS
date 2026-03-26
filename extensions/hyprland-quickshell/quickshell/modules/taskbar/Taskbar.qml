@@ -4,39 +4,18 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import qs.globals
+import qs.engine
 
-QtObject {
+Singleton {
     id: root
 
-    // Persisted pinned app IDs — survives restarts
-    property var pinned: []
-
-    readonly property string pinnedFile: Quickshell.env("HOME") + "/.config/quickshell/pinned_apps.json"
-
-    property var pinnedFileView: FileView {
-        path: root.pinnedFile
-        onLoaded: {
-            try {
-                root.pinned = JSON.parse(text)
-            } catch(e) {
-                root.pinned = []
-            }
-        }
-    }
-
-    function savePinned() {
-        pinnedFileView.setText(JSON.stringify(pinned, null, 2))
-    }
-
-    // The merged display list
+    // The merged display list: pinned slots first, then unpinned running windows
     readonly property var displayList: {
         let running = ToplevelManager.toplevels.values
-        // Start with pinned slots
-        let result = pinned.map(appId => {
+        let result = PinEngine.pinned.map(appId => {
             let live = running.find(t => {
                 let id = (t.appId || "").toLowerCase()
-                let parts = id.split(".")
-                return parts[parts.length - 1] === appId || id === appId
+                return PinEngine.shortId(id) === appId || id === appId
             })
             return {
                 appId:    appId,
@@ -45,15 +24,12 @@ QtObject {
                 running:  live != null
             }
         })
-        // Append unpinned running windows
         for (let t of running) {
-            let id = (t.appId || "").toLowerCase()
-            let parts = id.split(".")
-            let shortId = parts[parts.length - 1]
-            let alreadyPinned = pinned.includes(shortId) || pinned.includes(id)
-            if (!alreadyPinned) {
+            let id  = (t.appId || "").toLowerCase()
+            let sid = PinEngine.shortId(id)
+            if (!PinEngine.isPinned(sid) && !PinEngine.isPinned(id)) {
                 result.push({
-                    appId:    shortId,
+                    appId:    sid,
                     toplevel: t,
                     pinned:   false,
                     running:  true
@@ -82,21 +58,8 @@ QtObject {
         }
     }
 
-    function pin(entry) {
-        if (!pinned.includes(entry.appId)) {
-            pinned = pinned.concat([entry.appId])
-            savePinned()
-        }
-    }
-
-    function unpin(entry) {
-        pinned = pinned.filter(id => id !== entry.appId)
-        savePinned()
-    }
-
     function togglePin(entry) {
-        if (entry.pinned) unpin(entry)
-        else pin(entry)
+        PinEngine.toggle(entry.appId)
     }
 
     function iconFor(entry) {

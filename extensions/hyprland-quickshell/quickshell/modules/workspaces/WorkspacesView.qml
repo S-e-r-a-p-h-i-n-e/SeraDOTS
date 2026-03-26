@@ -155,6 +155,18 @@ Item {
                                 font.pixelSize: root.iconSize
                                 font.weight:    Font.Bold
                             }
+
+                            // Small pin indicator at the bottom for pinned apps
+                            Rectangle {
+                                visible: Workspaces.isPinned(appDot.modelData)
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                anchors.bottom: parent.bottom
+                                anchors.bottomMargin: 2
+                                width:  4
+                                height: 4
+                                radius: 2
+                                color:  appDot.isFocused ? Colors.color7 : Colors.color0
+                            }
                         }
 
                         MouseArea {
@@ -162,7 +174,14 @@ Item {
                             anchors.fill: parent
                             cursorShape:  Qt.PointingHandCursor
                             hoverEnabled: true
-                            onClicked:    Workspaces.focusWindow(appDot.modelData.address)
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
+                            onClicked: (event) => {
+                                if (event.button === Qt.RightButton) {
+                                    Workspaces.togglePin(appDot.modelData)
+                                } else {
+                                    Workspaces.focusWindow(appDot.modelData.address)
+                                }
+                            }
                         }
                     }
                 }

@@ -5,6 +5,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import qs.globals
+import qs.engine
 
 QtObject {
     readonly property var workspaces: Hyprland.workspaces
@@ -12,8 +13,11 @@ QtObject {
     function activate(ws)      { ws.activate() }
     function focusWindow(addr) { Hyprland.dispatch("focuswindow address:0x" + addr) }
 
-    // Delegates to globals/Icons.qml — single source of truth for all app icons.
     function iconFor(toplevel) {
+        return Icons.getIcon(appIdFor(toplevel))
+    }
+
+    function appIdFor(toplevel) {
         let appClass = ""
         if (toplevel.wayland && toplevel.wayland.appId) {
             appClass = toplevel.wayland.appId.toLowerCase()
@@ -21,6 +25,14 @@ QtObject {
             let ipc = toplevel.lastIpcObject || {}
             appClass = (ipc["class"] || ipc["initialClass"] || toplevel.title || "?").toLowerCase()
         }
-        return Icons.getIcon(appClass)
+        return PinEngine.shortId(appClass)
+    }
+
+    function isPinned(toplevel) {
+        return PinEngine.isPinned(appIdFor(toplevel))
+    }
+
+    function togglePin(toplevel) {
+        PinEngine.toggle(appIdFor(toplevel))
     }
 }

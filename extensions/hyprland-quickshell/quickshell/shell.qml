@@ -84,6 +84,13 @@ Scope {
         }
     }
 
+    IpcHandler {
+        target: "shell"
+        function reload(): void { Quickshell.reload(false) }
+        function hardReload(): void { Quickshell.reload(true) }
+        function refreshApps(): void { AppEngine.refresh() }
+    }
+
     // Extend Qt's icon search paths to match what GTK/Waybar searches automatically.
     Component.onCompleted: {
         let extra = [

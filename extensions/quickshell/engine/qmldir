@@ -7,6 +7,7 @@ singleton ClipboardEngine 1.0 ClipboardEngine.qml
 singleton WallpaperEngine  1.0 WallpaperEngine.qml
 singleton ThemeSyncEngine  1.0 ThemeSyncEngine.qml
 LayoutLoader              1.0 LayoutLoader.qml
+WallpaperWindow           1.0 WallpaperWindow.qml
 SlotLayout                1.0 SlotLayout.qml
 PillGroup                 1.0 PillGroup.qml
 DashboardEngine           1.0 DashboardEngine.qml

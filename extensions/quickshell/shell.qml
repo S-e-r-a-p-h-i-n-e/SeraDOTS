@@ -106,6 +106,10 @@ Scope {
 
     LayoutLoader { id: loader }
 
+    // Wallpaper renderer — self-contained, handles Variants per-screen internally.
+    // Reacts to Config.wallpaperPath; crossfade + parallax + smart video pause.
+    WallpaperWindow {}
+
     ScreenBorder {
         enabled:      Config.enableBorders && !Config.transparentNavbar
         location:     Config.navbarLocation

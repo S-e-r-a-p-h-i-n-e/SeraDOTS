@@ -7,6 +7,7 @@
   "pillPadding": 16,
   "pillSpacing": 6,
   "pillOpacity": 0.8,
+  "pillRadius": 999,
   "chipSpacing": 6,
   "chipInnerSpacing": 5,
   "panelWidth": 420,

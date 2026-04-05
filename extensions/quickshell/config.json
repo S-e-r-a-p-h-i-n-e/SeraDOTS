@@ -4,5 +4,5 @@
   "transparentNavbar": true,
   "activeLayout": "media",
   "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]",
-  "wallpaperPath": "/home/amelie/.config/YASD/wallpapers/Moon Goddess [Wallpaper Engine 4K].webm"
+  "wallpaperPath": "~/.config/SeraDOTS/wallpapers/shaded_landscape.png"
 }

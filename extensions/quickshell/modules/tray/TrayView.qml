@@ -41,13 +41,13 @@ Item {
                     width:  root.dotSize
                     height: root.dotSize
                     radius: height / 2
-                    color:  itemArea.containsMouse ? Colors.foreground : Colors.color7
+                    color:  itemArea.containsMouse ? Colors.color3 : Colors.color7
                     Behavior on color { ColorAnimation { duration: 150 } }
 
                     Text {
                         anchors.centerIn: parent
                         text:           Tray.iconFor(trayItem.modelData)
-                        color:          itemArea.containsMouse ? Colors.foreground : Colors.color3
+                        color:          itemArea.containsMouse ? Colors.color7 : Colors.color3
                         Behavior on color { ColorAnimation { duration: 150 } }
                         font.family:    Style.barFont
                         font.pixelSize: root.iconSize

@@ -114,8 +114,8 @@ install_compositor() {
             deploy "userland/wallust/templates/hyprland.template"       "$HOME/.config/wallust/templates" "hyprland.template"
             ;;
         hyprland-quickshell)
-            deploy "extensions/hyprland-quickshell/hypr"                "$HOME/.config" "hypr"
-            deploy "extensions/hyprland-quickshell/quickshell"          "$HOME/.config" "quickshell"
+            deploy "extensions/hypr"                                    "$HOME/.config" "hypr"
+            deploy "extensions/quickshell"                              "$HOME/.config" "quickshell"
             deploy "userland/wallust/templates/hyprland.template"       "$HOME/.config/wallust/templates" "hyprland.template"
             ;;
         niri)

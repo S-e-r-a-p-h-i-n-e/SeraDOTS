@@ -51,7 +51,7 @@ Item {
                     color: appArea.containsMouse
                         ? Colors.foreground
                         : appDot.isActive
-                            ? Colors.color0
+                            ? Colors.color3
                             : Colors.color7
                     opacity: modelData.running ? 1.0 : 0.4
                     Behavior on color   { ColorAnimation { duration: 150 } }
@@ -62,7 +62,7 @@ Item {
                         text:           Taskbar.iconFor(appDot.modelData)
                         color:          appArea.containsMouse
                             ? Colors.background
-                            : (appDot.isActive ? Colors.background : Colors.color0)
+                            : (appDot.isActive ? Colors.color7 : Colors.color3)
                         Behavior on color { ColorAnimation { duration: 150 } }
                         font.family:    Style.barFont
                         font.pixelSize: root.iconSize

@@ -1,27 +1,8 @@
 {
-  "left": [
-    [
-      "start",
-      "taskbar"
-    ]
-  ],
-  "center": [
-    [
-      "cava",
-      "idleinhibitor",
-      "clock",
-      "media"
-    ]
-  ],
+  "left": [["start", "settings", "power", "idleinhibitor", "taskbar"]],
+  "center": [["cava", "clock", "media"]],
   "right": [
-    [
-      "audio",
-      "updates",
-      "tray",
-      "cliphist",
-      "wallchange",
-      "settings",
-      "power"
-    ]
+    ["audio", "network", "updates"],
+    ["tray", "wallchange", "cliphist"]
   ]
 }

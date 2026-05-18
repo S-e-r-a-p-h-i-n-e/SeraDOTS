@@ -117,6 +117,7 @@ Panel {
         StyleField { label: "Pill Padding";  value: Style.pillPadding;  onCommitted: Style.saveSetting("pillPadding", newValue) }
         StyleField { label: "Pill Spacing";  value: Style.pillSpacing;  onCommitted: Style.saveSetting("pillSpacing", newValue) }
         StyleField { label: "Pill Opacity";  value: Style.pillOpacity;  isDecimal: true; onCommitted: Style.saveSetting("pillOpacity", newValue) }
+        StyleField { label: "Pill Radius";   value: Style.pillRadius;   onCommitted: Style.saveSetting("pillRadius", newValue) }
 
         StyleSection { label: "Chips" }
         StyleField { label: "Chip Spacing";       value: Style.chipSpacing;      onCommitted: Style.saveSetting("chipSpacing", newValue) }

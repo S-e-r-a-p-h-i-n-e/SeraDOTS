@@ -1,21 +1,9 @@
 {
   "left": [],
   "center": [
-    [
-      "tray",
-      "cliphist",
-      "wallchange",
-      "settings",
-      "power"
-    ],
-    [
-      "idleinhibitor",
-      "clock"
-    ],
-    [
-      "start",
-      "taskbar"
-    ]
+    ["start", "settings", "power", "idleinhibitor"],
+    ["clock"],
+    ["tray", "cliphist", "wallchange"]
   ],
   "right": []
 }

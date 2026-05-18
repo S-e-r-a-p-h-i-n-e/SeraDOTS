@@ -1,13 +1,5 @@
 {
-  "left": [
-    "start",
-    "settings"
-  ],
-  "center": [
-    
-  ],
-  "right": [
-    "audio",
-    "clock"
-  ]
+  "left": ["start", "settings", "power", "idleinhibitor"],
+  "center": [],
+  "right": ["audio", "clock"]
 }

@@ -1,16 +1,5 @@
 {
-  "left": [
-    "start",
-    "taskbar"
-  ],
-  "center": [
-    
-  ],
-  "right": [
-    "tray",
-    "notifications",
-    "settings",
-    "power",
-    "clock"
-  ]
+  "left": ["start", "settings", "power", "idleinhibitor", "taskbar"],
+  "center": [],
+  "right": ["tray", "audio", "clock"]
 }

@@ -7,4 +7,5 @@ Panel            1.0 Panel.qml
 ScreenBorder     1.0 ScreenBorder.qml
 Toggle           1.0 Toggle.qml
 DynamicChip      1.0 DynamicChip.qml
+IconImage        1.0 IconImage.qml
 StaticChip       1.0 StaticChip.qml

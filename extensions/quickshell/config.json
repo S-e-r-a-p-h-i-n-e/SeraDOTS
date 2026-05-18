@@ -1,7 +1,8 @@
 {
   "navbarLocation": "top",
-  "enableBorders": true,
-  "transparentNavbar": false,
-  "activeLayout": "media",
-  "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]"
+  "enableBorders": false,
+  "transparentNavbar": true,
+  "activeLayout": "sysinfo",
+  "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]",
+  "wallpaperPath": "/home/amelie/.config/YASD/wallpapers/burning_cherry.jpeg"
 }

@@ -1,10 +1,9 @@
-// engine/WallpaperEngine.qml 
+// engine/WallpaperEngine.qml — SeraDOTS / hyprland-quickshell
 pragma Singleton
 
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import qs.globals
 
 Singleton {
     id: root
@@ -12,7 +11,7 @@ Singleton {
     property var    wallpapers:    []
     property string activeBackend: ""   // "swww" | "mpvpaper" | ""
 
-    readonly property string wallDir:   Quickshell.env("HOME") + "/.config/SeraDOTS/wallpapers"
+    readonly property string wallDir:   Quickshell.env("HOME") + "/.config/YASD/wallpapers"
     readonly property string home:      Quickshell.env("HOME")
     readonly property var    videoExts: ["mp4", "webm", "mkv", "mov", "avi"]
 
@@ -56,9 +55,6 @@ Singleton {
 
     // ── Apply ─────────────────────────────────────────────────────────────
     function apply(path) {
-        // Persist path so WallpaperWindow reacts and survives restarts
-        Config.saveSetting("wallpaperPath", path)
-        // Also drive swww/mpvpaper + full theme sync (wallust → kvantum → gtk → …)
         if (isVideo(path)) {
             _applyVideo(path)
         } else {

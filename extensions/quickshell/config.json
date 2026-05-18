@@ -1,8 +1,7 @@
 {
   "navbarLocation": "top",
-  "enableBorders": false,
-  "transparentNavbar": true,
+  "enableBorders": true,
+  "transparentNavbar": false,
   "activeLayout": "media",
-  "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]",
-  "wallpaperPath": "~/.config/SeraDOTS/wallpapers/shaded_landscape.png"
+  "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]"
 }

@@ -24,7 +24,6 @@ Singleton {
     property real pillPadding: 16
     property real pillSpacing: 6
     property real pillOpacity: 0.6
-    property real pillRadius:  999  // 999 = fully round (clamped by Rectangle)
 
     // ── Chips ─────────────────────────────────────────────────────────────
     property real chipSpacing:      6
@@ -51,7 +50,6 @@ Singleton {
             property real   pillPadding:       16
             property real   pillSpacing:       6
             property real   pillOpacity:       0.6
-            property real   pillRadius:        999
             property real   chipSpacing:       6
             property real   chipInnerSpacing:  5
             property real   panelWidth:        400
@@ -69,7 +67,6 @@ Singleton {
             onPillPaddingChanged:      root.pillPadding      = pillPadding
             onPillSpacingChanged:      root.pillSpacing      = pillSpacing
             onPillOpacityChanged:      root.pillOpacity      = pillOpacity
-            onPillRadiusChanged:       root.pillRadius       = pillRadius
             onChipSpacingChanged:      root.chipSpacing      = chipSpacing
             onChipInnerSpacingChanged: root.chipInnerSpacing = chipInnerSpacing
             onPanelWidthChanged:       root.panelWidth       = panelWidth
@@ -83,7 +80,7 @@ Singleton {
 
     readonly property var styleKeys: [
         "barSize", "moduleSize", "barFont", "barPadding",
-        "slotSpacing", "pillPadding", "pillSpacing", "pillOpacity", "pillRadius",
+        "slotSpacing", "pillPadding", "pillSpacing", "pillOpacity",
         "chipSpacing", "chipInnerSpacing",
         "panelWidth", "panelHeight", "panelRadius", "panelPadding",
         "borderWidth", "cornerRadius"

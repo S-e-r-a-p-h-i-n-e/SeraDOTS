@@ -193,7 +193,7 @@ Scope {
         interval: 50
         onTriggered: {
             if (shell.pendingLocation !== "") {
-                shell.activePanel = "theming"
+                shell.activePanel = "settings"
                 shell.pendingLocation = ""
             }
         }

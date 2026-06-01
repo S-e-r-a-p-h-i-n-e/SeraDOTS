@@ -53,7 +53,7 @@ Item {
             height:        root.barThickness
             implicitWidth: titleText.implicitWidth + root.barThickness * 0.6
             radius:        height / 2
-            color:         Colors.color0
+            color:         Colors.color1
 
             Text {
                 id: titleText

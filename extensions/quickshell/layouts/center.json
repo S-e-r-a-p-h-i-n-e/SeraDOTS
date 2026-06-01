@@ -2,7 +2,7 @@
   "left": [],
   "center": [
     ["cpu", "network"],
-    ["start", "settings", "power", "idleinhibitor"],
+    ["start", "settings", "power", "idleinhibitor", "taskbar"],
     ["clock"],
     ["tray", "wallchange", "cliphist"],
     ["audio", "updates"]

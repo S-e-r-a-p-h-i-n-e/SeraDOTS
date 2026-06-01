@@ -42,6 +42,7 @@ QtObject {
         "nvim":                         "󰉿",
         "vim":                          "󰉿",
         "helix":                        "󰉿",
+        "zed":                          "󰉿",
         "jetbrains-idea":               "󰬺",
         "jetbrains-pycharm":            "󰬺",
         "android-studio":               "󰬺",
@@ -69,8 +70,8 @@ QtObject {
 
         // ── Music / Media ─────────────────────────────────────────────────
         "spotify":                      "󰓇",
-        "cider":                        "󰓇",
-        "apple-music":                  "󰓇",
+        "cider":                        "󰝚",
+        "apple-music":                  "󰝚",
         "strawberry":                   "󰝚",
         "rhythmbox":                    "󰝚",
         "clementine":                   "󰝚",
@@ -135,6 +136,7 @@ QtObject {
         "flameshot":                    "󰄄",
         "ksnip":                        "󰄄",
         "spectacle":                    "󰄄",
+        "satty":                    "󰄄",
 
         // ── Cloud / Sync ──────────────────────────────────────────────────
         "dropbox":                      "󰇣",

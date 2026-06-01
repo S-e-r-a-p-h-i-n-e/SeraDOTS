@@ -10,7 +10,7 @@ Item {
     property bool inPill:       false
 
     readonly property real dotSize:     barThickness
-    readonly property real iconSize:    dotSize * 0.75
+    readonly property real iconSize:    dotSize * 0.5
     readonly property real itemSpacing: Style.slotSpacing
 
     implicitWidth: isHorizontal
@@ -48,11 +48,11 @@ Item {
                     radius: root.dotSize / 2
 
                     // Pinned but not running: dimmer, dashed feel via opacity
-                    color: appArea.containsMouse
-                        ? Colors.foreground
-                        : appDot.isActive
-                            ? Colors.color0
-                            : Colors.color7
+                    color: appArea.containsMouse ? Colors.color3 : Colors.color7
+                    //    ? Colors.foreground
+                    //    : appDot.isActive
+                    //        ? Colors.color3
+                    //        : Colors.color7
                     opacity: modelData.running ? 1.0 : 0.4
                     Behavior on color   { ColorAnimation { duration: 150 } }
                     Behavior on opacity { NumberAnimation { duration: 150 } }
@@ -67,18 +67,6 @@ Item {
                         font.family:    Style.barFont
                         font.pixelSize: root.iconSize
                         font.weight:    Font.Bold
-                    }
-
-                    // Small dot indicator at the bottom for running apps
-                    Rectangle {
-                        visible: modelData.running
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 2
-                        width:  4
-                        height: 4
-                        radius: 2
-                        color:  appDot.isActive ? Colors.color7 : Colors.color3
                     }
                 }
 

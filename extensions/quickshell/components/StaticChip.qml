@@ -37,7 +37,7 @@ Item {
         radius: height / 2
 
         readonly property color resolvedBg: root.item.active
-            ? (root.item.activeColor ?? Colors.color7)
+            ? (root.item.activeColor ?? Colors.color3)
             : (root.item.bgColor ?? Colors.color7)
 
         color: resolvedBg
@@ -47,10 +47,10 @@ Item {
             anchors.centerIn: parent
             text:           root.item.icon ?? ""
             font.family:    root.barFont
-            font.pixelSize: root.barThickness * 0.6
+            font.pixelSize: root.barThickness * 0.5
             color:          root.item.active
                 ? Colors.color3
-                : (root.item.fgColor ?? Colors.color3)
+                : (root.item.fgColor ?? Colors.color0)
         }
 
         MouseArea {

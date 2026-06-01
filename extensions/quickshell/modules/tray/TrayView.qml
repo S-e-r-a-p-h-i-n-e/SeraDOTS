@@ -13,7 +13,7 @@ Item {
     property bool inPill:       false
 
     readonly property real dotSize:     barThickness
-    readonly property real iconSize:    dotSize * 0.55
+    readonly property real iconSize:    dotSize * 0.5
     readonly property real itemSpacing: Style.chipSpacing
 
     implicitWidth:  isHorizontal ? container.implicitWidth  : barThickness
@@ -40,14 +40,14 @@ Item {
                     anchors.centerIn: parent
                     width:  root.dotSize
                     height: root.dotSize
-                    radius: height / 2
-                    color:  itemArea.containsMouse ? Colors.foreground : Colors.color7
+                    radius: root.dotSize / 2
+                    color:  itemArea.containsMouse ? Colors.color3 : Colors.color7
                     Behavior on color { ColorAnimation { duration: 150 } }
 
                     Text {
                         anchors.centerIn: parent
                         text:           Tray.iconFor(trayItem.modelData)
-                        color:          itemArea.containsMouse ? Colors.foreground : Colors.color3
+                        color:          Colors.color0
                         Behavior on color { ColorAnimation { duration: 150 } }
                         font.family:    Style.barFont
                         font.pixelSize: root.iconSize

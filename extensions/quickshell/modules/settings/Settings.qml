@@ -7,11 +7,9 @@ import qs.globals
 
 QtObject {
     readonly property string moduleType: "static"
-
     readonly property var item: ({
         icon:      "",
         onClicked: function(screen) { SettingsModule.open(screen) }
     })
-
     function open(screen) { EventBus.togglePanel("theming", screen) }
 }

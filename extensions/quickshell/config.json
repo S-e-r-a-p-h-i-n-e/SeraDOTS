@@ -1,8 +1,8 @@
 {
   "navbarLocation": "top",
-  "enableBorders": false,
-  "transparentNavbar": true,
-  "activeLayout": "sysinfo",
+  "enableBorders": true,
+  "transparentNavbar": false,
+  "activeLayout": "cava+media",
   "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]",
-  "wallpaperPath": "/home/amelie/.config/YASD/wallpapers/burning_cherry.jpeg"
+  "wallpaperPath": "/home/amelie/.config/YASD/wallpapers/WearingtheMoon1-4K.png"
 }

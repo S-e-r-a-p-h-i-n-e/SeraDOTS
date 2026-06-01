@@ -9,3 +9,6 @@ Toggle           1.0 Toggle.qml
 DynamicChip      1.0 DynamicChip.qml
 IconImage        1.0 IconImage.qml
 StaticChip       1.0 StaticChip.qml
+Section     1.0 Section.qml
+Field       1.0 Field.qml
+Dropdown    1.0 Dropdown.qml

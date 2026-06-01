@@ -18,7 +18,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius:       Math.min(width, height) / 2
-        color:        Colors.color0
+        color:        Colors.color3
         opacity:      Style.pillOpacity
     }
 

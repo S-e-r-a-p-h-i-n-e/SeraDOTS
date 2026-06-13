@@ -1,13 +1,12 @@
 module qs.engine
 
-singleton PinEngine       1.0 PinEngine.qml
-singleton ModuleRegistry  1.0 ModuleRegistry.qml
 singleton AppEngine       1.0 AppEngine.qml
 singleton ClipboardEngine 1.0 ClipboardEngine.qml
-singleton WallpaperEngine  1.0 WallpaperEngine.qml
-singleton ThemeSyncEngine  1.0 ThemeSyncEngine.qml
-LayoutLoader              1.0 LayoutLoader.qml
-WallpaperWindow           1.0 WallpaperWindow.qml
-SlotLayout                1.0 SlotLayout.qml
-PillGroup                 1.0 PillGroup.qml
+singleton ModuleRegistry  1.0 ModuleRegistry.qml
+singleton PinEngine       1.0 PinEngine.qml
+singleton WallpaperEngine 1.0 WallpaperEngine.qml
 DashboardEngine           1.0 DashboardEngine.qml
+LayoutLoader              1.0 LayoutLoader.qml
+PillGroup                 1.0 PillGroup.qml
+SlotLayout                1.0 SlotLayout.qml
+WallpaperWindow           1.0 WallpaperWindow/WallpaperWindow.qml

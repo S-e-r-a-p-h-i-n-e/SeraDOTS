@@ -78,6 +78,6 @@ You may use the included **baseline, extensions, optionals, services, and userla
 
 Some folder layouts, scripts, and integration details may still be reorganized as the project is finalized.
 
-Using the installer is not recommended as it has not been fully tested yet with the updates being done. Proceed with caution when using the installer.
+~~Using the installer is not recommended as it has not been fully tested yet with the updates being done. Proceed with caution when using the installer.~~ Installer has been temporarily removed as it is too unpredictable and too unfinished.
 
 Once it's finished, the sky is the limit.

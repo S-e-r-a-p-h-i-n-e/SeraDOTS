@@ -64,7 +64,14 @@ Singleton {
         } else {
             _applyImage(path)
         }
-        ThemeSyncEngine.sync(path, isVideo(path))
+        // Only regenerate the source currently selected in Settings.
+        // Static palettes (anything other than "wallust"/"internal") stay
+        // untouched by a wallpaper change.
+        if (Config.paletteSource === "wallust") {
+            ThemeSyncEngine.sync(path, isVideo(path))
+        } else if (Config.paletteSource === "internal") {
+            PaletteEngine.generate(path)
+        }
     }
 
     function _applyImage(path) {

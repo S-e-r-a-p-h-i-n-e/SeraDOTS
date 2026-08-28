@@ -233,5 +233,27 @@ Scope {
         function onChangeLayout(layoutName) {
             Config.saveSetting("activeLayout", layoutName)
         }
+        function onChangePalette(source) {
+            Config.saveSetting("paletteSource", source)
+            // Colors.qml's FileView path is bound to Config.paletteSource, but
+            // that binding alone is not a reliable reload trigger — force one
+            // explicitly so a source switch always shows immediately, static
+            // palettes included.
+            Colors.reload()
+            // Static palettes need no regeneration. Dynamic sources back-fill
+            // immediately so the bar does not sit on a stale/empty file
+            // until the next wallpaper change.
+            if (source === "internal" && Config.wallpaperPath !== "") {
+                PaletteEngine.generate(Config.wallpaperPath)
+            } else if (source === "wallust" && Config.wallpaperPath !== "") {
+                // Skip the full wallust/kvantum/gtk/rofi/spicetify chain if
+                // this exact wallpaper was the last one wallust finished for.
+                // Colors.reload() above already picked up the existing
+                // wallust-colors.json, so the bar is already correct.
+                if (Config.wallustSyncedWallpaper !== Config.wallpaperPath) {
+                    ThemeSyncEngine.sync(Config.wallpaperPath, WallpaperEngine.isVideo(Config.wallpaperPath))
+                }
+            }
+        }
     }
 }

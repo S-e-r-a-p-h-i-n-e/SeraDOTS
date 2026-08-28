@@ -18,6 +18,15 @@ Singleton {
     // Stored as JSON string since JsonAdapter doesn't support arrays directly
     property string dashboardLayout:   JSON.stringify(["stats","speaker","mic","network","idleinhibitor","media"])
     property string wallpaperPath:     ""
+    // "wallust" and "internal" are dynamic sources regenerated on wallpaper
+    // change. Any other value is treated as a static file name under
+    // ~/.config/quickshell/palettes/<value>.json — new palettes only need
+    // a file dropped there, no code change.
+    property string paletteSource:     "wallust"
+    // Wallpaper path wallust last finished a full sync for. Lets a switch
+    // back to "wallust" skip re-running the whole chain when the wallpaper
+    // has not changed since. Persisted, so it survives a bar restart too.
+    property string wallustSyncedWallpaper: ""
 
     // True once config.json has been read at least once.
     // Panel windows must not be created before this is true, because
@@ -38,6 +47,8 @@ Singleton {
             property string activeLayout:      "default"
             property string dashboardLayout:   ""
             property string wallpaperPath:     ""
+            property string paletteSource:     "wallust"
+            property string wallustSyncedWallpaper: ""
 
             onNavbarLocationChanged: {
                 root.navbarLocation = navbarLocation
@@ -48,6 +59,8 @@ Singleton {
             onActiveLayoutChanged:      root.activeLayout      = activeLayout
             onDashboardLayoutChanged:   { if (dashboardLayout !== "") root.dashboardLayout = dashboardLayout }
             onWallpaperPathChanged:     { if (wallpaperPath   !== "") root.wallpaperPath   = wallpaperPath   }
+            onPaletteSourceChanged:     { if (paletteSource   !== "") root.paletteSource   = paletteSource   }
+            onWallustSyncedWallpaperChanged: root.wallustSyncedWallpaper = wallustSyncedWallpaper
         }
     }
 
@@ -62,7 +75,7 @@ Singleton {
         onTriggered: root.loaded = true
     }
 
-    readonly property var settingKeys: ["navbarLocation", "enableBorders", "transparentNavbar", "activeLayout", "dashboardLayout", "wallpaperPath"]
+    readonly property var settingKeys: ["navbarLocation", "enableBorders", "transparentNavbar", "activeLayout", "dashboardLayout", "wallpaperPath", "paletteSource", "wallustSyncedWallpaper"]
 
     function saveSetting(key, value) {
         root[key] = value

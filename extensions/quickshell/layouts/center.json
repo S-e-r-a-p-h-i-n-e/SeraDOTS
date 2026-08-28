@@ -1,11 +1,11 @@
 {
   "left": [],
   "center": [
-    ["cpu", "network"],
+    ["cpu", "updates"],
     ["start", "settings", "power", "idleinhibitor", "taskbar"],
     ["clock"],
     ["tray", "wallchange", "cliphist"],
-    ["audio", "updates"]
+    ["audio", "network"]
   ],
   "right": []
 }

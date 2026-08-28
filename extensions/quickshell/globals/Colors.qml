@@ -4,6 +4,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.globals
 
 Singleton {
   id: root
@@ -12,7 +13,7 @@ Singleton {
 
   readonly property color background: themeAdapter.special.background
   readonly property color foreground: themeAdapter.special.foreground
-  readonly property color cursor: "#FFFFFF"
+  readonly property color cursor:     themeAdapter.special.cursor
 
   readonly property color color0: themeAdapter.colors.color0
   readonly property color color1: themeAdapter.colors.color1
@@ -31,33 +32,56 @@ Singleton {
   readonly property color color14: themeAdapter.colors.color14
   readonly property color color15: themeAdapter.colors.color15
 
+  readonly property string home:          Quickshell.env("HOME")
+  readonly property string wallustPath:   home + "/.cache/quickshell/wallust-colors.json"
+  readonly property string internalPath:  home + "/.cache/quickshell/palette.json"
+  readonly property string palettesDir:   home + "/.config/quickshell/palettes"
+
+  // "wallust" and "internal" are the two dynamic, wallpaper-derived
+  // sources. Anything else in Config.paletteSource is read as a static
+  // file — palettes/<name>.json — so new palettes drop in with no QML
+  // change, just a new file in that folder.
+  function _resolvePath() {
+    switch (Config.paletteSource) {
+      case "wallust":  return root.wallustPath
+      case "internal": return root.internalPath
+      default:         return root.palettesDir + "/" + Config.paletteSource + ".json"
+    }
+  }
+
+  function reload() { themeFile.reload() }
+
   FileView {
     id: themeFile
+    // Never set path to "" — that does not reset the adapter, it just
+    // stops watching, so _resolvePath() always returns a concrete path.
+    path: root._resolvePath()
     adapter: JsonAdapter {
       id: themeAdapter
 
       property JsonObject special: JsonObject {
-        property color background: "#F2FFFF"
-        property color foreground: "#0B0612"
+        property color background: "#16141A"
+        property color foreground: "#C6DFF1"
+        property color cursor:     "#FFFFFF"
       }
 
       property JsonObject colors: JsonObject {
-        property color color0: "#F2FFFF"
-        property color color1: "#246481"
-        property color color2: "#30627D"
-        property color color3: "#284C65"
-        property color color4: "#21364D"
-        property color color5: "#192036"
-        property color color6: "#120A1E"
-        property color color7: "#0B0612"
-        property color color8: "#3A84A0"
-        property color color9: "#3086AC"
-        property color color10: "#3F82A6"
-        property color color11: "#366586"
-        property color color12: "#2C4867"
-        property color color13: "#222B48"
-        property color color14: "#180E28"
-        property color color15: "#040206"
+        property color color0: "#3D3B41"
+        property color color1: "#22314C"
+        property color color2: "#2B4361"
+        property color color3: "#345676"
+        property color color4: "#3D688B"
+        property color color5: "#467AA0"
+        property color color6: "#467AA1"
+        property color color7: "#A6C9E2"
+        property color color8: "#748C9E"
+        property color color9: "#2D4265"
+        property color color10: "#395A81"
+        property color color11: "#45729D"
+        property color color12: "#518BBA"
+        property color color13: "#5DA3D6"
+        property color color14: "#5DA3D6"
+        property color color15: "#A6C9E2"
       }
     }
   }

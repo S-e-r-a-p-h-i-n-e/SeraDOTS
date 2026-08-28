@@ -4,7 +4,9 @@ singleton AppEngine       1.0 AppEngine.qml
 singleton ClipboardEngine 1.0 ClipboardEngine.qml
 singleton ModuleRegistry  1.0 ModuleRegistry.qml
 singleton PinEngine       1.0 PinEngine.qml
+singleton PaletteEngine   1.0 PaletteEngine.qml
 singleton WallpaperEngine 1.0 WallpaperEngine.qml
+singleton ThemeSyncEngine  1.0 ThemeSyncEngine.qml
 DashboardEngine           1.0 DashboardEngine.qml
 LayoutLoader              1.0 LayoutLoader.qml
 PillGroup                 1.0 PillGroup.qml

@@ -23,7 +23,7 @@ Item {
         implicitWidth:    timeText.implicitWidth + root.barThickness * 0.6
         height:           root.barThickness
         radius:           height / 2
-        color:            Colors.color1
+        color:            Colors.color0
 
 
         Text {
@@ -45,7 +45,7 @@ Item {
         width:   root.barThickness
         height:  vInner.implicitHeight + root.barThickness * 0.6
         radius:  root.barThickness / 2
-        color:   Colors.color1
+        color:   Colors.color0
 
         Column {
             id: vInner

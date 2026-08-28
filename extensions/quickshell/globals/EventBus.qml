@@ -13,4 +13,5 @@ QtObject {
     signal toggleBorders(bool state)
     signal toggleTransparentNavbar(bool state)
     signal changeLayout(string layoutName)
+    signal changePalette(string source)
 }

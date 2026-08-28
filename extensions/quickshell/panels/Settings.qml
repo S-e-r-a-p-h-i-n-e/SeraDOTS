@@ -10,6 +10,7 @@ Panel {
     id: settingsPanel
 
     property var availableLayouts: []
+    property var availablePalettes: ["Wallust", "Internal"]
     property bool bordersEnabled: Config.enableBorders
 
     Column {
@@ -76,6 +77,33 @@ Panel {
                     // Runs your EventBus action identically to StyleField actions!
                     onCommitted: (newValue) => { EventBus.changeLocation(newValue.toLowerCase())}
                     }
+
+                    Dropdown {
+                    label: "Color Palette"
+                    currentValue: Config.paletteSource
+                    options: settingsPanel.availablePalettes
+
+                    // "Wallust" / "Internal" regenerate on selection and on the
+                    // next wallpaper change. Anything else scanned from
+                    // palettes/*.json is read as-is, no regeneration needed.
+                    onCommitted: (newValue) => { EventBus.changePalette(newValue.toLowerCase()) }
+                    }
+                }
+
+                Process {
+                    id: paletteScanner
+                    command: ["sh", "-c", "find ~/.config/quickshell/palettes/ -maxdepth 1 -name '*.json' -print0 | xargs -0 -n1 basename | sed 's/\\.json$//'"]
+                    stdout: StdioCollector {
+                    onStreamFinished: {
+                        const fixed = ["Wallust", "Internal"]
+                        let names = this.text.split('\n').filter(n => n.trim().length > 0)
+                        let staticNames = names
+                            .sort((a, b) => a.localeCompare(b))
+                            .map(n => n.charAt(0).toUpperCase() + n.slice(1))
+                        settingsPanel.availablePalettes = fixed.concat(staticNames)
+                        }
+                    }
+                    Component.onCompleted: running = true
                 }
 
                 Rectangle { width: parent.width; height: 1; color: Colors.color8; opacity: 0.5 }

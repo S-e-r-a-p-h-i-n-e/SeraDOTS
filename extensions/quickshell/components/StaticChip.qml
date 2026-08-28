@@ -37,7 +37,7 @@ Item {
         radius: height / 2
 
         readonly property color resolvedBg: root.item.active
-            ? (root.item.activeColor ?? Colors.color3)
+            ? (root.item.activeColor ?? Colors.color0)
             : (root.item.bgColor ?? Colors.color7)
 
         color: resolvedBg

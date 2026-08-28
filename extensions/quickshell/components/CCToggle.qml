@@ -15,7 +15,7 @@ Item {
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text:           icon
-            color:          active ? Colors.color7 : Colors.foreground
+            color:          active ? Colors.color8 : Colors.foreground
             font.family:    Style.barFont
             font.pixelSize: 22
             Behavior on color { ColorAnimation { duration: 150 } }

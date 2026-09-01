@@ -13,90 +13,79 @@ Singleton {
 
     Process {
         id: fileFinder
-        command: ["sh", "-c", "find ~/.local/share/applications /usr/share/applications /var/lib/flatpak/exports/share/applications -type f -name '*.desktop' 2>/dev/null"]
-        
-        // Use StdioCollector to gather all the output from the find command
+        command: [
+            "python3", "-c",
+            `
+import os, json, re
+
+apps = []
+seen = set()
+
+# XDG Data Dirs with proper precedence
+paths = [os.path.expanduser("~/.local/share")]
+env_paths = os.environ.get("XDG_DATA_DIRS", "/usr/local/share:/usr/share").split(":")
+paths.extend([p for p in env_paths if p])
+paths.append("/var/lib/flatpak/exports/share")
+
+for base in paths:
+    app_dir = os.path.join(base, "applications")
+    if not os.path.isdir(app_dir):
+        continue
+    for root_dir, _, files in os.walk(app_dir):
+        for f in files:
+            if not f.endswith(".desktop") or f in seen:
+                continue
+            seen.add(f)
+            fp = os.path.join(root_dir, f)
+            try:
+                with open(fp, "r", encoding="utf-8", errors="ignore") as file:
+                    in_entry = False
+                    name, icon, exec_cmd, nodisplay = "", "", "", False
+                    for line in file:
+                        line = line.strip()
+                        if line == "[Desktop Entry]":
+                            in_entry = True
+                            continue
+                        elif line.startswith("["):
+                            in_entry = False
+                            continue
+
+                        if in_entry:
+                            if line.startswith("Name=") and not name:
+                                name = line[5:].strip()
+                            elif line.startswith("Icon=") and not icon:
+                                icon = line[5:].strip()
+                            elif line.startswith("Exec=") and not exec_cmd:
+                                exec_cmd = line[5:].strip()
+                            elif line.lower() == "nodisplay=true":
+                                nodisplay = True
+
+                    if name and exec_cmd and not nodisplay:
+                        # Clean %U, %f, %F, %u field codes
+                        exec_clean = re.sub(r"%[a-zA-Z]", "", exec_cmd).strip()
+                        apps.append({
+                            "name": name,
+                            "icon": icon,
+                            "exec": exec_clean
+                        })
+            except Exception:
+                pass
+
+apps.sort(key=lambda x: x["name"].lower())
+print(json.dumps(apps))
+`
+        ]
+
         stdout: StdioCollector {
             onStreamFinished: {
-                // 'this.text' contains the entire multi-line string output
-                let files = this.text.split('\n').filter(path => path.trim().length > 0)
-                parseDesktopFiles(files)
+                try {
+                    root.applications = JSON.parse(this.text)
+                } catch (e) {
+                    console.warn("AppEngine: Failed to parse apps JSON", e)
+                }
+                root.loading = false
             }
         }
-    }
-
-    function parseDesktopFiles(filePaths) {
-        let apps = []
-        let seen = {}
-
-        for (let i = 0; i < filePaths.length; i++) {
-            let content = readFile(filePaths[i])
-            if (!content) continue
-
-            let lines = content.split('\n')
-            let name = ""
-            let icon = ""
-            let execCmd = ""
-            let nodisplay = false
-            let inDesktopEntry = false
-
-            for (let j = 0; j < lines.length; j++) {
-                let line = lines[j].trim()
-                
-                if (line === "[Desktop Entry]") {
-                    inDesktopEntry = true
-                    continue
-                } else if (line.startsWith("[")) {
-                    inDesktopEntry = false
-                    continue
-                }
-
-                if (inDesktopEntry) {
-                    if (line.startsWith("Name=") && !name) {
-                        name = line.substring(5).trim()
-                    } else if (line.startsWith("Icon=") && !icon) {
-                        icon = line.substring(5).trim()
-                    } else if (line.startsWith("Exec=") && !execCmd) {
-                        execCmd = line.substring(5).trim()
-                    } else if (line.startsWith("NoDisplay=") && line.substring(10).trim().toLowerCase() === "true") {
-                        nodisplay = true
-                    }
-                }
-            }
-
-            if (name && execCmd && !nodisplay) {
-                execCmd = execCmd.split("%")[0].trim()
-                
-                if (!seen[name]) {
-                    seen[name] = true
-                    apps.push({
-                        "name": name,
-                        "icon": icon,
-                        "exec": execCmd
-                    })
-                }
-            }
-        }
-
-        apps.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
-        
-        root.applications = apps
-        root.loading = false
-    }
-
-    function readFile(filePath) {
-        let xhr = new XMLHttpRequest()
-        try {
-            xhr.open("GET", "file://" + filePath, false) 
-            xhr.send()
-            
-            if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 0)) {
-                return xhr.responseText
-            }
-        } catch (e) {
-            console.warn("Could not read file: " + filePath)
-        }
-        return ""
     }
 
     function refresh() {

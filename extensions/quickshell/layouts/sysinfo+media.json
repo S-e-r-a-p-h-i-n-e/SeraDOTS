@@ -1,0 +1,8 @@
+{
+  "left": [["start", "settings", "power", "idleinhibitor", "taskbar"], ["cpu"]],
+  "center": [["cava", "clock", "media"]],
+  "right": [
+    ["audio", "network", "updates"],
+    ["tray", "wallchange", "cliphist"]
+  ]
+}

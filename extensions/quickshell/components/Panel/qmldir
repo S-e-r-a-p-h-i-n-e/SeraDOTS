@@ -1,0 +1,4 @@
+module qs.components.panel
+
+PanelBackground 1.0 PanelBackground.qml
+PanelFillets    1.0 PanelFillets.qml

@@ -1,10 +1,10 @@
 {
   "navbarLocation": "top",
-  "enableBorders": false,
+  "enableBorders": true,
   "transparentNavbar": false,
-  "activeLayout": "sysinfo+media",
+  "activeLayout": "cava+media",
   "dashboardLayout": "[\"stats\",\"updates\",\"speaker\",\"network\",\"bluetooth\",\"idleinhibitor\",\"wallchange\",\"settings\",\"power\"]",
-  "wallpaperPath": "/home/amelie/.config/YASD/wallpapers/WearingtheMoon3-4K.png",
-  "paletteSource": "catppuccin",
-  "wallustSyncedWallpaper": "/home/amelie/.config/YASD/wallpapers/WearingtheMoon3-4K.png"
+  "wallpaperPath": "/home/amelie/.config/YASD/wallpapers/ee049afacdd04b92b5beb84eb8aaa90cdd911e3f.jpg",
+  "paletteSource": "wallust",
+  "wallustSyncedWallpaper": "/home/amelie/.config/YASD/wallpapers/ee049afacdd04b92b5beb84eb8aaa90cdd911e3f.jpg"
 }
